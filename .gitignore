@@ -1,0 +1,12 @@
+node_modules
+
+# local env (secrets)
+.env*.local
+.env.local
+
+# Next.js
+.next
+out
+
+# OS
+.DS_Store
