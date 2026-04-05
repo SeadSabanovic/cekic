@@ -39,10 +39,6 @@ export default async function ServicePage({ params }: PageProps) {
   if (service === null) notFound();
 
   return (
-    <PageBuilder
-      id={service?._id ?? ''}
-      type="servicesPage"
-      pageBuilder={service?.pageBuilder ?? []}
-    />
+    <PageBuilder pageBuilder={service?.pageBuilder ?? []} />
   )
 }

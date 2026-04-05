@@ -41,10 +41,6 @@ export default async function ProjectPage({ params }: PageProps) {
   if (project === null) notFound();
   
   return (
-    <PageBuilder
-      id={project?._id ?? ''}
-      type={project?._type ?? ''}
-      pageBuilder={project?.pageBuilder ?? []}
-    />
+    <PageBuilder pageBuilder={project?.pageBuilder ?? []} />
   )
 }

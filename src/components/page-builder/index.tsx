@@ -2,9 +2,7 @@
 import dynamic from "next/dynamic";
 import { ComponentType } from "react";
 import { PageBuilderType } from "@/types";
-import { createDataAttribute } from "next-sanity";
 import { PageBySlugQueryResult } from "../../../sanity.types";
-import { dataset, projectId, studioUrl } from "@/sanity/lib/api";
 
 const HeroBlock = dynamic(() => import("./blocks/hero-block"));
 const HeaderBlock = dynamic(() => import("./blocks/header-block"));
@@ -25,8 +23,6 @@ type PageBlock = NonNullable<
 
 export type PageBuilderProps = {
   pageBuilder: PageBlock[];
-  id: string;
-  type: string;
 };
 
 const PB_BLOCKS = {
@@ -46,32 +42,13 @@ const PB_BLOCKS = {
 
 type BlockType = keyof typeof PB_BLOCKS;
 
-export function PageBuilder({ pageBuilder, id, type }: PageBuilderProps) {
+export function PageBuilder({ pageBuilder }: PageBuilderProps) {
   return (
-    <div
-      data-sanity={createDataAttribute({
-        id: id,
-        type: type,
-        dataset: dataset,
-        baseUrl: studioUrl,
-        path: "pageBuilder",
-        projectId: projectId,
-      }).toString()}
-    >
+    <div>
       {pageBuilder.map((block) => {
         const Component = PB_BLOCKS[block._type] as ComponentType<PageBuilderType<BlockType>>;
         return (
-          <div
-            key={`${block._type}-${block._key}`}
-            data-sanity={createDataAttribute({
-              id: id,
-              type: type,
-              dataset: dataset,
-              baseUrl: studioUrl,
-              projectId: projectId,
-              path: `pageBuilder[_key=="${block._key}"]`,
-            }).toString()}
-          >
+          <div key={`${block._type}-${block._key}`}>
             <Component {...block} />
           </div>
         );

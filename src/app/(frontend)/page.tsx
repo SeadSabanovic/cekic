@@ -39,11 +39,7 @@ export default async function Home() {
 
   return(
     <div id="home">
-      <PageBuilder 
-        id={page?._id ?? ""} 
-        type={page?._type ?? ""} 
-        pageBuilder={page?.pageBuilder ?? []} 
-      />
+      <PageBuilder pageBuilder={page?.pageBuilder ?? []} />
     </div>
   )
 }

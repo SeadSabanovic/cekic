@@ -29,11 +29,7 @@ export default function ProjectsLayout({ children, page }: Readonly<{
           {children}
         </Container>
       </div>
-      <PageBuilder
-        id={page?._id ?? ''}
-        type={page?._type ?? ''}
-        pageBuilder={page?.pageBuilder ?? []}
-      />
+      <PageBuilder pageBuilder={page?.pageBuilder ?? []} />
     </main>
   )
 

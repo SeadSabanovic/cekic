@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import { draftMode } from "next/headers";
 import Container from "@/components/global/container";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import ClientLayout from "@/components/global/client-layout";
-import { VisualEditing } from "@/components/shared/visual-editing";
 import InstallDemoButton from "@/components/shared/install-demo-button";
-import { DisableDraftMode } from "@/components/shared/disable-draft-mode";
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { navigationSettingsQuery } from "@/sanity/lib/queries/singletons/navigation";
 import { generalSettingsQuery, marketingSettingsQuery } from "@/sanity/lib/queries/singletons/settings";
@@ -23,8 +20,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  const { isEnabled: isDraftMode } = await draftMode();
 
   const [{ data: settings }, { data: marketingSettings }, { data: navigationSettings }] = await Promise.all([
     sanityFetch({ query: generalSettingsQuery }),
@@ -47,12 +42,6 @@ export default async function RootLayout({
         {children}
       </ClientLayout>
       <SanityLive />
-      {isDraftMode && (
-        <>
-          <DisableDraftMode />
-          <VisualEditing />
-        </>
-      )}
       {marketingSettings?.googleAnalyticsId && (
         <GoogleAnalytics gaId={marketingSettings.googleAnalyticsId} />
       )}

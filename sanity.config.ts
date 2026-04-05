@@ -4,8 +4,6 @@ import { media } from 'sanity-plugin-media';
 import { visionTool } from '@sanity/vision';
 import { structureTool } from 'sanity/structure';
 import { structure } from '@/sanity/lib/structure';
-import { presentationTool } from 'sanity/presentation';
-import { resolve } from '@/sanity/presentation/resolve';
 import { simplerColorInput } from 'sanity-plugin-simpler-color-input'
 import { defaultDocumentNode } from '@/sanity/lib/structure/default-document-node';
 import { apiVersion, dataset, projectId, studioUrl, useCdn } from '@/sanity/lib/api';
@@ -21,15 +19,6 @@ const config = defineConfig({
     structureTool({
       structure,
       defaultDocumentNode
-    }),
-    presentationTool({
-      resolve,
-      previewUrl: {
-        previewMode: {
-          enable: '/api/draft-mode/enable',
-          disable: '/api/draft-mode/disable',
-        },
-      },
     }),
     media(),
     visionTool(),
