@@ -3,7 +3,6 @@ import { SchemaTypeDefinition } from "sanity";
 import generalSettings from "./singletons/general-settings";
 import navigationSettings from "./singletons/navigation-settings";
 import blogSettings from "./singletons/blog-settings";
-import marketingSettings from "./singletons/marketing-settings";
 import redirect from "./documents/redirect";
 import page from "./documents/page";
 import post from "./documents/post";
@@ -20,7 +19,6 @@ import projectsPage from "./singletons/pages/projects-page";
 const coreSchema = [
   generalSettings,
   navigationSettings,
-  marketingSettings,
   blogSettings,
   redirect,
   page,

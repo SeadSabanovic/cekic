@@ -45,7 +45,6 @@ A fully-featured starter template made with Next.js, Sanity, TypeScript, Tailwin
 | `RESEND_SENDER_EMAIL`| The email address used to send emails via Resend |
 | `RESEND_RECIEVER_EMAIL`| The email address that receives contact form submissions |
 | `RESEND_API_KEY`| Your Resend API key for email functionality |
-| `SANITY_API_READ_TOKEN`| API token for accessing Sanity content |
 
 Next, run these commands in your terminal at the root of your project:
 

@@ -731,16 +731,6 @@ export type BlogSettings = {
   showPostsByCategory?: boolean;
 };
 
-export type MarketingSettings = {
-  _id: string;
-  _type: "marketingSettings";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  googleAnalyticsId?: string;
-  googleTagManagerId?: string;
-};
-
 export type NavigationSettings = {
   _id: string;
   _type: "navigationSettings";
@@ -1275,7 +1265,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = VideoObject | CallToActionObject | SpacerObject | SingleImageObject | ButtonObject | RichTextObject | HeadingObject | SeoObject | FormBlock | ServicesBlock | MediaBlock | LogoBlock | CallToActionBlock | PortableTextBlock | FreeformBlock | FeaturesMinimalBlock | FeatureCardsBlock | HeaderBlock | HeroBlock | PageBuilder | Form | Post | SanityImageCrop | SanityImageHotspot | Author | PostCategory | SimplerColor | Slug | Redirect | BlogSettings | MarketingSettings | NavigationSettings | GeneralSettings | Page | BlogPage | ServicesPage | ProjectsPage | Service | Project | ProjectCategory | HighlightColor | TextColor | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = VideoObject | CallToActionObject | SpacerObject | SingleImageObject | ButtonObject | RichTextObject | HeadingObject | SeoObject | FormBlock | ServicesBlock | MediaBlock | LogoBlock | CallToActionBlock | PortableTextBlock | FreeformBlock | FeaturesMinimalBlock | FeatureCardsBlock | HeaderBlock | HeroBlock | PageBuilder | Form | Post | SanityImageCrop | SanityImageHotspot | Author | PostCategory | SimplerColor | Slug | Redirect | BlogSettings | NavigationSettings | GeneralSettings | Page | BlogPage | ServicesPage | ProjectsPage | Service | Project | ProjectCategory | HighlightColor | TextColor | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries/documents/page.ts
 // Variable: pageSlugsQuery
@@ -9882,12 +9872,6 @@ export type GeneralSettingsQueryResult = {
     };
   } | null;
 } | null;
-// Variable: marketingSettingsQuery
-// Query: *[_type == 'marketingSettings'][0] {  googleAnalyticsId,  googleTagManagerId,}
-export type MarketingSettingsQueryResult = {
-  googleAnalyticsId: string | null;
-  googleTagManagerId: string | null;
-} | null;
 // Variable: blogSettingsQuery
 // Query: *[_type == 'blogSettings'][0] {  showRelatedPosts,  showTableOfContents,  showPostsByCategory}
 export type BlogSettingsQueryResult = {
@@ -9928,7 +9912,6 @@ declare module "@sanity/client" {
     "*[_type == 'navigationSettings'][0] {\n  \"navbar\": {\n    navbarMenuItems[] {\n      _key,\n      title,\n      pageReference->{\n        _id,\n        _type,\n        title,\n        \"slug\": slug.current\n      },\n      pageReferences[]->{\n        _id,\n        _type,\n        title,\n        \"slug\": slug.current\n      },\n      menuItemType,\n      isButton,\n    },\n  },\n  \"slideOutMenu\": {\n    showSlideOutMenu,\n    slideOutMenuItems[] {\n      _key,\n      title,\n      _type,\n      menuItemType,\n      pageReference->{\n        _id,\n        _type,\n        title,\n        \"slug\": slug.current\n      },\n      pageReferences[]->{\n        _id,\n        _type,\n        title,\n        \"slug\": slug.current\n      },\n    },\n    slideOutMenuButtons[] {\n      \n  _key,\n  showButton,\n  buttonText,\n  buttonVariant,\n  buttonType,\n  buttonWidth,\n  buttonFileUrl {\n    asset->{ url }\n  },\n  buttonPageReference->{\n    _id,\n    _type,\n    title,\n    \"slug\": slug.current\n  },\n  buttonEmailAddress,\n  buttonExternalUrl,\n  buttonAnchorLocation,\n  buttonAnchorId\n\n    },\n    showCompanyDetailsSlideOutMenu,\n    \"slideOutMenuSettings\": *[_type == 'generalSettings'][0] {\n      companyEmailAddress,\n      companyPhoneNumber,\n      companySocialMediaLinks[] {\n        _key,\n        title,\n        profileUrl,\n        icon {\n          asset->{\n            url\n          }\n        }\n      }\n    }\n  },\n  \"footer\": {\n    footerColumns[] {\n      _key,\n      title,\n      menuItems[] {\n        _key,\n        title,\n        linkType,\n        pageReference->{\n          _id,\n          title,\n          \"slug\": slug.current\n        },\n        externalUrl\n      },\n    },\n    footerLegalMenuItems[] {\n      _key,\n      title,\n      pageReference->{\n        _id,\n        title,\n        \"slug\": slug.current\n      },\n    },\n  }\n}": NavigationSettingsQueryResult;
     "\n  *[_id == $id][0]{\n    title,\n  }    \n": OgImageQueryResult;
     "*[_type == 'generalSettings'][0] {\n  siteTitle,\n  siteLogo { \n    asset->{ url },\n  },\n  copyright,\n  homePage->{\n    _id,\n    _type,\n    title,\n    'slug': slug.current,\n    \"seo\": {\n      \"title\": coalesce(seo.title, title, \"\"),\n      \"description\": coalesce(seo.description,  \"\"),\n      \"noIndex\": seo.noIndex == true,\n      \"image\": seo.image,\n    },\n  },\n}": GeneralSettingsQueryResult;
-    "*[_type == 'marketingSettings'][0] {\n  googleAnalyticsId,\n  googleTagManagerId,\n}": MarketingSettingsQueryResult;
     "*[_type == 'blogSettings'][0] {\n  showRelatedPosts,\n  showTableOfContents,\n  showPostsByCategory\n}": BlogSettingsQueryResult;
   }
 }

@@ -29,15 +29,6 @@ export const SettingsItem = (S: StructureBuilder) =>
             ),
           S.divider(),
           S.listItem()
-            .title('Marketing')
-            .child(
-              S.document()
-                .id('marketingSettings')
-                .schemaType('marketingSettings')
-                .documentId('marketingSettings')
-                .title('Marketing')
-            ),
-          S.listItem()
             .title('Redirects')
             .child(
               S.documentList()

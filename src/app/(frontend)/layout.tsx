@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Container from "@/components/global/container";
-import { sanityFetch, SanityLive } from "@/sanity/lib/live";
+import { sanityFetch } from "@/sanity/lib/sanity-fetch";
 import ClientLayout from "@/components/global/client-layout";
 import InstallDemoButton from "@/components/shared/install-demo-button";
-import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { navigationSettingsQuery } from "@/sanity/lib/queries/singletons/navigation";
-import { generalSettingsQuery, marketingSettingsQuery } from "@/sanity/lib/queries/singletons/settings";
+import { generalSettingsQuery } from "@/sanity/lib/queries/singletons/settings";
+import type { GeneralSettingsQueryResult, NavigationSettingsQueryResult } from "../../../sanity.types";
 
 export const metadata: Metadata = {
   title: {
@@ -21,10 +21,9 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const [{ data: settings }, { data: marketingSettings }, { data: navigationSettings }] = await Promise.all([
-    sanityFetch({ query: generalSettingsQuery }),
-    sanityFetch({ query: marketingSettingsQuery }),
-    sanityFetch({ query: navigationSettingsQuery })
+  const [{ data: settings }, { data: navigationSettings }] = await Promise.all([
+    sanityFetch<GeneralSettingsQueryResult | null>({ query: generalSettingsQuery }),
+    sanityFetch<NavigationSettingsQueryResult | null>({ query: navigationSettingsQuery })
   ]);
 
   if (!settings) return (
@@ -41,13 +40,6 @@ export default async function RootLayout({
       >
         {children}
       </ClientLayout>
-      <SanityLive />
-      {marketingSettings?.googleAnalyticsId && (
-        <GoogleAnalytics gaId={marketingSettings.googleAnalyticsId} />
-      )}
-      {marketingSettings?.googleTagManagerId && (
-        <GoogleTagManager gtmId={marketingSettings?.googleTagManagerId} />
-      )}
     </>
   );
 }

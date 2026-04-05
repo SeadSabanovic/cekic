@@ -6,9 +6,5 @@ export const client = createClient({
   dataset: dataset,
   apiVersion: apiVersion,
   useCdn: process.env.NODE_ENV === "production",
-  perspective: 'published',
-  stega: {
-    studioUrl: "/studio",
-    enabled: false,
-  },
+  perspective: "published",
 });

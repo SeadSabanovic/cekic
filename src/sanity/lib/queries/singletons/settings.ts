@@ -20,11 +20,6 @@ export const generalSettingsQuery = defineQuery(`*[_type == 'generalSettings'][0
   },
 }`); 
 
-export const marketingSettingsQuery = defineQuery(`*[_type == 'marketingSettings'][0] {
-  googleAnalyticsId,
-  googleTagManagerId,
-}`);
-
 export const blogSettingsQuery = defineQuery(`*[_type == 'blogSettings'][0] {
   showRelatedPosts,
   showTableOfContents,

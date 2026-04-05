@@ -1,14 +1,13 @@
 import { Metadata } from 'next';
 import { processMetadata } from '@/lib/utils';
 import PostGrid from './_components/post-grid';
-import { sanityFetch } from '@/sanity/lib/live';
-import { BlogPageQueryResult } from "../../../../sanity.types";
+import { sanityFetch } from '@/sanity/lib/sanity-fetch';
 import { allPostsQuery, blogPageQuery } from '@/sanity/lib/queries/documents/post';
+import type { AllPostsQueryResult, BlogPageQueryResult } from '../../../../sanity.types';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { data: page } = await sanityFetch({
+  const { data: page } = await sanityFetch<BlogPageQueryResult | null>({
     query: blogPageQuery,
-    stega: false
   });
 
   if (!page) { return {} };
@@ -17,11 +16,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function BlogArchivePage() {
-  const { data: posts } = await sanityFetch({
+  const { data: posts } = await sanityFetch<AllPostsQueryResult | null>({
     query: allPostsQuery,
   });
 
   return (
-    <PostGrid posts={posts} />
+    <PostGrid posts={posts ?? []} />
   )
 }

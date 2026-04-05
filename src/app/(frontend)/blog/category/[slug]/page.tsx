@@ -1,11 +1,16 @@
 import { Metadata } from 'next';
-import { sanityFetch } from '@/sanity/lib/live';
+import { sanityFetch } from '@/sanity/lib/sanity-fetch';
 import PostGrid from '../../_components/post-grid';
 import {
   postCategoryBySlugQuery,
   postCategorySlugsQuery,
   postsByCategoryQuery,
 } from '@/sanity/lib/queries/documents/post';
+import type {
+  PostCategoryBySlugQueryResult,
+  PostCategorySlugsQueryResult,
+  PostsByCategoryQueryResult,
+} from '../../../../../../sanity.types';
 import { CircleSlash } from 'lucide-react';
 
 interface PageProps {
@@ -13,20 +18,17 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const { data } = await sanityFetch({
+  const { data } = await sanityFetch<PostCategorySlugsQueryResult>({
     query: postCategorySlugsQuery,
-    perspective: "published",
-    stega: false,
   });
   return data ?? [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
 
-  const { data: category } = await sanityFetch({
+  const { data: category } = await sanityFetch<PostCategoryBySlugQueryResult | null>({
     query: postCategoryBySlugQuery,
     params: await params,
-    stega: false,
   });
 
   if (!category) { return {} };
@@ -43,12 +45,12 @@ export default async function PostsByCategoryPage(props: {
 
   const params = await props.params;
 
-  const { data: posts } = await sanityFetch({ 
+  const { data: posts } = await sanityFetch<PostsByCategoryQueryResult | null>({ 
     query: postsByCategoryQuery, 
     params: params
   });
 
-  if (posts.length === 0) {
+  if (!posts?.length) {
     return (
       <div className="py-20 flex items-center justify-center gap-2 border border-dashed rounded-3xl text-center text-gray-600 bg-white">
         <CircleSlash size={20} className='text-red-500' /> <span className='font-medium antialiased'>No posts found in this category.</span>
@@ -57,6 +59,6 @@ export default async function PostsByCategoryPage(props: {
   }
 
   return (
-    <PostGrid posts={posts} />
+    <PostGrid posts={posts ?? []} />
   )
 }

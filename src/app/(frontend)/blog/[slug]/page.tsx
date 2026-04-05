@@ -2,30 +2,27 @@ import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { processMetadata } from '@/lib/utils';
-import { sanityFetch } from '@/sanity/lib/live';
+import { sanityFetch } from '@/sanity/lib/sanity-fetch';
 import PostContent from '../_components/post-content';
 import RelatedPosts from '../_components/related-posts';
 import { postBySlugQuery, postSlugsQuery } from '@/sanity/lib/queries/documents/post';
-import { AllPostsQueryResult, PostBySlugQueryResult } from '../../../../../sanity.types';
+import type { AllPostsQueryResult, PostBySlugQueryResult, PostSlugsQueryResult } from '../../../../../sanity.types';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  const { data } = await sanityFetch({
+  const { data } = await sanityFetch<PostSlugsQueryResult>({
     query: postSlugsQuery,
-    perspective: "published",
-    stega: false,
   });
   return data ?? [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { data: post } = await sanityFetch({
+  const { data: post } = await sanityFetch<PostBySlugQueryResult | null>({
     query: postBySlugQuery,
     params: await params,
-    stega: false,
   });
 
   if (!post) { return {} };
@@ -34,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function PostPage({ params }: PageProps) {
-  const { data: post } = await sanityFetch({ 
+  const { data: post } = await sanityFetch<PostBySlugQueryResult | null>({ 
     query: postBySlugQuery, 
     params: await params
   });

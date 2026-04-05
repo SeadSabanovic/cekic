@@ -1,11 +1,16 @@
 import { Metadata } from 'next';
-import { sanityFetch } from '@/sanity/lib/live';
+import { sanityFetch } from '@/sanity/lib/sanity-fetch';
 import ProjectGrid from '../../_components/project-grid';
 import {
   projectCategoryBySlugQuery,
   projectCategorySlugsQuery,
   projectsByCategoryQuery,
 } from '@/sanity/lib/queries/documents/project';
+import type {
+  ProjectCategoryBySlugQueryResult,
+  ProjectCategorySlugsQueryResult,
+  ProjectsByCategoryQueryResult,
+} from '../../../../../../sanity.types';
 import { CircleSlash } from 'lucide-react';
 
 interface PageProps {
@@ -13,20 +18,17 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const { data } = await sanityFetch({
+  const { data } = await sanityFetch<ProjectCategorySlugsQueryResult>({
     query: projectCategorySlugsQuery,
-    perspective: "published",
-    stega: false,
   });
   return data ?? [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
 
-  const { data: category } = await sanityFetch({
+  const { data: category } = await sanityFetch<ProjectCategoryBySlugQueryResult | null>({
     query: projectCategoryBySlugQuery,
     params: await params,
-    stega: false,
   });
 
   if (!category) { return {} };
@@ -43,12 +45,12 @@ export default async function ProjectsByCategoryPage(props: {
 
   const params = await props.params;
 
-  const { data: projects } = await sanityFetch({
+  const { data: projects } = await sanityFetch<ProjectsByCategoryQueryResult | null>({
     query: projectsByCategoryQuery,
     params: params
   });
 
-  if (projects.length === 0) {
+  if (!projects?.length) {
     return (
       <div className="py-20 flex items-center justify-center gap-2 border border-dashed rounded-3xl text-center text-gray-600 bg-white">
         <CircleSlash size={20} className='text-red-500' /> <span className='font-medium antialiased'>No projects found in this category.</span>
@@ -57,6 +59,6 @@ export default async function ProjectsByCategoryPage(props: {
   }
 
   return (
-    <ProjectGrid projects={projects} />
+    <ProjectGrid projects={projects ?? []} />
   )
 }

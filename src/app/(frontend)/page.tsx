@@ -1,16 +1,15 @@
 import { Metadata } from "next";
 import { processMetadata } from "@/lib/utils";
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch } from "@/sanity/lib/sanity-fetch";
 import Container from "@/components/global/container";
 import { PageBuilder } from "@/components/page-builder";
-import { PageBySlugQueryResult } from "../../../sanity.types";
+import type { GeneralSettingsQueryResult, PageBySlugQueryResult } from "../../../sanity.types";
 import { pageBySlugQuery } from "@/sanity/lib/queries/documents/page";
 import { generalSettingsQuery } from "@/sanity/lib/queries/singletons/settings";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { data: settings } = await sanityFetch({
+  const { data: settings } = await sanityFetch<GeneralSettingsQueryResult | null>({
     query: generalSettingsQuery,
-    stega: false,
   });
 
   const page = settings?.homePage;
@@ -22,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home() {
 
-  const { data: settings } = await sanityFetch({
+  const { data: settings } = await sanityFetch<GeneralSettingsQueryResult | null>({
     query: generalSettingsQuery,
   });
 
@@ -32,7 +31,7 @@ export default async function Home() {
     </Container>
   )
 
-  const { data: page } = await sanityFetch({ 
+  const { data: page } = await sanityFetch<PageBySlugQueryResult | null>({ 
     query: pageBySlugQuery, 
     params: { slug: settings?.homePage?.slug },
   });
