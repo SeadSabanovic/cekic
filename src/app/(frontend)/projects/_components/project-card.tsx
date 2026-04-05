@@ -43,7 +43,7 @@ function Thumbnail({ image }: {
         width={800}
         height={800}
         alt={image?.altText ?? ''}
-        className='aspect-[3/2] rounded-2xl'
+        className='aspect-3/2 rounded-2xl'
       />
     </div>
   )

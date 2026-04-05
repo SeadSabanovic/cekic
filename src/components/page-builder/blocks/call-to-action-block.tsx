@@ -18,7 +18,7 @@ export default function CallToActionBlock(props: CallToActionBlockProps) {
       <Container className='py-16 md:py-28 border-x border-dashed'>
         <div className='flex flex-col lg:flex-row lg:items-center justify-between gap-x-16'>
           <div>
-            <Heading tag="h2" size="xl" className='max-w-[40rem] text-balance leading-tight'>
+            <Heading tag="h2" size="xl" className='max-w-160 text-balance leading-tight'>
               {heading}
             </Heading>
             <PortableTextEditor 

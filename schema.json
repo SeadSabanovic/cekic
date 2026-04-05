@@ -742,7 +742,7 @@
               },
               {
                 "type": "string",
-                "value": "outline"
+                "value": "outline-solid"
               },
               {
                 "type": "string",
@@ -1313,7 +1313,7 @@
               },
               {
                 "type": "string",
-                "value": "rounded"
+                "value": "rounded-sm"
               }
             ]
           },
@@ -1487,7 +1487,7 @@
             "of": [
               {
                 "type": "string",
-                "value": "rounded"
+                "value": "rounded-sm"
               },
               {
                 "type": "string",
@@ -1504,7 +1504,7 @@
             "of": [
               {
                 "type": "string",
-                "value": "rounded"
+                "value": "rounded-sm"
               },
               {
                 "type": "string",
@@ -2728,7 +2728,7 @@
             "of": [
               {
                 "type": "string",
-                "value": "rounded"
+                "value": "rounded-sm"
               },
               {
                 "type": "string",
@@ -2752,7 +2752,7 @@
             "of": [
               {
                 "type": "string",
-                "value": "rounded"
+                "value": "rounded-sm"
               },
               {
                 "type": "string",
@@ -3223,7 +3223,7 @@
                             },
                             {
                               "type": "string",
-                              "value": "outline"
+                              "value": "outline-solid"
                             },
                             {
                               "type": "string",
@@ -3631,7 +3631,7 @@
               },
               {
                 "type": "string",
-                "value": "rounded"
+                "value": "rounded-sm"
               }
             ]
           },
@@ -3837,7 +3837,7 @@
               },
               {
                 "type": "string",
-                "value": "rounded"
+                "value": "rounded-sm"
               }
             ]
           },

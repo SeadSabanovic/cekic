@@ -34,7 +34,7 @@ export default function ClientLayout({
   if (pathname.includes('/studio')) return (children);
   
   return (
-    <div className={`${geistSans.variable} ${geistMono.variable} font-geistSans antialiased grid min-h-[100dvh] grid-rows-[auto_1fr_auto]`}>
+    <div className={`${geistSans.variable} ${geistMono.variable} font-geistSans antialiased grid min-h-dvh grid-rows-[auto_1fr_auto]`}>
       <Navbar 
         settings={settings}
         navigationSettings={navigationSettings}

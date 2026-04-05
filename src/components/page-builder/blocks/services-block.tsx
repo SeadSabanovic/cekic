@@ -29,7 +29,7 @@ export default function ServicesBlock(props: ServicesBlockProps) {
       {...(anchorId ? { id: anchorId } : {})}
       className={cn('px-4 xl:px-10', {
         'pattern-bg': stegaClean(background) === 'pattern',
-        'rounded-t-4xl border-t border-t-gray-200/60': stegaClean(topCornerRadius) === 'rounded'
+        'rounded-t-4xl border-t border-t-gray-200/60': stegaClean(topCornerRadius) === 'rounded-sm'
       })}
     >
       <Container 
@@ -38,7 +38,7 @@ export default function ServicesBlock(props: ServicesBlockProps) {
         className='space-y-10 border-x border-dashed'
       >
         <div className='py-4 flex items-center justify-between gap-6 border-y border-dashed'>
-          <Heading tag="h2" size="xl" className='max-w-[40rem] text-balance leading-tight'>
+          <Heading tag="h2" size="xl" className='max-w-160 text-balance leading-tight'>
             {heading}
           </Heading>
           {buttons && buttons.length > 0 && (
@@ -77,7 +77,7 @@ function ServiceCard({ service }: {
             width={800}
             height={800}
             alt={image?.asset?.altText ?? ''}
-            className='aspect-[3/2] rounded-2xl'
+            className='aspect-3/2 rounded-2xl'
           />
         </div>
         <Heading tag="h2" size="md" className='pt-1 md:pt-0 text-balance'>

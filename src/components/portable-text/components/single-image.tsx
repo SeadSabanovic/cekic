@@ -9,7 +9,7 @@ export default function SingleImage({ data }: {
         _ref: string;
       };
       aspectRatio: 'square' | 'rectangle' | 'portrait';
-      cornerRadius: 'rounded' | 'straight';
+      cornerRadius: 'rounded-sm' | 'straight';
       enableBorder: boolean;
       borderStyle: 'solid' | 'dashed';
       alt: string;
@@ -31,8 +31,8 @@ export default function SingleImage({ data }: {
             height={800}
             alt={data.image?.alt ?? ''}
             className={cn('h-auto w-full my-0 object-cover aspect-auto rounded-2xl', {
-              'aspect-[3/2]': data?.image?.aspectRatio === 'rectangle',
-              'aspect-[3/4]': data?.image?.aspectRatio === 'portrait',
+              'aspect-3/2': data?.image?.aspectRatio === 'rectangle',
+              'aspect-3/4': data?.image?.aspectRatio === 'portrait',
             })}
           />
         </div>

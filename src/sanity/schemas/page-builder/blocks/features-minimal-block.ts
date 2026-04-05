@@ -52,11 +52,11 @@ export default defineType({
       type: "string",
       options: {
         list: [
-          { title: "Rounded", value: "rounded" },
+          { title: "Rounded", value: "rounded-sm" },
           { title: "Straight", value: "straight" },
         ],
       },
-      initialValue: 'rounded',
+      initialValue: 'rounded-sm',
       hidden: ({ parent }) => parent?.enableBorderTop === false,
     }),
     defineField({
@@ -70,11 +70,11 @@ export default defineType({
       type: "string",
       options: {
         list: [
-          { title: "Rounded", value: "rounded" },
+          { title: "Rounded", value: "rounded-sm" },
           { title: "Straight", value: "straight" },
         ],
       },
-      initialValue: 'rounded',
+      initialValue: 'rounded-sm',
       hidden: ({ parent }) => parent?.enableBorderBottom === false,
     }),
     defineField({

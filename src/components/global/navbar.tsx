@@ -42,7 +42,7 @@ export default function Navbar({ settings, navigationSettings }: NavbarProps) {
                     <>
                       {item.menuItemType === 'group' ? (
                         <NavigationMenuItem>
-                          <NavigationMenuTrigger className='group-hover/nav:opacity-40 hover:!opacity-100'>
+                          <NavigationMenuTrigger className='group-hover/nav:opacity-40 hover:opacity-100!'>
                             {item.title}
                           </NavigationMenuTrigger>
                           <NavigationMenuContent className='min-w-[180px] text-nowrap py-3 px-3 flex flex-col gap-2 bg-white'>
@@ -65,8 +65,8 @@ export default function Navbar({ settings, navigationSettings }: NavbarProps) {
                         <NavigationMenuItem>
                           <Link 
                             href={resolveHref(item?.pageReference?._type ?? '', item?.pageReference?.slug ?? '') ?? '/'}
-                            className={cn('relative overflow-hidden inline-flex transition-opacity duration-200 group-hover/nav:opacity-40 hover:!opacity-100', {
-                              'hover:underline underline-offset-[38px]': !item.isButton,
+                            className={cn('relative overflow-hidden inline-flex transition-opacity duration-200 group-hover/nav:opacity-40 hover:opacity-100!', {
+                              'hover:underline underline-offset-38': !item.isButton,
                               'py-2 px-4 rounded-full text-white bg-blue-600': item.isButton,
                               'text-blue-700': pathname.includes(`/${item.pageReference?.slug ?? ''}`)
                             })}

@@ -28,8 +28,8 @@ export default function FeaturesMinimalBlock(props: FeaturesMinimalBlockProps) {
       className={cn('px-4 xl:px-10 bg-gray-50', {
         'border-t': enableBorderTop,
         'border-b': enableBorderBottom,
-        'rounded-t-4xl': cornerRadiusTop === 'rounded',
-        'rounded-b-4xl': cornerRadiusBottom === 'rounded'
+        'rounded-t-4xl': cornerRadiusTop === 'rounded-sm',
+        'rounded-b-4xl': cornerRadiusBottom === 'rounded-sm'
       })}
     >
       <Container className='py-16 md:py-28 border-x border-dashed space-y-10 md:space-y-14'>
@@ -74,8 +74,8 @@ export default function FeaturesMinimalBlock(props: FeaturesMinimalBlockProps) {
 function EdgeBlur() {
   return (
     <div className='absolute inset-0 flex items-center justify-between'>
-      <div className='relative bg-gradient-to-r from-gray-50 to-transparent h-full w-[100px]'></div>
-      <div className='bg-gradient-to-l from-gray-50 to-transparent h-full w-[100px]'></div>
+      <div className='relative bg-linear-to-r from-gray-50 to-transparent h-full w-[100px]'></div>
+      <div className='bg-linear-to-l from-gray-50 to-transparent h-full w-[100px]'></div>
     </div>
   )
 }

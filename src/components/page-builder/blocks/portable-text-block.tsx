@@ -24,7 +24,7 @@ export default function PortableTextBlock(props: PortableTextBlockProps) {
         })}
       >
         <div 
-          className={cn('max-w-[48rem]', {
+          className={cn('max-w-3xl', {
             'pl-10 border-l border-dashed': stegaClean(alignment) === 'left',
             'border-r border-dashed': stegaClean(alignment) === 'right',
           })}

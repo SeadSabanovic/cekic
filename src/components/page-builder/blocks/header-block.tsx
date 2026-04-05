@@ -14,7 +14,7 @@ export default function HeaderBlock(props: HeaderBlockProps) {
     <section 
       {...(anchorId ? { id: anchorId } : {})} 
       className={cn('px-4 md:px-10 pattern-bg border-b', {
-        'rounded-4xl': bottomCornerRadius === 'rounded'
+        'rounded-4xl': bottomCornerRadius === 'rounded-sm'
       })}
     >
       <Container className='border-x border-dashed'>

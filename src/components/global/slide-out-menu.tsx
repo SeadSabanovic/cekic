@@ -131,7 +131,7 @@ export default function SlideOutMenu({ children, settings, navigationSettings }:
           </>
         )}
         {slideOutMenuButtons && slideOutMenuButtons.length > 0 && (
-          <div className='pt-10 fixed bottom-1 right-0 w-full md:w-[380px] px-4 pb-4 bg-gradient-to-t from-white via-white to-transparent'>
+          <div className='pt-10 fixed bottom-1 right-0 w-full md:w-[380px] px-4 pb-4 bg-linear-to-t from-white via-white to-transparent'>
             <ButtonRenderer buttons={slideOutMenuButtons} classNames="flex-col md:flex-row" />  
           </div>
         )}

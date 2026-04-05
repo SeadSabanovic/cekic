@@ -29,7 +29,7 @@ export default function HeroBlock(props: HeroBlockProps) {
     <section 
       {...(anchorId ? { id: anchorId } : {})} 
       className={cn('px-4 md:px-10 pattern-bg border-b border-b-gray-200/60', {
-        'rounded-3xl md:rounded-4xl': bottomCornerRadius === 'rounded'
+        'rounded-3xl md:rounded-4xl': bottomCornerRadius === 'rounded-sm'
       })}
     >
       <Container 
@@ -43,7 +43,7 @@ export default function HeroBlock(props: HeroBlockProps) {
           })}
         >
           <div className='col-span-12 xl:col-span-7'>
-            <Heading size="xxxl" tag="h1" className='md:max-w-[40rem] text-balance leading-tight'>
+            <Heading size="xxxl" tag="h1" className='md:max-w-160 text-balance leading-tight'>
               {heading}
             </Heading>
           </div>
@@ -69,7 +69,7 @@ export default function HeroBlock(props: HeroBlockProps) {
                 src={image?.asset?.url ?? ''}
                 alt={image?.asset?.altText ?? ''}
                 className={cn('object-cover rounded-2xl md:rounded-3xl', {
-                  'max-h-[30rem]': image?.height === 'short'
+                  'max-h-120': image?.height === 'short'
                 })}
               />
               {overlayType === 'dark' && (
@@ -90,7 +90,7 @@ function DarkOverlay() {
   return (
     <>
       <div className='absolute inset-0 bg-black/20' />
-      <div className='absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/40 to-transparent h-[50%] w-full' />
+      <div className='absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/40 to-transparent h-[50%] w-full' />
     </>
   )
 }

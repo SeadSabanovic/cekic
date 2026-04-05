@@ -57,7 +57,7 @@ export default function Form({ form }: { form: FormType; }) {
   return(
     <form 
       onSubmit={handleSubmit(onSubmit)} 
-      className="w-full max-w-xl p-6 md:p-8 space-y-6 border backdrop-blur-sm rounded-xl md:rounded-3xl"
+      className="w-full max-w-xl p-6 md:p-8 space-y-6 border backdrop-blur-xs rounded-xl md:rounded-3xl"
     >
       {fields?.map((field) => (
         <div key={field.name} className="space-y-2">

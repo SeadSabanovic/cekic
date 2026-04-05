@@ -31,12 +31,12 @@ export default function PostCard({ post }: PostCardProps) {
         </Excerpt>
         <div className='mt-5 md:mt-6 flex items-center justify-between'>
           <div className='flex items-center gap-3.5'>
-            <Author author={author} classNames='-translate-y-0'/>
+            <Author author={author} classNames='translate-y-0'/>
             <Date date={_createdAt} />
           </div>
           <ChevronRight 
             size={18} 
-            className='-translate-x-6 opacity-0 group-hover:-translate-x-0 group-hover:opacity-100 transition-all duration-300 text-gray-600'
+            className='-translate-x-6 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 text-gray-600'
           />
         </div>
       </Link>
@@ -61,7 +61,7 @@ function Thumbnail({ image }: {
         width={800}
         height={800}
         alt={image.altText ?? ''}
-        className='aspect-[3/2] rounded-2xl'
+        className='aspect-3/2 rounded-2xl'
       />
     </div>
   )

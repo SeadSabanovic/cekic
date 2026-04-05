@@ -27,7 +27,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
       <CollapsibleTrigger className="w-full">
         <div className="py-1.5 pl-2 flex items-center justify-between border border-dashed rounded-lg">
           <div className="flex items-center gap-2">
-            <span className='h-5 w-5 flex items-center justify-center rounded bg-gray-200 text-black'>
+            <span className='h-5 w-5 flex items-center justify-center rounded-sm bg-gray-200 text-black'>
               <Text size={12} />
             </span>
             <span className='font-medium text-sm'>
@@ -37,7 +37,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
           <ChevronDown 
             size={15} 
             className={cn('mr-2.5 -rotate-90 transition-transform duration-200', {
-              '-rotate-0': isOpen
+              'rotate-0': isOpen
             })}
           />
         </div>
@@ -49,7 +49,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
               <li key={item?._key}>
                 <a 
                   href={`#${slugify(item?.children?.[0]?.text ?? '')}`} 
-                  className="flex items-center gap-2 scroll-smooth focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                  className="flex items-center gap-2 scroll-smooth focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                 >
                   <span className="block w-2.5 border-t border-dashed text-gray-300" /> 
                   <span className="relative group w-fit">

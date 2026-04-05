@@ -23,8 +23,8 @@ export default function TestimonialBlock(props: TestimonialBlockProps) {
     <section 
       {...(anchorId ? { id: anchorId } : {})}
       className={cn('pb-10 md:pb-0 xl:px-10 pattern-bg border-y border-dashed', {
-        'rounded-t-4xl': stegaClean(cornerRadiusTop) === 'rounded',
-        'rounded-b-4xl': stegaClean(cornerRadiusBottom) === 'rounded'
+        'rounded-t-4xl': stegaClean(cornerRadiusTop) === 'rounded-sm',
+        'rounded-b-4xl': stegaClean(cornerRadiusBottom) === 'rounded-sm'
       })}
     >
       <Container className='py-16 md:py-28 space-y-10 border-x border-dashed'>
@@ -32,12 +32,12 @@ export default function TestimonialBlock(props: TestimonialBlockProps) {
           <div className='w-fit mx-auto px-2 h-6 flex items-center justify-between rounded-full text-center text-sm font-medium tracking-tight text-white bg-black'>
             {eyebrow}
           </div>
-          <h2 className='mt-6 py-2 text-center text-xl md:text-2xl font-semibold border-y w-fit mx-auto bg-gradient-to-r from-white/0 via-green-400/15 to-white/0'>
+          <h2 className='mt-6 py-2 text-center text-xl md:text-2xl font-semibold border-y w-fit mx-auto bg-linear-to-r from-white/0 via-green-400/15 to-white/0'>
             {heading}
           </h2>
         </div>
         {testimonials && testimonials.length > 1 ? (
-          <Carousel className="w-full max-w-[38rem] xl:max-w-[44rem] mx-auto">
+          <Carousel className="w-full max-w-152 xl:max-w-176 mx-auto">
             <CarouselContent>
               {testimonials?.map((testimonial) => (
                 <CarouselItem key={testimonial._id}>
@@ -64,7 +64,7 @@ function TestimonialCard({ testimonial, classNames }: {
   classNames?: string;
 }) {
   return (
-    <div className={cn('h-full mx-auto max-w-[38rem] md:max-w-[44rem] p-8 md:p-12 space-y-10 md:space-y-20 flex flex-col justify-between bg-white', classNames)}>
+    <div className={cn('h-full mx-auto max-w-152 md:max-w-176 p-8 md:p-12 space-y-10 md:space-y-20 flex flex-col justify-between bg-white', classNames)}>
       <h2 className='text-base md:text-xl text-pretty'>
         {testimonial?.quote}
       </h2>

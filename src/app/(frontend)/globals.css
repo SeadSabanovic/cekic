@@ -1,11 +1,46 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+/* Turbopack resolves bare imports from this file's directory; point at repo root node_modules */
+@import '../../../node_modules/tw-animate-css/dist/tw-animate.css';
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@plugin '@tailwindcss/typography';
+
+@theme {
+  --max-w-8xl: 90rem;
+
+  --radius-4xl: 2.4rem;
+
+  --font-geistSans: var(--font-geist-sans);
+  --font-geistMono: var(--font-geist-mono);
+
+  --animate-logo-marquee: logo-marquee-move 60s linear infinite;
+
+  @keyframes logo-marquee-move {
+    to {
+      transform: translateX(-50%);
+    }
   }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
 }
 
 html {

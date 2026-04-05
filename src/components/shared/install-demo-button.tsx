@@ -44,8 +44,8 @@ export default function InstallDemoButton() {
 function EdgeBlur() {
   return (
     <div className='absolute inset-0 flex items-center justify-between'>
-      <div className='relative bg-gradient-to-r from-gray-50 to-transparent h-full w-[100px]'></div>
-      <div className='bg-gradient-to-l from-gray-50 to-transparent h-full w-[100px]'></div>
+      <div className='relative bg-linear-to-r from-gray-50 to-transparent h-full w-[100px]'></div>
+      <div className='bg-linear-to-l from-gray-50 to-transparent h-full w-[100px]'></div>
     </div>
   )
 }

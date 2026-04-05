@@ -132,7 +132,7 @@ export type ButtonObject = {
     };
     _type: "file";
   };
-  buttonVariant?: "primary" | "secondary" | "tertiary" | "outline" | "underline";
+  buttonVariant?: "primary" | "secondary" | "tertiary" | "outline-solid" | "underline";
   buttonWidth?: "auto" | "fullWidth";
 };
 
@@ -206,7 +206,7 @@ export type ServicesBlock = {
     [internalGroqTypeReferenceTo]?: "service";
   }>;
   background?: "white" | "pattern";
-  topCornerRadius?: "straight" | "rounded";
+  topCornerRadius?: "straight" | "rounded-sm";
   buttons?: Array<{
     _key: string;
   } & ButtonObject>;
@@ -226,8 +226,8 @@ export type TestimonialBlock = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "testimonial";
   }>;
-  cornerRadiusTop?: "rounded" | "straight";
-  cornerRadiusBottom?: "rounded" | "straight";
+  cornerRadiusTop?: "rounded-sm" | "straight";
+  cornerRadiusBottom?: "rounded-sm" | "straight";
   anchorId?: string;
 };
 
@@ -381,9 +381,9 @@ export type FeaturesMinimalBlock = {
   } & ButtonObject>;
   features?: Array<string>;
   enableBorderTop?: boolean;
-  cornerRadiusTop?: "rounded" | "straight";
+  cornerRadiusTop?: "rounded-sm" | "straight";
   enableBorderBottom?: boolean;
-  cornerRadiusBottom?: "rounded" | "straight";
+  cornerRadiusBottom?: "rounded-sm" | "straight";
   anchorId?: string;
 };
 
@@ -456,7 +456,7 @@ export type FeatureCardsBlock = {
         };
         _type: "file";
       };
-      buttonVariant?: "primary" | "secondary" | "tertiary" | "outline" | "underline";
+      buttonVariant?: "primary" | "secondary" | "tertiary" | "outline-solid" | "underline";
       buttonWidth?: "auto" | "fullWidth";
     };
     _key: string;
@@ -508,7 +508,7 @@ export type HeaderBlock = {
     _type: "block";
     _key: string;
   }>;
-  bottomCornerRadius?: "straight" | "rounded";
+  bottomCornerRadius?: "straight" | "rounded-sm";
   anchorId?: string;
 };
 
@@ -534,7 +534,7 @@ export type HeroBlock = {
     _key: string;
   }>;
   mediaType?: "image" | "none";
-  bottomCornerRadius?: "straight" | "rounded";
+  bottomCornerRadius?: "straight" | "rounded-sm";
   image?: {
     asset?: {
       _ref: string;
@@ -1382,7 +1382,7 @@ export type PageBySlugQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -1438,7 +1438,7 @@ export type PageBySlugQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -1502,7 +1502,7 @@ export type PageBySlugQueryResult = {
         _key: null;
         showButton: boolean | null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonWidth: "auto" | "fullWidth" | null;
         buttonFileUrl: {
@@ -1571,7 +1571,7 @@ export type PageBySlugQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -1645,7 +1645,7 @@ export type PageBySlugQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -1691,9 +1691,9 @@ export type PageBySlugQueryResult = {
     }> | null;
     features: Array<string> | null;
     enableBorderTop: boolean | null;
-    cornerRadiusTop: "rounded" | "straight" | null;
+    cornerRadiusTop: "rounded-sm" | "straight" | null;
     enableBorderBottom: boolean | null;
-    cornerRadiusBottom: "rounded" | "straight" | null;
+    cornerRadiusBottom: "rounded-sm" | "straight" | null;
     anchorId: string | null;
     paddingTop: null;
     paddingBottom: null;
@@ -1756,7 +1756,7 @@ export type PageBySlugQueryResult = {
         headingSize: null;
         richTextContent: null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonPageReference: {
           _id: string;
@@ -1880,7 +1880,7 @@ export type PageBySlugQueryResult = {
       _type: "block";
       _key: string;
     }> | null;
-    bottomCornerRadius: "rounded" | "straight" | null;
+    bottomCornerRadius: "rounded-sm" | "straight" | null;
     anchorId: string | null;
   } | {
     _id: null;
@@ -1906,12 +1906,12 @@ export type PageBySlugQueryResult = {
       _key: string;
     }> | null;
     mediaType: "image" | "none" | null;
-    bottomCornerRadius: "rounded" | "straight" | null;
+    bottomCornerRadius: "rounded-sm" | "straight" | null;
     buttons: Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -2070,7 +2070,7 @@ export type PageBySlugQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -2115,7 +2115,7 @@ export type PageBySlugQueryResult = {
       buttonAnchorId: string | null;
     }> | null;
     background: "pattern" | "white" | null;
-    topCornerRadius: "rounded" | "straight" | null;
+    topCornerRadius: "rounded-sm" | "straight" | null;
     anchorId: string | null;
     paddingTop: "default" | "large" | "medium" | "none" | "small" | null;
     paddingBottom: "default" | "large" | "medium" | "none" | "small" | null;
@@ -2155,8 +2155,8 @@ export type PageBySlugQueryResult = {
       } | null;
     }> | null;
     anchorId: string | null;
-    cornerRadiusTop: "rounded" | "straight" | null;
-    cornerRadiusBottom: "rounded" | "straight" | null;
+    cornerRadiusTop: "rounded-sm" | "straight" | null;
+    cornerRadiusBottom: "rounded-sm" | "straight" | null;
     paddingTop: null;
     paddingBottom: null;
   }> | null;
@@ -2220,7 +2220,7 @@ export type BlogPageQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -2276,7 +2276,7 @@ export type BlogPageQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -2340,7 +2340,7 @@ export type BlogPageQueryResult = {
         _key: null;
         showButton: boolean | null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonWidth: "auto" | "fullWidth" | null;
         buttonFileUrl: {
@@ -2409,7 +2409,7 @@ export type BlogPageQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -2483,7 +2483,7 @@ export type BlogPageQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -2529,9 +2529,9 @@ export type BlogPageQueryResult = {
     }> | null;
     features: Array<string> | null;
     enableBorderTop: boolean | null;
-    cornerRadiusTop: "rounded" | "straight" | null;
+    cornerRadiusTop: "rounded-sm" | "straight" | null;
     enableBorderBottom: boolean | null;
-    cornerRadiusBottom: "rounded" | "straight" | null;
+    cornerRadiusBottom: "rounded-sm" | "straight" | null;
     anchorId: string | null;
     paddingTop: null;
     paddingBottom: null;
@@ -2594,7 +2594,7 @@ export type BlogPageQueryResult = {
         headingSize: null;
         richTextContent: null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonPageReference: {
           _id: string;
@@ -2718,7 +2718,7 @@ export type BlogPageQueryResult = {
       _type: "block";
       _key: string;
     }> | null;
-    bottomCornerRadius: "rounded" | "straight" | null;
+    bottomCornerRadius: "rounded-sm" | "straight" | null;
     anchorId: string | null;
   } | {
     _id: null;
@@ -2744,12 +2744,12 @@ export type BlogPageQueryResult = {
       _key: string;
     }> | null;
     mediaType: "image" | "none" | null;
-    bottomCornerRadius: "rounded" | "straight" | null;
+    bottomCornerRadius: "rounded-sm" | "straight" | null;
     buttons: Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -2908,7 +2908,7 @@ export type BlogPageQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -2953,7 +2953,7 @@ export type BlogPageQueryResult = {
       buttonAnchorId: string | null;
     }> | null;
     background: "pattern" | "white" | null;
-    topCornerRadius: "rounded" | "straight" | null;
+    topCornerRadius: "rounded-sm" | "straight" | null;
     anchorId: string | null;
     paddingTop: "default" | "large" | "medium" | "none" | "small" | null;
     paddingBottom: "default" | "large" | "medium" | "none" | "small" | null;
@@ -2993,8 +2993,8 @@ export type BlogPageQueryResult = {
       } | null;
     }> | null;
     anchorId: string | null;
-    cornerRadiusTop: "rounded" | "straight" | null;
-    cornerRadiusBottom: "rounded" | "straight" | null;
+    cornerRadiusTop: "rounded-sm" | "straight" | null;
+    cornerRadiusBottom: "rounded-sm" | "straight" | null;
     paddingTop: null;
     paddingBottom: null;
   }> | null;
@@ -3309,7 +3309,7 @@ export type ProjectsPageQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -3365,7 +3365,7 @@ export type ProjectsPageQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -3429,7 +3429,7 @@ export type ProjectsPageQueryResult = {
         _key: null;
         showButton: boolean | null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonWidth: "auto" | "fullWidth" | null;
         buttonFileUrl: {
@@ -3498,7 +3498,7 @@ export type ProjectsPageQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -3572,7 +3572,7 @@ export type ProjectsPageQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -3618,9 +3618,9 @@ export type ProjectsPageQueryResult = {
     }> | null;
     features: Array<string> | null;
     enableBorderTop: boolean | null;
-    cornerRadiusTop: "rounded" | "straight" | null;
+    cornerRadiusTop: "rounded-sm" | "straight" | null;
     enableBorderBottom: boolean | null;
-    cornerRadiusBottom: "rounded" | "straight" | null;
+    cornerRadiusBottom: "rounded-sm" | "straight" | null;
     anchorId: string | null;
     paddingTop: null;
     paddingBottom: null;
@@ -3683,7 +3683,7 @@ export type ProjectsPageQueryResult = {
         headingSize: null;
         richTextContent: null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonPageReference: {
           _id: string;
@@ -3807,7 +3807,7 @@ export type ProjectsPageQueryResult = {
       _type: "block";
       _key: string;
     }> | null;
-    bottomCornerRadius: "rounded" | "straight" | null;
+    bottomCornerRadius: "rounded-sm" | "straight" | null;
     anchorId: string | null;
   } | {
     _id: null;
@@ -3833,12 +3833,12 @@ export type ProjectsPageQueryResult = {
       _key: string;
     }> | null;
     mediaType: "image" | "none" | null;
-    bottomCornerRadius: "rounded" | "straight" | null;
+    bottomCornerRadius: "rounded-sm" | "straight" | null;
     buttons: Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -3997,7 +3997,7 @@ export type ProjectsPageQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -4042,7 +4042,7 @@ export type ProjectsPageQueryResult = {
       buttonAnchorId: string | null;
     }> | null;
     background: "pattern" | "white" | null;
-    topCornerRadius: "rounded" | "straight" | null;
+    topCornerRadius: "rounded-sm" | "straight" | null;
     anchorId: string | null;
     paddingTop: "default" | "large" | "medium" | "none" | "small" | null;
     paddingBottom: "default" | "large" | "medium" | "none" | "small" | null;
@@ -4082,8 +4082,8 @@ export type ProjectsPageQueryResult = {
       } | null;
     }> | null;
     anchorId: string | null;
-    cornerRadiusTop: "rounded" | "straight" | null;
-    cornerRadiusBottom: "rounded" | "straight" | null;
+    cornerRadiusTop: "rounded-sm" | "straight" | null;
+    cornerRadiusBottom: "rounded-sm" | "straight" | null;
     paddingTop: null;
     paddingBottom: null;
   }> | null;
@@ -4132,7 +4132,7 @@ export type ProjectsPageQueryResult = {
         _key: string;
         showButton: boolean | null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonWidth: "auto" | "fullWidth" | null;
         buttonFileUrl: {
@@ -4188,7 +4188,7 @@ export type ProjectsPageQueryResult = {
         _key: string;
         showButton: boolean | null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonWidth: "auto" | "fullWidth" | null;
         buttonFileUrl: {
@@ -4252,7 +4252,7 @@ export type ProjectsPageQueryResult = {
           _key: null;
           showButton: boolean | null;
           buttonText: string | null;
-          buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+          buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
           buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
           buttonWidth: "auto" | "fullWidth" | null;
           buttonFileUrl: {
@@ -4321,7 +4321,7 @@ export type ProjectsPageQueryResult = {
         _key: string;
         showButton: boolean | null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonWidth: "auto" | "fullWidth" | null;
         buttonFileUrl: {
@@ -4395,7 +4395,7 @@ export type ProjectsPageQueryResult = {
         _key: string;
         showButton: boolean | null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonWidth: "auto" | "fullWidth" | null;
         buttonFileUrl: {
@@ -4441,9 +4441,9 @@ export type ProjectsPageQueryResult = {
       }> | null;
       features: Array<string> | null;
       enableBorderTop: boolean | null;
-      cornerRadiusTop: "rounded" | "straight" | null;
+      cornerRadiusTop: "rounded-sm" | "straight" | null;
       enableBorderBottom: boolean | null;
-      cornerRadiusBottom: "rounded" | "straight" | null;
+      cornerRadiusBottom: "rounded-sm" | "straight" | null;
       anchorId: string | null;
       paddingTop: null;
       paddingBottom: null;
@@ -4506,7 +4506,7 @@ export type ProjectsPageQueryResult = {
           headingSize: null;
           richTextContent: null;
           buttonText: string | null;
-          buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+          buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
           buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
           buttonPageReference: {
             _id: string;
@@ -4630,7 +4630,7 @@ export type ProjectsPageQueryResult = {
         _type: "block";
         _key: string;
       }> | null;
-      bottomCornerRadius: "rounded" | "straight" | null;
+      bottomCornerRadius: "rounded-sm" | "straight" | null;
       anchorId: string | null;
     } | {
       _id: null;
@@ -4656,12 +4656,12 @@ export type ProjectsPageQueryResult = {
         _key: string;
       }> | null;
       mediaType: "image" | "none" | null;
-      bottomCornerRadius: "rounded" | "straight" | null;
+      bottomCornerRadius: "rounded-sm" | "straight" | null;
       buttons: Array<{
         _key: string;
         showButton: boolean | null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonWidth: "auto" | "fullWidth" | null;
         buttonFileUrl: {
@@ -4820,7 +4820,7 @@ export type ProjectsPageQueryResult = {
         _key: string;
         showButton: boolean | null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonWidth: "auto" | "fullWidth" | null;
         buttonFileUrl: {
@@ -4865,7 +4865,7 @@ export type ProjectsPageQueryResult = {
         buttonAnchorId: string | null;
       }> | null;
       background: "pattern" | "white" | null;
-      topCornerRadius: "rounded" | "straight" | null;
+      topCornerRadius: "rounded-sm" | "straight" | null;
       anchorId: string | null;
       paddingTop: "default" | "large" | "medium" | "none" | "small" | null;
       paddingBottom: "default" | "large" | "medium" | "none" | "small" | null;
@@ -4905,8 +4905,8 @@ export type ProjectsPageQueryResult = {
         } | null;
       }> | null;
       anchorId: string | null;
-      cornerRadiusTop: "rounded" | "straight" | null;
-      cornerRadiusBottom: "rounded" | "straight" | null;
+      cornerRadiusTop: "rounded-sm" | "straight" | null;
+      cornerRadiusBottom: "rounded-sm" | "straight" | null;
       paddingTop: null;
       paddingBottom: null;
     }> | null;
@@ -4980,7 +4980,7 @@ export type ProjectBySlugQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -5036,7 +5036,7 @@ export type ProjectBySlugQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -5100,7 +5100,7 @@ export type ProjectBySlugQueryResult = {
         _key: null;
         showButton: boolean | null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonWidth: "auto" | "fullWidth" | null;
         buttonFileUrl: {
@@ -5169,7 +5169,7 @@ export type ProjectBySlugQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -5243,7 +5243,7 @@ export type ProjectBySlugQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -5289,9 +5289,9 @@ export type ProjectBySlugQueryResult = {
     }> | null;
     features: Array<string> | null;
     enableBorderTop: boolean | null;
-    cornerRadiusTop: "rounded" | "straight" | null;
+    cornerRadiusTop: "rounded-sm" | "straight" | null;
     enableBorderBottom: boolean | null;
-    cornerRadiusBottom: "rounded" | "straight" | null;
+    cornerRadiusBottom: "rounded-sm" | "straight" | null;
     anchorId: string | null;
     paddingTop: null;
     paddingBottom: null;
@@ -5354,7 +5354,7 @@ export type ProjectBySlugQueryResult = {
         headingSize: null;
         richTextContent: null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonPageReference: {
           _id: string;
@@ -5478,7 +5478,7 @@ export type ProjectBySlugQueryResult = {
       _type: "block";
       _key: string;
     }> | null;
-    bottomCornerRadius: "rounded" | "straight" | null;
+    bottomCornerRadius: "rounded-sm" | "straight" | null;
     anchorId: string | null;
   } | {
     _id: null;
@@ -5504,12 +5504,12 @@ export type ProjectBySlugQueryResult = {
       _key: string;
     }> | null;
     mediaType: "image" | "none" | null;
-    bottomCornerRadius: "rounded" | "straight" | null;
+    bottomCornerRadius: "rounded-sm" | "straight" | null;
     buttons: Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -5668,7 +5668,7 @@ export type ProjectBySlugQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -5713,7 +5713,7 @@ export type ProjectBySlugQueryResult = {
       buttonAnchorId: string | null;
     }> | null;
     background: "pattern" | "white" | null;
-    topCornerRadius: "rounded" | "straight" | null;
+    topCornerRadius: "rounded-sm" | "straight" | null;
     anchorId: string | null;
     paddingTop: "default" | "large" | "medium" | "none" | "small" | null;
     paddingBottom: "default" | "large" | "medium" | "none" | "small" | null;
@@ -5753,8 +5753,8 @@ export type ProjectBySlugQueryResult = {
       } | null;
     }> | null;
     anchorId: string | null;
-    cornerRadiusTop: "rounded" | "straight" | null;
-    cornerRadiusBottom: "rounded" | "straight" | null;
+    cornerRadiusTop: "rounded-sm" | "straight" | null;
+    cornerRadiusBottom: "rounded-sm" | "straight" | null;
     paddingTop: null;
     paddingBottom: null;
   }> | null;
@@ -5822,7 +5822,7 @@ export type AllProjectsQueryResult = Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -5878,7 +5878,7 @@ export type AllProjectsQueryResult = Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -5942,7 +5942,7 @@ export type AllProjectsQueryResult = Array<{
         _key: null;
         showButton: boolean | null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonWidth: "auto" | "fullWidth" | null;
         buttonFileUrl: {
@@ -6011,7 +6011,7 @@ export type AllProjectsQueryResult = Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -6085,7 +6085,7 @@ export type AllProjectsQueryResult = Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -6131,9 +6131,9 @@ export type AllProjectsQueryResult = Array<{
     }> | null;
     features: Array<string> | null;
     enableBorderTop: boolean | null;
-    cornerRadiusTop: "rounded" | "straight" | null;
+    cornerRadiusTop: "rounded-sm" | "straight" | null;
     enableBorderBottom: boolean | null;
-    cornerRadiusBottom: "rounded" | "straight" | null;
+    cornerRadiusBottom: "rounded-sm" | "straight" | null;
     anchorId: string | null;
     paddingTop: null;
     paddingBottom: null;
@@ -6196,7 +6196,7 @@ export type AllProjectsQueryResult = Array<{
         headingSize: null;
         richTextContent: null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonPageReference: {
           _id: string;
@@ -6320,7 +6320,7 @@ export type AllProjectsQueryResult = Array<{
       _type: "block";
       _key: string;
     }> | null;
-    bottomCornerRadius: "rounded" | "straight" | null;
+    bottomCornerRadius: "rounded-sm" | "straight" | null;
     anchorId: string | null;
   } | {
     _id: null;
@@ -6346,12 +6346,12 @@ export type AllProjectsQueryResult = Array<{
       _key: string;
     }> | null;
     mediaType: "image" | "none" | null;
-    bottomCornerRadius: "rounded" | "straight" | null;
+    bottomCornerRadius: "rounded-sm" | "straight" | null;
     buttons: Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -6510,7 +6510,7 @@ export type AllProjectsQueryResult = Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -6555,7 +6555,7 @@ export type AllProjectsQueryResult = Array<{
       buttonAnchorId: string | null;
     }> | null;
     background: "pattern" | "white" | null;
-    topCornerRadius: "rounded" | "straight" | null;
+    topCornerRadius: "rounded-sm" | "straight" | null;
     anchorId: string | null;
     paddingTop: "default" | "large" | "medium" | "none" | "small" | null;
     paddingBottom: "default" | "large" | "medium" | "none" | "small" | null;
@@ -6595,8 +6595,8 @@ export type AllProjectsQueryResult = Array<{
       } | null;
     }> | null;
     anchorId: string | null;
-    cornerRadiusTop: "rounded" | "straight" | null;
-    cornerRadiusBottom: "rounded" | "straight" | null;
+    cornerRadiusTop: "rounded-sm" | "straight" | null;
+    cornerRadiusBottom: "rounded-sm" | "straight" | null;
     paddingTop: null;
     paddingBottom: null;
   }> | null;
@@ -6657,7 +6657,7 @@ export type ProjectsByCategoryQueryResult = Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -6713,7 +6713,7 @@ export type ProjectsByCategoryQueryResult = Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -6777,7 +6777,7 @@ export type ProjectsByCategoryQueryResult = Array<{
         _key: null;
         showButton: boolean | null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonWidth: "auto" | "fullWidth" | null;
         buttonFileUrl: {
@@ -6846,7 +6846,7 @@ export type ProjectsByCategoryQueryResult = Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -6920,7 +6920,7 @@ export type ProjectsByCategoryQueryResult = Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -6966,9 +6966,9 @@ export type ProjectsByCategoryQueryResult = Array<{
     }> | null;
     features: Array<string> | null;
     enableBorderTop: boolean | null;
-    cornerRadiusTop: "rounded" | "straight" | null;
+    cornerRadiusTop: "rounded-sm" | "straight" | null;
     enableBorderBottom: boolean | null;
-    cornerRadiusBottom: "rounded" | "straight" | null;
+    cornerRadiusBottom: "rounded-sm" | "straight" | null;
     anchorId: string | null;
     paddingTop: null;
     paddingBottom: null;
@@ -7031,7 +7031,7 @@ export type ProjectsByCategoryQueryResult = Array<{
         headingSize: null;
         richTextContent: null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonPageReference: {
           _id: string;
@@ -7155,7 +7155,7 @@ export type ProjectsByCategoryQueryResult = Array<{
       _type: "block";
       _key: string;
     }> | null;
-    bottomCornerRadius: "rounded" | "straight" | null;
+    bottomCornerRadius: "rounded-sm" | "straight" | null;
     anchorId: string | null;
   } | {
     _id: null;
@@ -7181,12 +7181,12 @@ export type ProjectsByCategoryQueryResult = Array<{
       _key: string;
     }> | null;
     mediaType: "image" | "none" | null;
-    bottomCornerRadius: "rounded" | "straight" | null;
+    bottomCornerRadius: "rounded-sm" | "straight" | null;
     buttons: Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -7345,7 +7345,7 @@ export type ProjectsByCategoryQueryResult = Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -7390,7 +7390,7 @@ export type ProjectsByCategoryQueryResult = Array<{
       buttonAnchorId: string | null;
     }> | null;
     background: "pattern" | "white" | null;
-    topCornerRadius: "rounded" | "straight" | null;
+    topCornerRadius: "rounded-sm" | "straight" | null;
     anchorId: string | null;
     paddingTop: "default" | "large" | "medium" | "none" | "small" | null;
     paddingBottom: "default" | "large" | "medium" | "none" | "small" | null;
@@ -7430,8 +7430,8 @@ export type ProjectsByCategoryQueryResult = Array<{
       } | null;
     }> | null;
     anchorId: string | null;
-    cornerRadiusTop: "rounded" | "straight" | null;
-    cornerRadiusBottom: "rounded" | "straight" | null;
+    cornerRadiusTop: "rounded-sm" | "straight" | null;
+    cornerRadiusBottom: "rounded-sm" | "straight" | null;
     paddingTop: null;
     paddingBottom: null;
   }> | null;
@@ -7487,7 +7487,7 @@ export type ServiceBySlugQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -7543,7 +7543,7 @@ export type ServiceBySlugQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -7607,7 +7607,7 @@ export type ServiceBySlugQueryResult = {
         _key: null;
         showButton: boolean | null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonWidth: "auto" | "fullWidth" | null;
         buttonFileUrl: {
@@ -7676,7 +7676,7 @@ export type ServiceBySlugQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -7750,7 +7750,7 @@ export type ServiceBySlugQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -7796,9 +7796,9 @@ export type ServiceBySlugQueryResult = {
     }> | null;
     features: Array<string> | null;
     enableBorderTop: boolean | null;
-    cornerRadiusTop: "rounded" | "straight" | null;
+    cornerRadiusTop: "rounded-sm" | "straight" | null;
     enableBorderBottom: boolean | null;
-    cornerRadiusBottom: "rounded" | "straight" | null;
+    cornerRadiusBottom: "rounded-sm" | "straight" | null;
     anchorId: string | null;
     paddingTop: null;
     paddingBottom: null;
@@ -7861,7 +7861,7 @@ export type ServiceBySlugQueryResult = {
         headingSize: null;
         richTextContent: null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonPageReference: {
           _id: string;
@@ -7985,7 +7985,7 @@ export type ServiceBySlugQueryResult = {
       _type: "block";
       _key: string;
     }> | null;
-    bottomCornerRadius: "rounded" | "straight" | null;
+    bottomCornerRadius: "rounded-sm" | "straight" | null;
     anchorId: string | null;
   } | {
     _id: null;
@@ -8011,12 +8011,12 @@ export type ServiceBySlugQueryResult = {
       _key: string;
     }> | null;
     mediaType: "image" | "none" | null;
-    bottomCornerRadius: "rounded" | "straight" | null;
+    bottomCornerRadius: "rounded-sm" | "straight" | null;
     buttons: Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -8175,7 +8175,7 @@ export type ServiceBySlugQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -8220,7 +8220,7 @@ export type ServiceBySlugQueryResult = {
       buttonAnchorId: string | null;
     }> | null;
     background: "pattern" | "white" | null;
-    topCornerRadius: "rounded" | "straight" | null;
+    topCornerRadius: "rounded-sm" | "straight" | null;
     anchorId: string | null;
     paddingTop: "default" | "large" | "medium" | "none" | "small" | null;
     paddingBottom: "default" | "large" | "medium" | "none" | "small" | null;
@@ -8260,8 +8260,8 @@ export type ServiceBySlugQueryResult = {
       } | null;
     }> | null;
     anchorId: string | null;
-    cornerRadiusTop: "rounded" | "straight" | null;
-    cornerRadiusBottom: "rounded" | "straight" | null;
+    cornerRadiusTop: "rounded-sm" | "straight" | null;
+    cornerRadiusBottom: "rounded-sm" | "straight" | null;
     paddingTop: null;
     paddingBottom: null;
   }> | null;
@@ -8315,7 +8315,7 @@ export type AllServicesQueryResult = Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -8371,7 +8371,7 @@ export type AllServicesQueryResult = Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -8435,7 +8435,7 @@ export type AllServicesQueryResult = Array<{
         _key: null;
         showButton: boolean | null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonWidth: "auto" | "fullWidth" | null;
         buttonFileUrl: {
@@ -8504,7 +8504,7 @@ export type AllServicesQueryResult = Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -8578,7 +8578,7 @@ export type AllServicesQueryResult = Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -8624,9 +8624,9 @@ export type AllServicesQueryResult = Array<{
     }> | null;
     features: Array<string> | null;
     enableBorderTop: boolean | null;
-    cornerRadiusTop: "rounded" | "straight" | null;
+    cornerRadiusTop: "rounded-sm" | "straight" | null;
     enableBorderBottom: boolean | null;
-    cornerRadiusBottom: "rounded" | "straight" | null;
+    cornerRadiusBottom: "rounded-sm" | "straight" | null;
     anchorId: string | null;
     paddingTop: null;
     paddingBottom: null;
@@ -8689,7 +8689,7 @@ export type AllServicesQueryResult = Array<{
         headingSize: null;
         richTextContent: null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonPageReference: {
           _id: string;
@@ -8813,7 +8813,7 @@ export type AllServicesQueryResult = Array<{
       _type: "block";
       _key: string;
     }> | null;
-    bottomCornerRadius: "rounded" | "straight" | null;
+    bottomCornerRadius: "rounded-sm" | "straight" | null;
     anchorId: string | null;
   } | {
     _id: null;
@@ -8839,12 +8839,12 @@ export type AllServicesQueryResult = Array<{
       _key: string;
     }> | null;
     mediaType: "image" | "none" | null;
-    bottomCornerRadius: "rounded" | "straight" | null;
+    bottomCornerRadius: "rounded-sm" | "straight" | null;
     buttons: Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -9003,7 +9003,7 @@ export type AllServicesQueryResult = Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -9048,7 +9048,7 @@ export type AllServicesQueryResult = Array<{
       buttonAnchorId: string | null;
     }> | null;
     background: "pattern" | "white" | null;
-    topCornerRadius: "rounded" | "straight" | null;
+    topCornerRadius: "rounded-sm" | "straight" | null;
     anchorId: string | null;
     paddingTop: "default" | "large" | "medium" | "none" | "small" | null;
     paddingBottom: "default" | "large" | "medium" | "none" | "small" | null;
@@ -9088,8 +9088,8 @@ export type AllServicesQueryResult = Array<{
       } | null;
     }> | null;
     anchorId: string | null;
-    cornerRadiusTop: "rounded" | "straight" | null;
-    cornerRadiusBottom: "rounded" | "straight" | null;
+    cornerRadiusTop: "rounded-sm" | "straight" | null;
+    cornerRadiusBottom: "rounded-sm" | "straight" | null;
     paddingTop: null;
     paddingBottom: null;
   }> | null;
@@ -9128,7 +9128,7 @@ export type ServicesPageQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -9184,7 +9184,7 @@ export type ServicesPageQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -9248,7 +9248,7 @@ export type ServicesPageQueryResult = {
         _key: null;
         showButton: boolean | null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonWidth: "auto" | "fullWidth" | null;
         buttonFileUrl: {
@@ -9317,7 +9317,7 @@ export type ServicesPageQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -9391,7 +9391,7 @@ export type ServicesPageQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -9437,9 +9437,9 @@ export type ServicesPageQueryResult = {
     }> | null;
     features: Array<string> | null;
     enableBorderTop: boolean | null;
-    cornerRadiusTop: "rounded" | "straight" | null;
+    cornerRadiusTop: "rounded-sm" | "straight" | null;
     enableBorderBottom: boolean | null;
-    cornerRadiusBottom: "rounded" | "straight" | null;
+    cornerRadiusBottom: "rounded-sm" | "straight" | null;
     anchorId: string | null;
     paddingTop: null;
     paddingBottom: null;
@@ -9502,7 +9502,7 @@ export type ServicesPageQueryResult = {
         headingSize: null;
         richTextContent: null;
         buttonText: string | null;
-        buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+        buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
         buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
         buttonPageReference: {
           _id: string;
@@ -9626,7 +9626,7 @@ export type ServicesPageQueryResult = {
       _type: "block";
       _key: string;
     }> | null;
-    bottomCornerRadius: "rounded" | "straight" | null;
+    bottomCornerRadius: "rounded-sm" | "straight" | null;
     anchorId: string | null;
   } | {
     _id: null;
@@ -9652,12 +9652,12 @@ export type ServicesPageQueryResult = {
       _key: string;
     }> | null;
     mediaType: "image" | "none" | null;
-    bottomCornerRadius: "rounded" | "straight" | null;
+    bottomCornerRadius: "rounded-sm" | "straight" | null;
     buttons: Array<{
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -9816,7 +9816,7 @@ export type ServicesPageQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {
@@ -9861,7 +9861,7 @@ export type ServicesPageQueryResult = {
       buttonAnchorId: string | null;
     }> | null;
     background: "pattern" | "white" | null;
-    topCornerRadius: "rounded" | "straight" | null;
+    topCornerRadius: "rounded-sm" | "straight" | null;
     anchorId: string | null;
     paddingTop: "default" | "large" | "medium" | "none" | "small" | null;
     paddingBottom: "default" | "large" | "medium" | "none" | "small" | null;
@@ -9901,8 +9901,8 @@ export type ServicesPageQueryResult = {
       } | null;
     }> | null;
     anchorId: string | null;
-    cornerRadiusTop: "rounded" | "straight" | null;
-    cornerRadiusBottom: "rounded" | "straight" | null;
+    cornerRadiusTop: "rounded-sm" | "straight" | null;
+    cornerRadiusBottom: "rounded-sm" | "straight" | null;
     paddingTop: null;
     paddingBottom: null;
   }> | null;
@@ -10072,7 +10072,7 @@ export type NavigationSettingsQueryResult = {
       _key: string;
       showButton: boolean | null;
       buttonText: string | null;
-      buttonVariant: "outline" | "primary" | "secondary" | "tertiary" | "underline" | null;
+      buttonVariant: "outline-solid" | "primary" | "secondary" | "tertiary" | "underline" | null;
       buttonType: "anchor" | "emailAddress" | "external" | "fileDownload" | "internal" | null;
       buttonWidth: "auto" | "fullWidth" | null;
       buttonFileUrl: {

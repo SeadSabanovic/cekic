@@ -34,7 +34,7 @@ export default defineType({
       options: {
         list: [
           { title: "Straight", value: "straight" },
-          { title: "Rounded", value: "rounded" },
+          { title: "Rounded", value: "rounded-sm" },
         ],
       },
       initialValue: 'straight',

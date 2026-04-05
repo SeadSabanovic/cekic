@@ -28,7 +28,7 @@ export default function MediaBlock(props: MediaBlockProps) {
       })}
     >
       <Container 
-        className={cn('relative h-[18rem] md:h-[48rem] overflow-hidden', {
+        className={cn('relative h-72 md:h-192 overflow-hidden', {
           'border-x border-dashed': stegaClean(backgroundWidth) === 'contained'
         })}
       >
@@ -58,7 +58,7 @@ function DarkOverlay() {
   return (
     <>
       <div className='absolute inset-0 bg-black/40' />
-      <div className='absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent h-[50%] w-full' />
+      <div className='absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent h-[50%] w-full' />
     </>
   )
 }

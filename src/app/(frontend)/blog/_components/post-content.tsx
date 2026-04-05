@@ -39,7 +39,7 @@ export default function PostContent({ post }: PostGridProps) {
   
   return (
     <div className='order-0 grid grid-cols-12 gap-y-10 xl:gap-20'>
-      <aside className='col-span-12 xl:col-span-2 xl:sticky xl:top-28 h-fit -translate-x-1 md:-translate-x-0'>
+      <aside className='col-span-12 xl:col-span-2 xl:sticky xl:top-28 h-fit -translate-x-1 md:translate-x-0'>
         <BackButton />
       </aside>
       <div className='order-2 xl:order-1 col-span-12 xl:col-span-7 xl:pl-10 xl:border-l xl:border-dashed'>
@@ -93,7 +93,7 @@ function Thumbnail({ image }: {
           width={800}
           height={800}
           alt={image?.altText ?? ''}
-          className='aspect-[3/2] w-full rounded-2xl'
+          className='aspect-3/2 w-full rounded-2xl'
         />
       </div>
       <div className='flex items-center justify-center gap-1 mt-4 text-center text-gray-600'>
@@ -113,7 +113,7 @@ function Category({ category }: {
       className='flex items-center gap-1 px-1.5 rounded-full bg-black'
     >
       <span 
-        className='h-2 w-2 rounded bg-violet-300' 
+        className='h-2 w-2 rounded-sm bg-violet-300' 
         style={{ backgroundColor: category?.categoryColor?.value ?? '#FFFFFF' }} 
       />
       <span className='pr-[1.5px] text-sm text-white'>
@@ -138,7 +138,7 @@ function PostCategories({ categories }: {
       <CollapsibleTrigger className="w-full">
         <div className="py-1.5 pl-2 flex items-center justify-between border border-dashed rounded-lg">
           <div className="flex items-center gap-2">
-            <span className='h-5 w-5 flex items-center justify-center rounded bg-gray-200 text-black'>
+            <span className='h-5 w-5 flex items-center justify-center rounded-sm bg-gray-200 text-black'>
               <Tag size={12} />
             </span>
             <span className='font-medium text-sm'>
@@ -148,7 +148,7 @@ function PostCategories({ categories }: {
           <ChevronDown 
             size={15} 
             className={cn('mr-2.5 -rotate-90 transition-transform duration-200', {
-              '-rotate-0': isOpen
+              'rotate-0': isOpen
             })}
           />
         </div>
@@ -159,7 +159,7 @@ function PostCategories({ categories }: {
             <li key={category?.slug}>
               <Link 
                 href={`/blog/category/${category?.slug}`}
-                className="flex items-center gap-2 scroll-smooth focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                className="flex items-center gap-2 scroll-smooth focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary"
               >
                 <span className="block w-2.5 border-t border-dashed text-gray-300" /> 
                 <span className="relative group w-fit">

@@ -7,7 +7,7 @@ export default function PlayVideo({ videoUrl }: {
   return (
     <div className='z-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group'>
       <VideoDialog videoUrl={videoUrl}>
-        <button aria-label='Play video' className='flex flex-col justify-center items-center outline-none'>
+        <button aria-label='Play video' className='flex flex-col justify-center items-center outline-hidden'>
           <div className='flex items-center justify-center h-14 w-14 lg:h-20 lg:w-20 border-[2.5px] drop-shadow-xl group border-white rounded-full bg-white/20 backdrop-blur-lg transition duration-300'>
             <div className='h-6 w-6 play-icon translate-x-1 bg-white'></div>
           </div>

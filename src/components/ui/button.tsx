@@ -13,8 +13,10 @@ const buttonVariants = cva(
         primary: "text-white bg-blue-700 hover:bg-blue-600",
         secondary: "text-white bg-black hover:bg-blue-700",
         tertiary: "text-black hover:text-white border border-gray-300/80 hover:border-blue-500 bg-gray-200 hover:bg-blue-600",
-        outline: "text-black border border-gray-300/80 hover:border-black hover:bg-black backdrop-blur hover:text-white",
-        underline: "xl:px-0 mb-2 underline underline-offset-[10px] decoration-[1.5px] decoration-gray-800",
+        outline: "text-black border border-gray-300/80 hover:border-black hover:bg-black backdrop-blur-sm hover:text-white",
+        "outline-solid":
+          "text-black border border-gray-300/80 hover:border-black hover:bg-black backdrop-blur-sm hover:text-white",
+        underline: "xl:px-0 mb-2 underline underline-offset-10 decoration-[1.5px] decoration-gray-800",
       },
       size: {
         default: "h-9 md:h-10",

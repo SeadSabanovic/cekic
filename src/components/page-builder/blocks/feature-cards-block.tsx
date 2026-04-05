@@ -20,7 +20,7 @@ export default function FeatureCardsBlock(props: FeatureCardsBlockProps) {
       className='px-4 xl:px-10'
     >
       <Container className='py-16 md:py-28 px-4 space-y-8 md:space-y-6 border-x border-dashed'>
-        <div className='relative max-w-[60rem] mx-auto py-2 md:py-4 flex flex-col md:flex-row gap-30 md:gap-6 items-center justify-between border-y border-dashed pattern-bg--2'>
+        <div className='relative max-w-240 mx-auto py-2 md:py-4 flex flex-col md:flex-row gap-30 md:gap-6 items-center justify-between border-y border-dashed pattern-bg--2'>
           <Heading tag="h2" size="xl" className='relative col-span-7 py-1.5 text-balance leading-normal'>
             <span className='relative z-10'>
               {heading}
@@ -31,7 +31,7 @@ export default function FeatureCardsBlock(props: FeatureCardsBlockProps) {
           )}
           <EdgeBlur />
         </div>
-        <div className='max-w-[60rem] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6'>
+        <div className='max-w-240 mx-auto grid grid-cols-1 md:grid-cols-2 gap-6'>
           {features?.map((feature) => (
             <div key={feature._key} className='col-span-2 md:col-span-1'>
               <FeatureCard feature={feature} />
@@ -135,8 +135,8 @@ function CallToAction(props: FeatureCardsBlockProps) {
 function EdgeBlur() {
   return (
     <div className='absolute inset-0 flex items-center justify-between'>
-      <div className='relative bg-gradient-to-r from-white to-transparent h-full w-[100px]'></div>
-      <div className='bg-gradient-to-l from-white to-transparent h-full w-[100px]'></div>
+      <div className='relative bg-linear-to-r from-white to-transparent h-full w-[100px]'></div>
+      <div className='bg-linear-to-l from-white to-transparent h-full w-[100px]'></div>
     </div>
   )
 }

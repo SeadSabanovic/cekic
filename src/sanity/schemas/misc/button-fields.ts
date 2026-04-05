@@ -90,7 +90,7 @@ export const buttonFields = [
         { title: "Primary", value: "primary" },
         { title: "Secondary", value: "secondary" },
         { title: "Tertiary", value: "tertiary" },
-        { title: "Outline", value: "outline" },
+        { title: "Outline", value: "outline-solid" },
         { title: "Underline", value: "underline" },
       ],
     },
