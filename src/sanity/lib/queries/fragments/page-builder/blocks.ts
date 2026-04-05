@@ -128,31 +128,6 @@ export const logoBlockQuery = `
     anchorId
   }
 `
-export const testimonialBlockQuery = `
-  _type == "testimonialBlock" => {
-    ${baseQuery},
-    heading,
-    eyebrow,
-    testimonials[]->{
-      _id,
-      name,
-      jobTitle,
-      company,
-      quote,
-      avatar { 
-        ${mediaQuery}
-      },
-      logo { 
-        ${mediaQuery}
-      },
-    },
-    anchorId,
-    cornerRadiusTop,
-    cornerRadiusBottom,
-    ${paddingQuery}
-  }
-`
-
 export const freeformBlockQuery = `
   _type == "freeformBlock" => {
     ${baseQuery},

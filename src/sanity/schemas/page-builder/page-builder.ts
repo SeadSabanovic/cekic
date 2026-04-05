@@ -12,7 +12,6 @@ export const pageBuilder = defineType({
     defineArrayMember({ name: 'portableTextBlock', type: 'portableTextBlock' }),
     defineArrayMember({ name: 'callToActionBlock', type: 'callToActionBlock' }),
     defineArrayMember({ name: 'logoBlock', type: 'logoBlock' }),
-    defineArrayMember({ name: 'testimonialBlock', type: 'testimonialBlock' }),
     defineArrayMember({ name: 'servicesBlock', type: 'servicesBlock' }),
     defineArrayMember({ name: 'formBlock', type: 'formBlock' }),
     defineArrayMember({ name: 'mediaBlock', type: 'mediaBlock' }),
@@ -38,7 +37,7 @@ export const pageBuilder = defineType({
         {
           name: 'socialProof',
           title: 'Social Proof',
-          of: [ 'logoBlock', 'testimonialBlock' ]
+          of: [ 'logoBlock' ]
         }
       ],
       views: [

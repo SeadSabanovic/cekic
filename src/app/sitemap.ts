@@ -19,12 +19,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           changeFrequency: "weekly",
           priority: 1,
         },
-        ...paths.map((path: { href: string; _updatedAt: string }) => ({
-          url: new URL(path.href!, baseUrl).toString(),
-          lastModified: new Date(path._updatedAt),
-          changeFrequency: "weekly" as const,
-          priority: 1,
-        })),
+        ...paths
+          .filter((path): path is { href: string; _updatedAt: string } =>
+            Boolean(path.href)
+          )
+          .map((path) => ({
+            url: new URL(path.href, baseUrl).toString(),
+            lastModified: new Date(path._updatedAt),
+            changeFrequency: "weekly" as const,
+            priority: 1,
+          })),
       ];
   } catch (error) {
     console.error("Failed to generate sitemap:", error);

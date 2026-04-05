@@ -9,7 +9,6 @@ import page from "./documents/page";
 import post from "./documents/post";
 import postCategory from "./documents/post-category";
 import author from "./documents/author";
-import testimonial from "./documents/testimonial";
 import service from "./documents/service";
 import form from "./documents/form";
 import project from "./documents/project";
@@ -28,7 +27,6 @@ const coreSchema = [
   post,
   postCategory,
   author,
-  testimonial,
   projectCategory,
   project,
   form,
@@ -45,7 +43,6 @@ import logoBlock from "./page-builder/blocks/logo-block";
 import featuresMinimalBlock from "./page-builder/blocks/features-minimal-block";
 import featureCardsBlock from "./page-builder/blocks/feature-cards-block";
 import callToActionBlock from "./page-builder/blocks/call-to-action-block";
-import testimonialBlock from "./page-builder/blocks/testimonial-block";
 import portableTextBlock from "./page-builder/blocks/portable-text-block";
 import freeformBlock from "./page-builder/blocks/freeform-block";
 import servicesBlock from "./page-builder/blocks/services-block";
@@ -63,7 +60,6 @@ const pageBuilderSchema = [
   callToActionBlock,
   logoBlock,
   mediaBlock,
-  testimonialBlock,
   servicesBlock,
   formBlock
 ];

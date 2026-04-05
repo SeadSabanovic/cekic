@@ -7,7 +7,6 @@ import { PageBySlugQueryResult } from "../../../sanity.types";
 const HeroBlock = dynamic(() => import("./blocks/hero-block"));
 const HeaderBlock = dynamic(() => import("./blocks/header-block"));
 const FeatureCardsBlock = dynamic(() => import("./blocks/feature-cards-block"));
-const TestimonialBlock = dynamic(() => import("./blocks/testimonial-block"));
 const LogoBlock = dynamic(() => import("./blocks/logo-block"));
 const FreeformBlock = dynamic(() => import("./blocks/freeform-block"));
 const PortableTextBlock = dynamic(() => import("./blocks/portable-text-block"));
@@ -29,7 +28,6 @@ const PB_BLOCKS = {
   heroBlock: HeroBlock,
   headerBlock: HeaderBlock,
   featureCardsBlock: FeatureCardsBlock,
-  testimonialBlock: TestimonialBlock,
   logoBlock: LogoBlock,
   freeformBlock: FreeformBlock,
   portableTextBlock: PortableTextBlock,
@@ -46,7 +44,10 @@ export function PageBuilder({ pageBuilder }: PageBuilderProps) {
   return (
     <div>
       {pageBuilder.map((block) => {
-        const Component = PB_BLOCKS[block._type] as ComponentType<PageBuilderType<BlockType>>;
+        const Component = PB_BLOCKS[block._type as BlockType] as
+          | ComponentType<PageBuilderType<BlockType>>
+          | undefined;
+        if (!Component) return null;
         return (
           <div key={`${block._type}-${block._key}`}>
             <Component {...block} />
