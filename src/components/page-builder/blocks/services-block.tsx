@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { stegaClean } from 'next-sanity';
 import { PageBuilderType } from '@/types';
 import Heading from '@/components/shared/heading';
 import Container from '@/components/global/container';
@@ -13,28 +12,28 @@ export type ServicesBlockProps = PageBuilderType<"servicesBlock">;
 
 export default function ServicesBlock(props: ServicesBlockProps) {
 
-  const { 
-    heading, 
-    services, 
-    background, 
-    topCornerRadius, 
+  const {
+    heading,
+    services,
+    background,
+    topCornerRadius,
     buttons,
     anchorId,
-    paddingTop, 
-    paddingBottom 
+    paddingTop,
+    paddingBottom
   } = props;
 
   return (
-    <section 
+    <section
       {...(anchorId ? { id: anchorId } : {})}
       className={cn('px-4 xl:px-10', {
-        'pattern-bg': stegaClean(background) === 'pattern',
-        'rounded-t-4xl border-t border-t-gray-200/60': stegaClean(topCornerRadius) === 'rounded-sm'
+        'pattern-bg': background === 'pattern',
+        'rounded-t-4xl border-t border-t-gray-200/60': topCornerRadius === 'rounded-sm'
       })}
     >
-      <Container 
-        paddingTop={stegaClean(paddingTop) ?? undefined}
-        paddingBottom={stegaClean(paddingBottom) ?? undefined}
+      <Container
+        paddingTop={paddingTop ?? undefined}
+        paddingBottom={paddingBottom ?? undefined}
         className='space-y-10 border-x border-dashed'
       >
         <div className='py-4 flex items-center justify-between gap-6 border-y border-dashed'>
@@ -43,7 +42,7 @@ export default function ServicesBlock(props: ServicesBlockProps) {
           </Heading>
           {buttons && buttons.length > 0 && (
             <div className='hidden md:block'>
-              <ButtonRenderer buttons={buttons} />  
+              <ButtonRenderer buttons={buttons} />
             </div>
           )}
         </div>
@@ -54,7 +53,7 @@ export default function ServicesBlock(props: ServicesBlockProps) {
         </div>
         {buttons && buttons.length > 0 && (
           <div className='md:hidden pt-4'>
-            <ButtonRenderer buttons={buttons} />  
+            <ButtonRenderer buttons={buttons} />
           </div>
         )}
       </Container>

@@ -1,5 +1,4 @@
 "use client"
-import React from 'react';
 import Image from 'next/image';
 import { cn, scrollToElement } from '@/lib/utils';
 import { usePathname, useRouter } from 'next/navigation';
@@ -17,22 +16,22 @@ export default function SiteLogo({ settings, location, theme }: {
   const { siteTitle, siteLogo } = settings ?? {};
 
   return (
-    <button 
+    <button
       aria-label="Go to home page"
       onClick={() => pathname === '/' ? scrollToElement('home') : router.push(`/#home`)}
       className={cn('hover:scale-[0.95] transition-transform duration-300 ease-in-out', {
         'text-white': theme === 'light'
       })}
     >
-      {!siteLogo ? ( 
-        <span 
+      {!siteLogo ? (
+        <span
           className={cn('font-semibold tracking-tighter text-xl', {
             'text-3xl': location === 'footer'
           })}
         >
-          {siteTitle}
+          Čekić
         </span>
-      ): (
+      ) : (
         <Image
           priority
           width={140}

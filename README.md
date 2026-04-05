@@ -1,4 +1,4 @@
-# SiteEngine - Next.js & Sanity Template.
+# Čekić 
 
 A fully-featured starter template made with Next.js, Sanity, TypeScript, Tailwind & more.
 

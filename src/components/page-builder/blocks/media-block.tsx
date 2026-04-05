@@ -1,7 +1,6 @@
 "use client"
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { stegaClean } from 'next-sanity';
 import { PageBuilderType } from '@/types';
 import Container from '@/components/global/container';
 import PlayVideo from '@/components/shared/play-video';
@@ -10,26 +9,26 @@ export type MediaBlockProps = PageBuilderType<"mediaBlock">;
 
 export default function MediaBlock(props: MediaBlockProps) {
 
-  const { 
+  const {
     backgroundType,
     backgroundWidth,
-    image, 
+    image,
     overlayType,
     dialogType,
     videoUrl,
-    anchorId 
+    anchorId
   } = props;
 
   return (
-    <section 
-      {...(anchorId ? { id: anchorId } : {})} 
+    <section
+      {...(anchorId ? { id: anchorId } : {})}
       className={cn('border-t border-dashed pattern-bg--2', {
-        'px-4 md:px-10': stegaClean(backgroundWidth) === 'contained'
+        'px-4 md:px-10': backgroundWidth === 'contained'
       })}
     >
-      <Container 
+      <Container
         className={cn('relative h-72 md:h-192 overflow-hidden', {
-          'border-x border-dashed': stegaClean(backgroundWidth) === 'contained'
+          'border-x border-dashed': backgroundWidth === 'contained'
         })}
       >
         {backgroundType === 'image' && image && (
