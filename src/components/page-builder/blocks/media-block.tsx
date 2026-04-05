@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { PageBuilderType } from '@/types';
 import Container from '@/components/global/container';
-import PlayVideo from '@/components/shared/play-video';
 
 export type MediaBlockProps = PageBuilderType<"mediaBlock">;
 
@@ -14,10 +13,12 @@ export default function MediaBlock(props: MediaBlockProps) {
     backgroundWidth,
     image,
     overlayType,
-    dialogType,
-    videoUrl,
     anchorId
   } = props;
+
+  if (backgroundType !== 'image' || !image?.asset?.url) {
+    return null;
+  }
 
   return (
     <section
@@ -31,23 +32,18 @@ export default function MediaBlock(props: MediaBlockProps) {
           'border-x border-dashed': backgroundWidth === 'contained'
         })}
       >
-        {backgroundType === 'image' && image && (
-          <div className='absolute inset-0'>
-            <Image
-              src={image?.asset?.url ?? ''}
-              width={2400}
-              height={1200}
-              alt={image?.asset?.altText ?? ''}
-              className='w-full h-full object-cover'
-            />
-            {overlayType === 'dark' && (
-              <DarkOverlay />
-            )}
-          </div>
-        )}
-        {dialogType === 'video' && videoUrl && (
-          <PlayVideo videoUrl={videoUrl} />
-        )}
+        <div className='absolute inset-0'>
+          <Image
+            src={image.asset.url}
+            width={2400}
+            height={1200}
+            alt={image?.asset?.altText ?? ''}
+            className='w-full h-full object-cover'
+          />
+          {overlayType === 'dark' && (
+            <DarkOverlay />
+          )}
+        </div>
       </Container>
     </section>
   )

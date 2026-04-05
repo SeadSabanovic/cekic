@@ -14,8 +14,6 @@ export const heroBlockQuery = `
       height,
       ${mediaQuery}
     },
-    dialogType,
-    videoUrl,
     overlayType,
     anchorId
   }
@@ -240,8 +238,6 @@ export const mediaBlockQuery = `
       ${mediaQuery}
     },
     overlayType,
-    dialogType,
-    videoUrl,
     anchorId
   }
 `

@@ -83,24 +83,6 @@ export default defineType({
       of: [{ type: 'buttonObject' }],
     }),
     defineField({
-      title: "Dialog Type",
-      name: "dialogType",
-      type: "string",
-      options: {
-        list: [
-          { title: "None", value: "none" },
-          { title: "Video", value: "video" },
-        ],
-      },
-      initialValue: 'none',
-    }),
-    defineField({
-      name: 'videoUrl',
-      title: 'Video URL',
-      type: 'string',
-      hidden: ({ parent }) => parent?.dialogType !== 'video',
-    }),
-    defineField({
       title: "Overlay Type",
       name: "overlayType",
       type: "string",

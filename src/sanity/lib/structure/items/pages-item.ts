@@ -27,7 +27,6 @@ export const IndexPages = (
         .title('Index Pages')
         .items([
           BlogItem(S),
-          ProjectsItem(S),
           ServicesItem(S)
         ])
     ) 
@@ -70,19 +69,5 @@ export const ServicesItem = (
       .schemaType('servicesPage')
       .documentId('servicesPage')
       .title('Services')
-    )
-)
-
-export const ProjectsItem = (
-  S: StructureBuilder, 
-) => (
-  S.listItem()
-    .title('Projects')
-    .child(
-      S.document()
-      .id('projectsPage')
-      .schemaType('projectsPage')
-      .documentId('projectsPage')
-      .title('Projects')
     )
 )

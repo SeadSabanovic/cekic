@@ -17,7 +17,6 @@ export default defineType({
       options: {
         list: [
           { title: "Image", value: "image" },
-          { title: "Video", value: "video" },
         ],
       },
       initialValue: 'image',
@@ -58,24 +57,6 @@ export default defineType({
         ],
       },
       initialValue: 'none',
-    }),
-    defineField({
-      title: "Dialog Type",
-      name: "dialogType",
-      type: "string",
-      options: {
-        list: [
-          { title: "None", value: "none" },
-          { title: "Video", value: "video" },
-        ],
-      },
-      initialValue: 'none',
-    }),
-    defineField({
-      name: 'videoUrl',
-      title: 'Video URL',
-      type: 'string',
-      hidden: ({ parent }) => parent?.dialogType !== 'video',
     }),
     defineField({
       name: 'anchorId',

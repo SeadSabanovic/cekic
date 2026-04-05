@@ -1,35 +1,5 @@
 [
   {
-    "name": "videoObject",
-    "type": "type",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "videoObject"
-          }
-        },
-        "title": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        },
-        "videoUrl": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        }
-      }
-    }
-  },
-  {
     "name": "callToActionObject",
     "type": "type",
     "value": {
@@ -1360,10 +1330,6 @@
               {
                 "type": "string",
                 "value": "image"
-              },
-              {
-                "type": "string",
-                "value": "video"
               }
             ]
           },
@@ -1476,30 +1442,6 @@
                 "value": "dark"
               }
             ]
-          },
-          "optional": true
-        },
-        "dialogType": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "none"
-              },
-              {
-                "type": "string",
-                "value": "video"
-              }
-            ]
-          },
-          "optional": true
-        },
-        "videoUrl": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
           },
           "optional": true
         },
@@ -3801,30 +3743,6 @@
           },
           "optional": true
         },
-        "dialogType": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "none"
-              },
-              {
-                "type": "string",
-                "value": "video"
-              }
-            ]
-          },
-          "optional": true
-        },
-        "videoUrl": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        },
         "overlayType": {
           "type": "objectAttribute",
           "value": {
@@ -4473,21 +4391,6 @@
                 "rest": {
                   "type": "inline",
                   "name": "singleImageObject"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "videoObject"
                 }
               }
             ]

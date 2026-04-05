@@ -9,8 +9,6 @@ import {
   BlogPageQueryResult, 
   PageBySlugQueryResult, 
   PostBySlugQueryResult, 
-  ProjectBySlugQueryResult, 
-  ProjectsPageQueryResult, 
   ServiceBySlugQueryResult, 
   ServicesPageQueryResult 
 } from '../../sanity.types';
@@ -116,8 +114,6 @@ export function resolveHref(documentType?: string, slug?: string): string | unde
       return slug ? `/${slug}` : undefined;
     case 'service':
       return slug ? `/services/${slug}` : undefined;
-    case 'project':
-      return slug ? `/projects/${slug}` : undefined;
     case 'post':
       return slug ? `/blog/${slug}` : undefined;
     default:
@@ -130,9 +126,7 @@ export type PageQueryResult =
   | ServicesPageQueryResult 
   | ServiceBySlugQueryResult 
   | BlogPageQueryResult 
-  | PostBySlugQueryResult
-  | ProjectsPageQueryResult
-  | ProjectBySlugQueryResult;
+  | PostBySlugQueryResult;
   
 export function processMetadata({ data }: {
   data: PageQueryResult;

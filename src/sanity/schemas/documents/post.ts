@@ -54,7 +54,6 @@ export default defineType({
         { type: 'block' },
         { type: 'callToActionObject' },
         { type: 'singleImageObject' },
-        { type: 'videoObject' }
       ],
     }),
     defineField({

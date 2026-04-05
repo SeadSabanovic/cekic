@@ -10,11 +10,8 @@ import postCategory from "./documents/post-category";
 import author from "./documents/author";
 import service from "./documents/service";
 import form from "./documents/form";
-import project from "./documents/project";
-import projectCategory from "./documents/project-category";
 import servicesPage from "./singletons/pages/services-page";
 import blogPage from "./singletons/pages/blog-page";
-import projectsPage from "./singletons/pages/projects-page";
 
 const coreSchema = [
   generalSettings,
@@ -25,13 +22,10 @@ const coreSchema = [
   post,
   postCategory,
   author,
-  projectCategory,
-  project,
   form,
   blogPage,
   service,
   servicesPage,
-  projectsPage,
 ];
 
 import { pageBuilder } from "./page-builder/page-builder";
@@ -66,7 +60,6 @@ import seoObject from './objects/seo';
 import headingObject from './objects/heading';
 import richTextObject from './objects/rich-text';
 import spacerObject from './objects/spacer';
-import videoObject from './objects/video';
 import buttonObject from './objects/button';
 import singleImageObject from "./objects/single-image";
 import callToActionObject from "./objects/call-to-action";
@@ -79,7 +72,6 @@ const objectSchema = [
   singleImageObject,
   spacerObject,
   callToActionObject,
-  videoObject
 ];
 
 export const schema: { types: SchemaTypeDefinition[] } = {
