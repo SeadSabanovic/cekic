@@ -6,18 +6,6 @@ export const generalSettingsQuery = defineQuery(`*[_type == 'generalSettings'][0
     asset->{ url },
   },
   copyright,
-  homePage->{
-    _id,
-    _type,
-    title,
-    'slug': slug.current,
-    "seo": {
-      "title": coalesce(seo.title, title, ""),
-      "description": coalesce(seo.description,  ""),
-      "noIndex": seo.noIndex == true,
-      "image": seo.image,
-    },
-  },
 }`); 
 
 export const blogSettingsQuery = defineQuery(`*[_type == 'blogSettings'][0] {

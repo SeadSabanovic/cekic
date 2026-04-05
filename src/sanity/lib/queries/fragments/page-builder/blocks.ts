@@ -191,44 +191,6 @@ export const blogArchiveBlockQuery = `
   }
 `
 
-export const servicesBlockQuery = `
-  _type == "servicesBlock" => {
-    ${baseQuery},
-    heading,
-    services[]->{
-      _id,
-      title,
-      shortDescription,
-      image { 
-        ${mediaQuery}
-      },
-      "slug": slug.current,
-    },
-    buttons[]{
-      ${buttonQuery}
-    },
-    background,
-    topCornerRadius,
-    anchorId,
-    ${paddingQuery}
-  }
-`
-
-export const formBlockQuery = `
-  _type == "formBlock" => {
-    ${baseQuery},
-    heading,
-    content[],
-    form->{
-      title,
-      submitButtonText,
-      fields
-    },
-    anchorId,
-    ${paddingQuery}
-  }
-`
-
 export const mediaBlockQuery = `
   _type == "mediaBlock" => {
     ${baseQuery},

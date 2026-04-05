@@ -12,8 +12,6 @@ const FreeformBlock = dynamic(() => import("./blocks/freeform-block"));
 const PortableTextBlock = dynamic(() => import("./blocks/portable-text-block"));
 const CallToActionBlock = dynamic(() => import("./blocks/call-to-action-block"));
 const FeaturesMinimalBlock = dynamic(() => import("./blocks/features-minimal-block"));
-const ServicesBlock = dynamic(() => import("./blocks/services-block"));
-const FormBlock = dynamic(() => import("./blocks/form-block"));
 const MediaBlock = dynamic(() => import("./blocks/media-block"));
 
 type PageBlock = NonNullable<
@@ -33,21 +31,25 @@ const PB_BLOCKS = {
   portableTextBlock: PortableTextBlock,
   callToActionBlock: CallToActionBlock,
   featuresMinimalBlock: FeaturesMinimalBlock,
-  servicesBlock: ServicesBlock,
-  formBlock: FormBlock,
   mediaBlock: MediaBlock,
 } as const;
 
 type BlockType = keyof typeof PB_BLOCKS;
 
+type ActivePageBlock = Extract<PageBlock, { _type: BlockType }>;
+
+function isActivePageBlock(block: PageBlock): block is ActivePageBlock {
+  return block._type in PB_BLOCKS;
+}
+
 export function PageBuilder({ pageBuilder }: PageBuilderProps) {
   return (
     <div>
       {pageBuilder.map((block) => {
-        const Component = PB_BLOCKS[block._type as BlockType] as
-          | ComponentType<PageBuilderType<BlockType>>
-          | undefined;
-        if (!Component) return null;
+        if (!isActivePageBlock(block)) return null;
+        const Component = PB_BLOCKS[block._type] as ComponentType<
+          PageBuilderType<BlockType>
+        >;
         return (
           <div key={`${block._type}-${block._key}`}>
             <Component {...block} />

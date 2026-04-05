@@ -5,21 +5,16 @@ import Heading from '../shared/heading';
 import SiteLogo from '../shared/site-logo';
 import { ExternalLink } from 'lucide-react';
 import AnimatedUnderline from '../shared/animated-underline';
-import { GeneralSettingsQueryResult, NavigationSettingsQueryResult } from '../../../sanity.types';
+import { GeneralSettingsQueryResult } from '../../../sanity.types';
+import { siteNavigation, type SiteFooterColumn, type SiteFooterLink } from '@/lib/site-navigation';
 
 interface FooterProps {
   settings: GeneralSettingsQueryResult;
-  navigationSettings: NavigationSettingsQueryResult;
 }
 
-export default function Footer({ settings, navigationSettings }: FooterProps) {
+export default function Footer({ settings }: FooterProps) {
 
-  const { copyright } = settings ?? {};
-  
-  const { 
-    footerColumns: columns, 
-    footerLegalMenuItems: legalMenuItems 
-  } = navigationSettings?.footer ?? {};
+  const { columns, legal: legalMenuItems } = siteNavigation.footer;
 
   return (
     <footer className='px-4 xl:px-10 border-t border-t-gray-200/60'>
@@ -28,21 +23,21 @@ export default function Footer({ settings, navigationSettings }: FooterProps) {
           <div className='flex-none py-4 md:py-0 border-y border-dashed md:border-none'>
             <SiteLogo settings={settings} location="footer" />
           </div>
-          <FooterColumns columns={columns ?? []} />
+          <FooterColumns columns={columns} />
         </div>
         <div className='relative mt-10 md:mt-20 mb-8 py-6 flex flex-col md:flex-row md:items-center justify-between gap-1 md:gap-0 border-y border-dashed text-xs pattern-bg--2'>
           <div className='z-20 relative'>
-          {copyright} © {new Date().getFullYear()}  - Design + Code by
-            <a 
-              href="https://jamesrea.co" 
+            Čekić © {new Date().getFullYear()}  - Design + Code by
+            <a
+              href="https://www.linkedin.com/in/ssabanovic/"
               rel="noopener noreferrer" target="_blank"
               className='relative ml-1 font-semibold tracking-tight text-blue-600 group'
             >
-              <span>James Rea.</span> 
-              <AnimatedUnderline className='bg-blue-600'/>
+              <span>Sead Šabanović</span>
+              <AnimatedUnderline className='bg-blue-600' />
             </a>
           </div>
-          <LegalMenuItems legalMenuItems={legalMenuItems ?? []} />
+          <LegalMenuItems legalMenuItems={legalMenuItems} />
           <EdgeBlur />
         </div>
       </Container>
@@ -50,30 +45,14 @@ export default function Footer({ settings, navigationSettings }: FooterProps) {
   )
 }
 
-function FooterColumns({ columns }: {
-  columns: Array<{
-    _key: string;
-    title: string | null;
-    menuItems: Array<{
-      _key: string;
-      title: string | null;
-      linkType: "external" | "internal" | null;
-      pageReference: {
-        _id: string;
-        title: string | null;
-        slug: string | null;
-      } | null;
-      externalUrl: string | null;
-    }> | null;
-  }> | null;
-}) {
+function FooterColumns({ columns }: { columns: SiteFooterColumn[] }) {
   return (
     <ul className='flex-1 grid md:grid-cols-2 lg:grid-cols-4 gap-0 md:gap-2 border-y border-dashed pattern-bg--2'>
-      {columns?.map((column, index) => (
-        <li 
-          key={column._key} 
-          className={cn('md:py-10 px-10 w-full space-y-7 border-x border-dashed bg-white', { 
-            'pb-8': index === columns.length - 1 
+      {columns.map((column, index) => (
+        <li
+          key={column.id}
+          className={cn('md:py-10 px-10 w-full space-y-7 border-x border-dashed bg-white', {
+            'pb-8': index === columns.length - 1
           })}>
           <Heading tag="h2" size="xs" className='relative mt-8 md:mt-0 py-2.5 font-semibold border-y border-dashed pattern-bg--2'>
             <span className='z-20 relative'>
@@ -82,29 +61,9 @@ function FooterColumns({ columns }: {
             <EdgeBlur />
           </Heading>
           <ul className='space-y-1 md:space-y-2'>
-            {column?.menuItems?.map((item) => (
-              <li key={item._key}>
-                {item.linkType === 'internal' ? (
-                  <Link 
-                    href={`/${item?.pageReference?.slug}`}
-                    className='relative group text-sm md:text-base'
-                  >
-                    {item.title}
-                    <AnimatedUnderline />
-                  </Link>
-                ): (
-                  <a 
-                    href={item?.externalUrl ?? ''}
-                    rel="noopener noreferrer" target="_blank"
-                    className='group flex items-center gap-2'
-                  >
-                    <span className='relative'>
-                      {item.title}
-                      <AnimatedUnderline />
-                    </span>
-                    <ExternalLink size={14} className='group-hover:rotate-12 group-hover:text-blue-500 transition-all duration-300' />
-                  </a>
-                )}
+            {column.links.map((item) => (
+              <li key={item.id}>
+                <FooterLink item={item} />
               </li>
             ))}
           </ul>
@@ -114,26 +73,43 @@ function FooterColumns({ columns }: {
   )
 }
 
-function LegalMenuItems({ legalMenuItems }: {
-  legalMenuItems: Array<{
-    _key: string;
-    title: string | null;
-    pageReference: {
-      _id: string;
-      title: string | null;
-      slug: string | null;
-    } | null;
-  }> | null;
-}) {
+function FooterLink({ item }: { item: SiteFooterLink }) {
+  if (item.external) {
+    return (
+      <a
+        href={item.href}
+        rel="noopener noreferrer" target="_blank"
+        className='group flex items-center gap-2'
+      >
+        <span className='relative'>
+          {item.label}
+          <AnimatedUnderline />
+        </span>
+        <ExternalLink size={14} className='group-hover:rotate-12 group-hover:text-blue-500 transition-all duration-300' />
+      </a>
+    );
+  }
   return (
-    <ul className='z-20 relative flex items-center gap-1'>
-      {legalMenuItems?.map((item, index) => (
-        <li key={item._key} className='text-xs font-medium'>
-          <Link 
-            href={`/${item?.pageReference?.slug}`}
+    <Link
+      href={item.href}
+      className='relative group text-sm md:text-base'
+    >
+      {item.label}
+      <AnimatedUnderline />
+    </Link>
+  );
+}
+
+function LegalMenuItems({ legalMenuItems }: { legalMenuItems: SiteFooterLink[] }) {
+  return (
+    <ul className='z-20 relative flex items-center gap-1 flex-wrap'>
+      {legalMenuItems.map((item, index) => (
+        <li key={item.id} className='text-xs font-medium'>
+          <Link
+            href={item.href}
             className='relative group'
           >
-            <span>{item.title}</span>
+            <span>{item.label}</span>
             <AnimatedUnderline />
           </Link>
           {index !== legalMenuItems.length - 1 && (

@@ -4,12 +4,11 @@ import Footer from './footer';
 import localFont from "next/font/local";
 import { Toaster } from 'react-hot-toast';
 import { usePathname } from 'next/navigation';
-import { GeneralSettingsQueryResult, NavigationSettingsQueryResult } from '../../../sanity.types';
+import { GeneralSettingsQueryResult } from '../../../sanity.types';
 
 interface ClientLayoutProps {
   children: React.ReactNode;
   settings: GeneralSettingsQueryResult;
-  navigationSettings: NavigationSettingsQueryResult;
 }
 
 const geistSans = localFont({
@@ -27,7 +26,6 @@ const geistMono = localFont({
 export default function ClientLayout({ 
   children,
   settings,
-  navigationSettings,
 }: ClientLayoutProps) {
 
   const pathname = usePathname();
@@ -37,14 +35,12 @@ export default function ClientLayout({
     <div className={`${geistSans.variable} ${geistMono.variable} font-geistSans antialiased grid min-h-dvh grid-rows-[auto_1fr_auto]`}>
       <Navbar 
         settings={settings}
-        navigationSettings={navigationSettings}
       />
       <main className='overflow-hidden'>
         {children}
       </main>
       <Footer 
         settings={settings} 
-        navigationSettings={navigationSettings}
       />
       <Toaster 
         position="bottom-right" 

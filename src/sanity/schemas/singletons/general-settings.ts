@@ -1,7 +1,6 @@
 import { fieldsets } from "../misc/fieldsets";
 import { defineField, defineType } from "sanity";
 import { fieldGroups } from "../misc/field-groups";
-import { pageReferenceTypes } from "../misc/page-reference-types";
 
 export default defineType({
   name: 'generalSettings',
@@ -19,13 +18,6 @@ export default defineType({
       title: 'Logo',
       name: 'siteLogo',
       type: 'image',
-    }),
-    defineField({
-      name: 'homePage',
-      title: 'Home Page',
-      type: 'reference',
-      description: 'Choose which page you would like to set as the homepage.',
-      to: [ ...pageReferenceTypes ]
     }),
     defineField({
       title: 'Email Address',

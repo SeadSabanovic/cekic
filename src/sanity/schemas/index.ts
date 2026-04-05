@@ -8,9 +8,6 @@ import page from "./documents/page";
 import post from "./documents/post";
 import postCategory from "./documents/post-category";
 import author from "./documents/author";
-import service from "./documents/service";
-import form from "./documents/form";
-import servicesPage from "./singletons/pages/services-page";
 import blogPage from "./singletons/pages/blog-page";
 
 const coreSchema = [
@@ -22,10 +19,7 @@ const coreSchema = [
   post,
   postCategory,
   author,
-  form,
   blogPage,
-  service,
-  servicesPage,
 ];
 
 import { pageBuilder } from "./page-builder/page-builder";
@@ -37,8 +31,6 @@ import featureCardsBlock from "./page-builder/blocks/feature-cards-block";
 import callToActionBlock from "./page-builder/blocks/call-to-action-block";
 import portableTextBlock from "./page-builder/blocks/portable-text-block";
 import freeformBlock from "./page-builder/blocks/freeform-block";
-import servicesBlock from "./page-builder/blocks/services-block";
-import formBlock from "./page-builder/blocks/form-block";
 import mediaBlock from "./page-builder/blocks/media-block";
 
 const pageBuilderSchema = [
@@ -52,8 +44,6 @@ const pageBuilderSchema = [
   callToActionBlock,
   logoBlock,
   mediaBlock,
-  servicesBlock,
-  formBlock
 ];
 
 import seoObject from './objects/seo';

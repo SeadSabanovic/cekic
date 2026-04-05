@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import Container from "@/components/global/container";
 import { sanityFetch } from "@/sanity/lib/sanity-fetch";
 import ClientLayout from "@/components/global/client-layout";
-import { navigationSettingsQuery } from "@/sanity/lib/queries/singletons/navigation";
 import { generalSettingsQuery } from "@/sanity/lib/queries/singletons/settings";
-import type { GeneralSettingsQueryResult, NavigationSettingsQueryResult } from "../../../sanity.types";
+import type { GeneralSettingsQueryResult } from "../../../sanity.types";
 
 export const metadata: Metadata = {
   title: {
@@ -20,10 +19,9 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const [{ data: settings }, { data: navigationSettings }] = await Promise.all([
-    sanityFetch<GeneralSettingsQueryResult | null>({ query: generalSettingsQuery }),
-    sanityFetch<NavigationSettingsQueryResult | null>({ query: navigationSettingsQuery })
-  ]);
+  const { data: settings } = await sanityFetch<GeneralSettingsQueryResult | null>({
+    query: generalSettingsQuery,
+  });
 
   if (!settings) return (
     <Container className="py-16 flex flex-col items-center justify-center gap-3 min-h-dvh pattern-bg--2 text-center px-6">
@@ -40,7 +38,6 @@ export default async function RootLayout({
     <>
       <ClientLayout
         settings={settings}
-        navigationSettings={navigationSettings}
       >
         {children}
       </ClientLayout>

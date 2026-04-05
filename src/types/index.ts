@@ -16,7 +16,3 @@ export type ButtonType = NonNullable<
 export type PortableTextProps = NonNullable<
   NonNullable<PageBuilderType<"heroBlock">>["content"]
 >;
-
-export type FormType = NonNullable<
-  NonNullable<PageBuilderType<"formBlock">>["form"]
->;

@@ -3,28 +3,34 @@ import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import SiteLogo from "../shared/site-logo";
 import { useRouter } from "next/navigation";
-import { cn, resolveHref } from "@/lib/utils";
-import ButtonRenderer from "../shared/button-renderer";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "../ui/button";
+import Link from "next/link";
 import AnimatedUnderline from "../shared/animated-underline";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
-import { GeneralSettingsQueryResult, NavigationSettingsQueryResult } from "../../../sanity.types";
+import { GeneralSettingsQueryResult } from "../../../sanity.types";
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '../ui/sheet';
+import { siteNavigation, type SiteNavbarItem } from "@/lib/site-navigation";
 
-export default function SlideOutMenu({ children, settings, navigationSettings }: {
+export default function SlideOutMenu({ children, settings }: {
   children: React.ReactNode;
   settings: GeneralSettingsQueryResult;
-  navigationSettings: NavigationSettingsQueryResult;
 }) {
 
   const router = useRouter();
   const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
 
-  const { 
-    slideOutMenuItems: menuItems,
-    slideOutMenuButtons,
-    slideOutMenuSettings,
-    showCompanyDetailsSlideOutMenu
-  } = navigationSettings?.slideOutMenu ?? {};
+  const {
+    menuTitle,
+    showContact,
+    contactTitle,
+    contactEmail,
+    socialLinks,
+    ctaButtons,
+    menuItems,
+  } = siteNavigation.slideOut;
+
+  const slideItems = menuItems.length > 0 ? menuItems : siteNavigation.navbar;
 
   return(
     <Sheet>
@@ -36,106 +42,154 @@ export default function SlideOutMenu({ children, settings, navigationSettings }:
           <SiteLogo settings={settings} theme='dark' />
         </SheetHeader>
         <SheetTitle className='mt-16 px-0 py-6 antialiased font-normal text-gray-400'>
-          Explore
+          {menuTitle}
         </SheetTitle>
         <ul className='px-0 flex flex-col gap-4 text-black'>
-          {menuItems?.map((item) => {
-            return (
-              <React.Fragment key={item?._key}>
-                {item.menuItemType === 'group' ? (
-                  <Collapsible 
-                    open={openItems[item._key]}
-                    onOpenChange={(open) => (
-                      setOpenItems(prev => ({ ...prev, [item._key]: open }))
-                    )}
-                    className="space-y-3.5"
-                  >
-                    <CollapsibleTrigger className="relative flex items-center gap-2 text-3xl tracking-tight group">
-                      <span className="relative">
-                        {item.title} 
-                        <AnimatedUnderline className='h-[2px]' />
-                      </span>
-                      <ChevronDown 
-                        size={23} 
-                        className={cn('translate-y-0.5 rotate-0 transition-transform duration-200', {
-                          'rotate-180': openItems[item._key]
-                        })}
-                      />
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="flex flex-col gap-y-1 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 transition-all duration-200">
-                      {item?.pageReferences?.map((item) => (
-                        <SheetClose key={item.title}>
-                          <button 
-                            onClick={() => {
-                              router.push(resolveHref(item._type ?? '', item.slug ?? '') ?? '/');
-                              setOpenItems(prev => ({ ...prev, [item.title ?? '']: false }));
-                            }}
-                            className='relative block text-xl tracking-tight text-gray-500 hover:text-black group'
-                          >
-                            {item.title}
-                            <AnimatedUnderline className='h-[1.5px] bg-gray-500 group-hover:bg-black' />
-                          </button>
-                        </SheetClose>
-                      ))}                        
-                    </CollapsibleContent>
-                  </Collapsible>
-                ): (
-                  <SheetClose>
-                    <button 
-                      onClick={() => (
-                        router.push(resolveHref(item.pageReference?._type ?? '', item.pageReference?.slug ?? '') ?? '/')
-                      )}
-                      className='relative block text-3xl tracking-tight group'
-                    >
-                      {item.title}
-                      <AnimatedUnderline className='h-[2px]' />
-                    </button>
-                  </SheetClose>
-                )}
-              </React.Fragment>
-            )
-          })}
+          {slideItems.map((item) => (
+            <SlideMenuRow
+              key={item.id}
+              item={item}
+              openItems={openItems}
+              setOpenItems={setOpenItems}
+              router={router}
+            />
+          ))}
         </ul>
-        {showCompanyDetailsSlideOutMenu && (
+        {showContact && (
           <>
             <SheetTitle className='border-t border-dashed mt-8 px-0 pt-8 antialiased font-normal text-gray-400'>
-              Say Hello
+              {contactTitle}
             </SheetTitle>
             <div className="mt-2 space-y-4">
               <a 
-                href={`mailto:${slideOutMenuSettings?.companyEmailAddress ?? ''}`} 
+                href={`mailto:${contactEmail}`} 
                 className="relative w-fit block text-2xl tracking-tight group"
               >
-                {slideOutMenuSettings?.companyEmailAddress ?? ''}
+                {contactEmail}
                 <AnimatedUnderline className='h-[2px]' />
               </a>
             </div>
-            <div className="mt-8 py-4 flex items-center gap-3 border-y border-dashed">
-              {slideOutMenuSettings?.companySocialMediaLinks?.map((item) => (
-                <a 
-                  key={item._key} 
-                  href={item.profileUrl ?? ''} 
-                  target="_blank" rel="noopener noreferrer"
-                  className="p-3 border rounded-full hover:bg-black group transition-all duration-300"
-                >
-                  <Image
-                    src={item.icon?.asset?.url ?? ''}
-                    width={16}
-                    height={16}
-                    alt={`Follow us on ${item.title ?? ''}`}
-                    className="group-hover:invert"
-                  />
-                </a>
-              ))}
-            </div>
+            {socialLinks.length > 0 && (
+              <div className="mt-8 py-4 flex items-center gap-3 border-y border-dashed flex-wrap">
+                {socialLinks.map((item) => (
+                  item.iconSrc ? (
+                    <a 
+                      key={item.id} 
+                      href={item.href} 
+                      target="_blank" rel="noopener noreferrer"
+                      className="p-3 border rounded-full hover:bg-black group transition-all duration-300"
+                    >
+                      <Image
+                        src={item.iconSrc}
+                        width={16}
+                        height={16}
+                        alt={item.label}
+                        className="group-hover:invert"
+                      />
+                    </a>
+                  ) : (
+                    <a
+                      key={item.id}
+                      href={item.href}
+                      target="_blank" rel="noopener noreferrer"
+                      className="text-sm font-medium underline-offset-4 hover:underline"
+                    >
+                      {item.label}
+                    </a>
+                  )
+                ))}
+              </div>
+            )}
           </>
         )}
-        {slideOutMenuButtons && slideOutMenuButtons.length > 0 && (
+        {ctaButtons.length > 0 && (
           <div className='pt-10 fixed bottom-1 right-0 w-full md:w-[380px] px-4 pb-4 bg-linear-to-t from-white via-white to-transparent'>
-            <ButtonRenderer buttons={slideOutMenuButtons} classNames="flex-col md:flex-row" />  
+            <div className="flex flex-col md:flex-row gap-3">
+              {ctaButtons.map((btn) => (
+                <SheetClose key={btn.id} asChild>
+                  <Link
+                    href={btn.href}
+                    className={cn('group justify-center text-center', buttonVariants({ variant: btn.variant ?? 'primary', width: 'fullWidth' }))}
+                  >
+                    {btn.label}
+                  </Link>
+                </SheetClose>
+              ))}
+            </div>
           </div>
         )}
       </SheetContent>
     </Sheet>
   )
+}
+
+function SlideMenuRow({
+  item,
+  openItems,
+  setOpenItems,
+  router,
+}: {
+  item: SiteNavbarItem;
+  openItems: Record<string, boolean>;
+  setOpenItems: React.Dispatch<React.SetStateAction<Record<string, boolean>>>;
+  router: ReturnType<typeof useRouter>;
+}) {
+  if (item.kind === 'group') {
+    return (
+      <li>
+        <Collapsible 
+          open={openItems[item.id]}
+          onOpenChange={(open) => (
+            setOpenItems(prev => ({ ...prev, [item.id]: open }))
+          )}
+          className="space-y-3.5"
+        >
+          <CollapsibleTrigger className="relative flex items-center gap-2 text-3xl tracking-tight group">
+            <span className="relative">
+              {item.label} 
+              <AnimatedUnderline className='h-[2px]' />
+            </span>
+            <ChevronDown 
+              size={23} 
+              className={cn('translate-y-0.5 rotate-0 transition-transform duration-200', {
+                'rotate-180': openItems[item.id]
+              })}
+            />
+          </CollapsibleTrigger>
+          <CollapsibleContent className="flex flex-col gap-y-1 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 transition-all duration-200">
+            {item.items.map((sub) => (
+              <SheetClose key={sub.href}>
+                <button 
+                  type="button"
+                  onClick={() => {
+                    router.push(sub.href);
+                    setOpenItems(prev => ({ ...prev, [item.id]: false }));
+                  }}
+                  className='relative block text-xl tracking-tight text-gray-500 hover:text-black group'
+                >
+                  {sub.label}
+                  <AnimatedUnderline className='h-[1.5px] bg-gray-500 group-hover:bg-black' />
+                </button>
+              </SheetClose>
+            ))}                        
+          </CollapsibleContent>
+        </Collapsible>
+      </li>
+    );
+  }
+
+  return (
+    <li>
+      <SheetClose asChild>
+        <button 
+          type="button"
+          onClick={() => router.push(item.href)}
+          className='relative block text-3xl tracking-tight group w-full text-left'
+        >
+          {item.label}
+          <AnimatedUnderline className='h-[2px]' />
+        </button>
+      </SheetClose>
+    </li>
+  );
 }
