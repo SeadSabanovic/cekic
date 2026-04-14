@@ -14,14 +14,8 @@ export default function Home() {
     <div id="home" className="overflow-hidden">
       <div className="px-4 xl:px-10 pattern-bg">
         <Container className="px-4 pt-32 md:pt-40 pb-14 md:pb-28 border-x border-dashed">
-          <Heading
-            tag="h1"
-            size="xxxl"
-            className="w-fit max-w-3xl text-balance"
-          >
-            {homePageContent.headline}
-          </Heading>
-          <p className="mt-6 text-lg text-neutral-600 max-w-2xl text-balance leading-relaxed">
+          <Heading>{homePageContent.headline}</Heading>
+          <p className="mt-6 text-lg text-muted-foreground max-w-2xl text-balance leading-relaxed">
             {homePageContent.lead}
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-4">

@@ -5,7 +5,7 @@ export const homePageContent = {
   metaTitle: 'Početna',
   description:
     'Čekić — predstavite svoj brend, usluge i kontakt na jednom mjestu.',
-  headline: 'Zanat je u tvojim rukama čćšđž',
+  headline: 'Zanat je u tvojim rukama',
   lead: 'Postani sam svoj majstor uz cekic.io. Donosimo ti jasne putokaze: od sitnih kućnih popravki do visokoplaćenih modernih zanata. Nauči, primijeni i gradi svojim rukama.',
 } as const;
 
