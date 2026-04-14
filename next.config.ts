@@ -8,6 +8,12 @@ const nextConfig: NextConfig = {
         hostname: 'cdn.sanity.io',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };

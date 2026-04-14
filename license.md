@@ -9,16 +9,18 @@ following conditions:
 
 **Commercial Restriction:** The Template, whether in its original form or modified,
 shall not be sold for commercial gain. This includes but is not limited to:
+
 - Direct selling of the Template code
 - Including the Template in a paid collection or marketplace
 - Repackaging the Template as a commercial product.
 
 **This restriction does not prevent:**
+
 - Using the Template in commercial projects or applications
 - Providing paid services related to implementing, customizing, or extending
-the Template
+  the Template
 - Accepting donations for maintenance or development of projects using the
-Template
+  Template
 
 THE TEMPLATE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
 KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE

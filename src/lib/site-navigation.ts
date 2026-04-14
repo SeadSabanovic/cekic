@@ -4,7 +4,7 @@
 
 export type SiteNavSingle = {
   id: string;
-  kind: "single";
+  kind: 'single';
   label: string;
   /** Apsolutna putanja, npr. "/", "/o-nama" */
   href: string;
@@ -13,7 +13,7 @@ export type SiteNavSingle = {
 
 export type SiteNavGroup = {
   id: string;
-  kind: "group";
+  kind: 'group';
   label: string;
   items: Array<{ href: string; label: string }>;
 };
@@ -45,28 +45,28 @@ export type SiteSlideCta = {
   id: string;
   label: string;
   href: string;
-  variant?: "primary" | "secondary" | "tertiary" | "outline";
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'outline';
 };
 
 export const siteNavigation = {
   navbar: [
     {
-      id: "home",
-      kind: "single",
-      label: "Početna",
-      href: "/",
+      id: 'home',
+      kind: 'single',
+      label: 'Početna',
+      href: '/',
     },
     {
-      id: "about",
-      kind: "single",
-      label: "O nama",
-      href: "/o-nama",
+      id: 'about',
+      kind: 'single',
+      label: 'O nama',
+      href: '/o-nama',
     },
     {
-      id: "contact",
-      kind: "single",
-      label: "Kontakt",
-      href: "/kontakt",
+      id: 'contact',
+      kind: 'single',
+      label: 'Kontakt',
+      href: '/kontakt',
       isButton: true,
     },
   ] satisfies SiteNavbarItem[],
@@ -75,11 +75,11 @@ export const siteNavigation = {
     enabled: true,
     /** Prazno = iste stavke kao u navbar-u */
     menuItems: [] as SiteNavbarItem[],
-    menuTitle: "Meni",
+    menuTitle: 'Meni',
     showContact: false,
-    contactTitle: "Kontakt",
-    contactEmail: "",
-    contactPhone: "",
+    contactTitle: 'Kontakt',
+    contactEmail: '',
+    contactPhone: '',
     /** Tekstualni linkovi; ako dodaš iconSrc, prikazuje se i ikona */
     socialLinks: [] as SiteSocialLink[],
     ctaButtons: [] as SiteSlideCta[],
@@ -88,11 +88,11 @@ export const siteNavigation = {
   footer: {
     columns: [
       {
-        id: "col-nav",
-        title: "Navigacija",
+        id: 'col-nav',
+        title: 'Navigacija',
         links: [
-          { id: "f-home", label: "Početna", href: "/" },
-          { id: "f-about", label: "O nama", href: "/o-nama" },
+          { id: 'f-home', label: 'Početna', href: '/' },
+          { id: 'f-about', label: 'O nama', href: '/o-nama' },
         ],
       },
     ] satisfies SiteFooterColumn[],

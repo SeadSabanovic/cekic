@@ -1,101 +1,117 @@
-"use client"
+'use client';
+
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { stegaClean } from 'next-sanity';
-import { PageBuilderType } from '@/types';
 import Container from '@/components/global/container';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
-export type TestimonialBlockProps = PageBuilderType<"testimonialBlock">;
+export type TestimonialItem = {
+  id: string;
+  quote: string;
+  name: string;
+  jobTitle?: string;
+  company?: string;
+  avatarSrc: string;
+  logoSrc?: string;
+};
+
+export type TestimonialBlockProps = {
+  anchorId?: string;
+  eyebrow?: string;
+  heading?: string;
+  testimonials?: TestimonialItem[];
+  cornerRadiusTop?: 'flat' | 'rounded';
+  cornerRadiusBottom?: 'flat' | 'rounded';
+};
 
 export default function TestimonialBlock(props: TestimonialBlockProps) {
-
-  const { 
-    heading, 
-    eyebrow, 
-    testimonials, 
-    anchorId, 
+  const {
+    heading,
+    eyebrow,
+    testimonials,
+    anchorId,
     cornerRadiusTop,
     cornerRadiusBottom,
   } = props;
 
   return (
-    <section 
+    <section
       {...(anchorId ? { id: anchorId } : {})}
-      className={cn('pb-10 md:pb-0 xl:px-10 pattern-bg border-y border-dashed', {
-        'rounded-t-4xl': stegaClean(cornerRadiusTop) === 'rounded',
-        'rounded-b-4xl': stegaClean(cornerRadiusBottom) === 'rounded'
-      })}
+      className={cn(
+        'pattern-bg border-y border-dashed pb-10 md:pb-0 xl:px-10',
+        {
+          'rounded-t-4xl': cornerRadiusTop === 'rounded',
+          'rounded-b-4xl': cornerRadiusBottom === 'rounded',
+        }
+      )}
     >
-      <Container className='py-16 md:py-28 space-y-10 border-x border-dashed'>
+      <Container className="space-y-10 border-x border-dashed py-16 md:py-28">
         <div>
-          <div className='w-fit mx-auto px-2 h-6 flex items-center justify-between rounded-full text-center text-sm font-medium tracking-tight text-white bg-black'>
-            {eyebrow}
-          </div>
-          <h2 className='mt-6 py-2 text-center text-xl md:text-2xl font-semibold border-y w-fit mx-auto bg-gradient-to-r from-white/0 via-green-400/15 to-white/0'>
-            {heading}
-          </h2>
+          {eyebrow && (
+            <div className="mx-auto flex h-6 w-fit items-center justify-between rounded-full bg-black px-2 text-center text-sm font-medium tracking-tight text-white">
+              {eyebrow}
+            </div>
+          )}
+          {heading && (
+            <h2 className="mx-auto mt-6 w-fit border-y bg-linear-to-r from-white/0 via-green-400/15 to-white/0 py-2 text-center text-xl font-semibold md:text-2xl">
+              {heading}
+            </h2>
+          )}
         </div>
-        {testimonials && testimonials.length > 1 ? (
-          <Carousel className="w-full max-w-[38rem] xl:max-w-[44rem] mx-auto">
-            <CarouselContent>
-              {testimonials?.map((testimonial) => (
-                <CarouselItem key={testimonial._id}>
-                  <TestimonialCard testimonial={testimonial} />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
-        ): (
-          <TestimonialCard 
-            testimonial={testimonials?.[0] ?? null} 
-            classNames='border border-gray-200/70 rounded-xl'
-          />
-        )}       
+        <div className="mx-auto flex max-w-176 flex-col gap-8">
+          {testimonials?.map((t) => (
+            <TestimonialCard key={t.id} testimonial={t} />
+          ))}
+        </div>
       </Container>
     </section>
-  )
+  );
 }
 
-function TestimonialCard({ testimonial, classNames }: {
-  testimonial: NonNullable<TestimonialBlockProps['testimonials']>[number] | null;
+function TestimonialCard({
+  testimonial,
+  classNames,
+}: {
+  testimonial: TestimonialItem;
   classNames?: string;
 }) {
   return (
-    <div className={cn('h-full mx-auto max-w-[38rem] md:max-w-[44rem] p-8 md:p-12 space-y-10 md:space-y-20 flex flex-col justify-between bg-white', classNames)}>
-      <h2 className='text-base md:text-xl text-pretty'>
-        {testimonial?.quote}
-      </h2>
-      <div className='flex flex-col md:flex-row md:items-center justify-between'>
-        <div className='flex items-center gap-4'>
+    <div
+      className={cn(
+        'mx-auto flex h-full max-w-176 flex-col justify-between space-y-10 bg-white p-8 md:space-y-20 md:p-12',
+        classNames
+      )}
+    >
+      <h2 className="text-pretty text-base md:text-xl">{testimonial.quote}</h2>
+      <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
+        <div className="flex items-center gap-4">
           <Image
-            src={testimonial?.avatar?.asset?.url ?? ''}
+            src={testimonial.avatarSrc}
             width={50}
             height={50}
-            alt={testimonial?.name ?? ''}
-            className='w-12 h-12 rounded-full'
+            alt={testimonial.name}
+            className="h-12 w-12 rounded-full"
           />
-          <div className='-space-y-0.5'>
-            <h3 className='text-sm md:text-base font-medium'>
-              {testimonial?.name}
+          <div className="-space-y-0.5">
+            <h3 className="text-sm font-medium md:text-base">
+              {testimonial.name}
             </h3>
-            <p className='text-sm text-gray-500'>
-              {testimonial?.jobTitle}
-            </p>
+            {testimonial.jobTitle && (
+              <p className="text-sm text-gray-500">{testimonial.jobTitle}</p>
+            )}
           </div>
         </div>
-        <div>
-          <Image
-            src={testimonial?.logo?.asset?.url ?? ''}
-            width={80}
-            height={40}
-            alt={`${testimonial?.company} Logo`}
-            className='hidden md:block'
-          />
-        </div>
+        {testimonial.logoSrc && (
+          <div>
+            <Image
+              src={testimonial.logoSrc}
+              width={80}
+              height={40}
+              alt={`${testimonial.company ?? ''} logo`}
+              className="hidden md:block"
+            />
+          </div>
+        )}
       </div>
     </div>
-  )
+  );
 }

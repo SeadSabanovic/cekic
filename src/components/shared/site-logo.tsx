@@ -1,46 +1,16 @@
-"use client"
-import Image from 'next/image';
-import { cn, scrollToElement } from '@/lib/utils';
-import { usePathname, useRouter } from 'next/navigation';
-import type { SiteSettings } from '@/lib/site-settings';
+import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
-export default function SiteLogo({ settings, location, theme }: {
-  settings: SiteSettings;
-  location?: 'footer' | 'navbar';
-  theme?: 'light' | 'dark';
-}) {
-
-  const pathname = usePathname();
-  const router = useRouter();
-
-  const { siteTitle, siteLogoUrl } = settings;
-
+export default function SiteLogo() {
   return (
-    <button
+    <Link
+      href="/"
       aria-label="Go to home page"
-      onClick={() => pathname === '/' ? scrollToElement('home') : router.push(`/#home`)}
-      className={cn('hover:scale-[0.95] transition-transform duration-300 ease-in-out', {
-        'text-white': theme === 'light'
-      })}
-    >
-      {!siteLogoUrl ? (
-        <span
-          className={cn('font-semibold tracking-tighter text-xl', {
-            'text-3xl': location === 'footer'
-          })}
-        >
-          Čekić
-        </span>
-      ) : (
-        <Image
-          priority
-          width={140}
-          height={140}
-          src={siteLogoUrl}
-          alt={`${siteTitle} Logo`}
-          className='w-[140px] h-auto object-contain'
-        />
+      className={cn(
+        'hover:scale-[0.95] transition-transform duration-300 ease-in-out'
       )}
-    </button>
-  )
+    >
+      <span className="font-semibold tracking-tighter text-xl">Čekić</span>
+    </Link>
+  );
 }

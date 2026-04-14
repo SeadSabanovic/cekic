@@ -7,10 +7,15 @@ export type ButtonPageReference = {
 };
 
 export type ButtonType = {
-  buttonType?: "internal" | "anchor" | "external" | "fileDownload" | "emailAddress";
+  buttonType?:
+    | 'internal'
+    | 'anchor'
+    | 'external'
+    | 'fileDownload'
+    | 'emailAddress';
   buttonPageReference?: ButtonPageReference | null;
   buttonExternalUrl?: string | null;
-  buttonAnchorLocation?: "currentPage" | "otherPage";
+  buttonAnchorLocation?: 'currentPage' | 'otherPage';
   buttonAnchorId?: string | null;
   buttonEmailAddress?: string | null;
 };

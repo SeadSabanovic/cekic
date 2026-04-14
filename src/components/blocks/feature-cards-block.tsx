@@ -1,142 +1,172 @@
+import type { ReactNode } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { PageBuilderType } from '@/types';
 import { CircleCheck } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import Heading from '@/components/shared/heading';
 import Container from '@/components/global/container';
-import ButtonRenderer from '@/components/shared/button-renderer';
-import PortableTextEditor from '@/components/portable-text/portable-text-editor';
+import {
+  BlockButtonRow,
+  type BlockLinkItem,
+} from '@/components/blocks/block-button-row';
 
-export type FeatureCardsBlockProps = PageBuilderType<"featureCardsBlock">;
+export type FeatureCardsBlockFeature = {
+  id: string;
+  imageSrc: string;
+  imageAlt?: string;
+  title: string;
+  description?: string;
+  items?: string[];
+  cta?: { label: string; href: string };
+};
+
+export type FeatureCardsBlockProps = {
+  anchorId?: string;
+  heading?: string;
+  headerActions?: BlockLinkItem[];
+  features?: FeatureCardsBlockFeature[];
+  showCallToAction?: boolean;
+  callToAction?: {
+    title: string;
+    body: ReactNode;
+    actions?: BlockLinkItem[];
+  };
+};
 
 export default function FeatureCardsBlock(props: FeatureCardsBlockProps) {
-
-  const { heading, buttons, features, showCallToAction, anchorId } = props;
+  const {
+    heading,
+    headerActions,
+    features,
+    showCallToAction,
+    anchorId,
+    callToAction,
+  } = props;
 
   return (
-    <section 
-      {...(anchorId ? { id: anchorId } : {})}
-      className='px-4 xl:px-10'
-    >
-      <Container className='py-16 md:py-28 px-4 space-y-8 md:space-y-6 border-x border-dashed'>
-        <div className='relative max-w-[60rem] mx-auto py-2 md:py-4 flex flex-col md:flex-row gap-30 md:gap-6 items-center justify-between border-y border-dashed pattern-bg--2'>
-          <Heading tag="h2" size="xl" className='relative col-span-7 py-1.5 text-balance leading-normal'>
-            <span className='relative z-10'>
-              {heading}
-            </span>
+    <section {...(anchorId ? { id: anchorId } : {})} className="px-4 xl:px-10">
+      <Container className="space-y-8 border-x border-dashed px-4 py-16 md:space-y-6 md:py-28">
+        <div className="pattern-bg--2 relative mx-auto flex max-w-240 flex-col items-center justify-between gap-8 border-y border-dashed py-2 md:flex-row md:gap-6 md:py-4">
+          <Heading
+            tag="h2"
+            size="xl"
+            className="relative col-span-7 py-1.5 leading-normal text-balance"
+          >
+            <span className="relative z-10">{heading}</span>
           </Heading>
-          {buttons && buttons.length > 0 && (
-            <ButtonRenderer classNames='z-20 hidden md:flex' buttons={buttons} />  
+          {headerActions && headerActions.length > 0 && (
+            <BlockButtonRow
+              className="z-20 hidden md:flex"
+              items={headerActions}
+            />
           )}
           <EdgeBlur />
         </div>
-        <div className='max-w-[60rem] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6'>
+        <div className="mx-auto grid max-w-240 grid-cols-1 gap-6 md:grid-cols-2">
           {features?.map((feature) => (
-            <div key={feature._key} className='col-span-2 md:col-span-1'>
+            <div key={feature.id} className="col-span-2 md:col-span-1">
               <FeatureCard feature={feature} />
             </div>
           ))}
-          {showCallToAction && (
-            <CallToAction 
-              {...props}
-            />
+          {showCallToAction && callToAction && (
+            <CallToAction section={callToAction} />
           )}
         </div>
       </Container>
     </section>
-  )
+  );
 }
 
-function FeatureCard({ feature }: {
-  feature:  NonNullable<FeatureCardsBlockProps['features']>[number];
-}) {
+function FeatureCard({ feature }: { feature: FeatureCardsBlockFeature }) {
   return (
-    <div className='border border-dashed rounded-3xl'>
-      <div className='p-3'>
+    <div className="rounded-3xl border border-dashed">
+      <div className="p-3">
         <Image
-          src={feature.image?.asset?.url ?? ''}
+          src={feature.imageSrc}
           width={600}
           height={400}
-          alt={feature.title ?? ''}
-          className='rounded-2xl h-[280px] object-cover overflow-hidden'
+          alt={feature.imageAlt ?? feature.title}
+          className="h-[280px] overflow-hidden rounded-2xl object-cover"
         />
       </div>
-      <div className='mt-5 px-6 md:px-8 pb-2'>
-        <div className='space-y-6'>
-          <Heading tag="h3" size="sm" className='relative py-2 font-semibold border-y border-y-gray-200/40 pattern-bg'>
+      <div className="mt-5 px-6 pb-2 md:px-8">
+        <div className="space-y-6">
+          <Heading
+            tag="h3"
+            size="sm"
+            className="pattern-bg relative border-y border-y-gray-200/40 py-2 font-semibold"
+          >
             {feature.title}
           </Heading>
-          <p className='text-balance text-sm text-gray-500'>
-            {feature.description}
-          </p>
+          {feature.description && (
+            <p className="text-sm text-balance text-gray-500">
+              {feature.description}
+            </p>
+          )}
         </div>
       </div>
-      <div className='mt-4 space-y-3 border-t border-dashed'>
-        {feature?.items?.map((item, index) => (
-          <div 
-            key={item} 
-            className={cn('flex items-start md:items-center gap-2 px-6 md:px-8 py-4 border-b border-dashed', {
-              'border-none pb-6': index === (feature?.items?.length ?? 0) - 1
-            })}
+      <div className="mt-4 space-y-3 border-t border-dashed">
+        {feature.items?.map((item, index) => (
+          <div
+            key={`${feature.id}-item-${index}`}
+            className={cn(
+              'flex items-start gap-2 border-b border-dashed px-6 py-4 md:items-center md:px-8',
+              {
+                'border-none pb-6': index === (feature.items?.length ?? 0) - 1,
+              }
+            )}
           >
-            <CircleCheck className='h-4 w-4 text-green-600' />
-            <span className='text-balance text-sm'>
-              {item}
-            </span>
+            <CircleCheck className="h-4 w-4 shrink-0 text-green-600" />
+            <span className="text-sm text-balance">{item}</span>
           </div>
         ))}
       </div>
-      {feature?.button?.showButton && (
-        <div className='px-4 py-4 border-t border-dashed'>
-          <Button 
-            variant={feature?.button.buttonVariant}
-            buttonType={feature?.button.buttonType}
-            pageReference={feature?.button.buttonPageReference}
-            externalUrl={feature?.button.buttonExternalUrl ?? ''}
-            className='h-12 w-full'
+      {feature.cta && (
+        <div className="border-t border-dashed px-4 py-4">
+          <Link
+            href={feature.cta.href}
+            className={cn(
+              buttonVariants({ variant: 'default' }),
+              'h-12 w-full'
+            )}
           >
-            {feature.button.buttonText}
-          </Button>
+            {feature.cta.label}
+          </Link>
         </div>
       )}
     </div>
-  )
+  );
 }
 
-function CallToAction(props: FeatureCardsBlockProps) {
-
-  const { 
-    callToActionHeading,
-    callToActionContent,
-    callToActionButtons,
-  } = props;
-
+function CallToAction({
+  section,
+}: {
+  section: NonNullable<FeatureCardsBlockProps['callToAction']>;
+}) {
   return (
-    <div className='col-span-2 w-full p-8 flex flex-col md:flex-row items-center gap-8 border rounded-3xl pattern-bg--2'>
+    <div className="pattern-bg--2 col-span-2 flex w-full flex-col items-center gap-8 rounded-3xl border p-8 md:flex-row">
       <div className="space-y-5 md:space-y-3">
-        <div className="font-medium text-xl text-balance">
-          {callToActionHeading}
+        <div className="text-xl font-medium text-balance">{section.title}</div>
+        <div className="text-sm text-balance text-gray-500 md:text-base">
+          {section.body}
         </div>
-        <PortableTextEditor 
-          data={callToActionContent}
-          classNames='text-balance text-sm md:text-base text-gray-500'
-        />
       </div>
-      {callToActionButtons && callToActionButtons.length > 0 && (
-        <div className='items-center md:justify-center gap-2.5'>
-          <ButtonRenderer buttons={callToActionButtons} />  
-        </div>
+      {section.actions && section.actions.length > 0 && (
+        <BlockButtonRow
+          className="items-center md:justify-center"
+          items={section.actions}
+        />
       )}
     </div>
-  )
+  );
 }
 
 function EdgeBlur() {
   return (
-    <div className='absolute inset-0 flex items-center justify-between'>
-      <div className='relative bg-gradient-to-r from-white to-transparent h-full w-[100px]'></div>
-      <div className='bg-gradient-to-l from-white to-transparent h-full w-[100px]'></div>
+    <div className="absolute inset-0 flex items-center justify-between">
+      <div className="relative h-full w-[100px] bg-linear-to-r from-white to-transparent" />
+      <div className="h-full w-[100px] bg-linear-to-l from-white to-transparent" />
     </div>
-  )
+  );
 }

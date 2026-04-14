@@ -1,33 +1,37 @@
+import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
-import { PageBuilderType } from '@/types';
 import Heading from '@/components/shared/heading';
 import Container from '@/components/global/container';
-import PortableTextEditor from '@/components/portable-text/portable-text-editor';
 
-export type HeaderBlockProps = PageBuilderType<"headerBlock">;
+export type HeaderBlockProps = {
+  anchorId?: string;
+  heading?: string;
+  body?: ReactNode;
+  bottomCornerRadius?: 'flat' | 'rounded';
+};
 
 export default function HeaderBlock(props: HeaderBlockProps) {
-
-  const { heading, content, bottomCornerRadius, anchorId } = props;
+  const { heading, body, bottomCornerRadius, anchorId } = props;
 
   return (
-    <section 
-      {...(anchorId ? { id: anchorId } : {})} 
-      className={cn('px-4 md:px-10 pattern-bg border-b', {
-        'rounded-4xl': bottomCornerRadius === 'rounded'
+    <section
+      {...(anchorId ? { id: anchorId } : {})}
+      className={cn('pattern-bg border-b px-4 md:px-10', {
+        'rounded-4xl': bottomCornerRadius === 'rounded',
       })}
     >
-      <Container className='border-x border-dashed'>
-        <div className='pt-36 md:pt-52 pb-20 md:pb-36'>
-          <Heading tag="h1" size="xxl" className='text-balance leading-normal'>
+      <Container className="border-x border-dashed">
+        <div className="pt-36 pb-20 md:pt-52 md:pb-36">
+          <Heading tag="h1" size="xxl" className="text-balance leading-normal">
             {heading}
           </Heading>
-          <PortableTextEditor 
-            data={content ?? []}
-            classNames='mt-6 md:mt-8 md:text-xl text-balance text-gray-600'
-          />
+          {body && (
+            <div className="mt-6 text-balance text-gray-600 md:mt-8 md:text-xl">
+              {body}
+            </div>
+          )}
         </div>
       </Container>
     </section>
-  )
+  );
 }

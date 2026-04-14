@@ -7,7 +7,12 @@ const headingVariants = cva(
   {
     variants: {
       tag: {
-        h1: '', h2: '', h3: '', h4: '', h5: '', h6: '',
+        h1: '',
+        h2: '',
+        h3: '',
+        h4: '',
+        h5: '',
+        h6: '',
       },
       size: {
         xxxl: 'text-3xl md:text-[3.40rem] md:leading-[3.60rem]',
@@ -24,12 +29,13 @@ const headingVariants = cva(
       size: 'xl',
     },
   }
-)
+);
 
-interface HeadingProps 
-  extends React.HTMLAttributes<HTMLHeadingElement>, 
-  VariantProps<typeof headingVariants> {
-    as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+interface HeadingProps
+  extends
+    React.HTMLAttributes<HTMLHeadingElement>,
+    VariantProps<typeof headingVariants> {
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
 
 const sizeToComponent = {
@@ -49,15 +55,15 @@ export default function Heading({
   children,
   ...props
 }: HeadingProps) {
+  const Component =
+    as || sizeToComponent[tag as keyof typeof sizeToComponent] || 'h1';
 
-  const Component = as || sizeToComponent[tag as keyof typeof sizeToComponent] || 'h1';
-  
   return (
-    <Component 
+    <Component
       className={cn('', headingVariants({ tag, size, className }))}
       {...props}
     >
       {children}
     </Component>
-  )
+  );
 }

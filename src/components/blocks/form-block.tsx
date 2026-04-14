@@ -1,39 +1,42 @@
-"use client"
-import { PageBuilderType } from '@/types';
-import Form from '@/components/shared/form';
+import type { ReactNode } from 'react';
 import Heading from '@/components/shared/heading';
 import Container from '@/components/global/container';
-import PortableTextEditor from '@/components/portable-text/portable-text-editor';
 
-export type FormBlockProps = PageBuilderType<"formBlock">;
+export type FormBlockProps = {
+  anchorId?: string;
+  heading?: string;
+  intro?: ReactNode;
+  /** Npr. vlastiti `<form>` ili kontakt forma */
+  children: ReactNode;
+};
 
 export default function FormBlock(props: FormBlockProps) {
-
-  const { heading, content, form, anchorId } = props;
+  const { heading, intro, children, anchorId } = props;
 
   return (
-    <section 
-      {...(anchorId ? { id: anchorId } : {})} 
-      className='px-4 xl:px-10 pattern-bg'
+    <section
+      {...(anchorId ? { id: anchorId } : {})}
+      className="pattern-bg px-4 xl:px-10"
     >
-      <Container className='py-16 md:py-28 border-x border-dashed'>
-        <div className='flex flex-col justify-center items-center gap-4 md:gap-6'>
+      <Container className="border-x border-dashed py-16 md:py-28">
+        <div className="flex flex-col items-center justify-center gap-4 md:gap-6">
           {heading && (
-            <Heading tag="h2" size="xl" className='text-balance text-center leading-normal'>
+            <Heading
+              tag="h2"
+              size="xl"
+              className="text-center leading-normal text-balance"
+            >
               {heading}
             </Heading>
           )}
-          {content && (
-            <PortableTextEditor 
-              data={content}
-              classNames='max-w-[320px] mb-4 md:text-xl text-balance text-center text-gray-600'
-            />
+          {intro && (
+            <div className="mb-4 max-w-[320px] text-center text-balance text-gray-600 md:text-xl">
+              {intro}
+            </div>
           )}
-          {form && (
-            <Form form={form} />
-          )}
+          {children}
         </div>
       </Container>
     </section>
-  )
+  );
 }

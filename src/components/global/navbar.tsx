@@ -9,7 +9,13 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { ChevronRight, Menu } from 'lucide-react';
 import AnimatedText from '../shared/animated-text';
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from '@/components/ui/navigation-menu';
 import { siteNavigation, type SiteNavbarItem } from '@/lib/site-navigation';
 import type { SiteSettings } from '@/lib/site-settings';
 
@@ -23,24 +29,26 @@ function navItemActive(pathname: string, href: string) {
 }
 
 export default function Navbar({ settings }: NavbarProps) {
-
   const pathname = usePathname();
   const hasScrolled = useScroll();
 
   const navbarMenuItems = siteNavigation.navbar;
   const { enabled: showSlideOutMenu } = siteNavigation.slideOut;
-  
+
   return (
-    <header 
-      className={cn('z-40 fixed top-0 left-0 w-full py-6 rounded-b-xl border-b border-b-gray-100 bg-white/80 backdrop-blur-lg transition-all duration-300 ease-in-out', {
-        'py-4 ': hasScrolled
-      })}
+    <header
+      className={cn(
+        'z-40 fixed top-0 left-0 w-full py-6 rounded-b-xl border-b border-b-gray-100 bg-white/80 backdrop-blur-lg transition-all duration-300 ease-in-out',
+        {
+          'py-4 ': hasScrolled,
+        }
+      )}
     >
-      <Container className='flex items-center justify-between'>
-        <SiteLogo settings={settings} />
-        <div className='flex items-center gap-3'>
-          <NavigationMenu className='hidden md:block'>
-            <NavigationMenuList className='space-x-8 group/nav'>
+      <Container className="flex items-center justify-between">
+        <SiteLogo />
+        <div className="flex items-center gap-3">
+          <NavigationMenu className="hidden md:block">
+            <NavigationMenuList className="space-x-8 group/nav">
               {navbarMenuItems.map((item) => (
                 <NavbarMenuItem key={item.id} item={item} pathname={pathname} />
               ))}
@@ -48,7 +56,10 @@ export default function Navbar({ settings }: NavbarProps) {
           </NavigationMenu>
           {showSlideOutMenu && (
             <SlideOutMenu settings={settings}>
-              <button aria-label='Otvori meni' className='p-2.5 border border-gray-200/60 rounded-full cursor-pointer hover:bg-gray-50 transition-colors duration-300 ease-in-out'>
+              <button
+                aria-label="Otvori meni"
+                className="p-2.5 border border-gray-200/60 rounded-full cursor-pointer hover:bg-gray-50 transition-colors duration-300 ease-in-out"
+              >
                 <Menu size={18} />
               </button>
             </SlideOutMenu>
@@ -56,27 +67,33 @@ export default function Navbar({ settings }: NavbarProps) {
         </div>
       </Container>
     </header>
-  )
+  );
 }
 
-function NavbarMenuItem({ item, pathname }: { item: SiteNavbarItem; pathname: string }) {
+function NavbarMenuItem({
+  item,
+  pathname,
+}: {
+  item: SiteNavbarItem;
+  pathname: string;
+}) {
   if (item.kind === 'group') {
     return (
       <NavigationMenuItem>
-        <NavigationMenuTrigger className='group-hover/nav:opacity-40 hover:opacity-100!'>
+        <NavigationMenuTrigger className="group-hover/nav:opacity-40 hover:opacity-100!">
           {item.label}
         </NavigationMenuTrigger>
-        <NavigationMenuContent className='min-w-[180px] text-nowrap py-3 px-3 flex flex-col gap-2 bg-white'>
+        <NavigationMenuContent className="min-w-[180px] text-nowrap py-3 px-3 flex flex-col gap-2 bg-white">
           {item.items.map((page) => (
-            <Link 
-              key={page.href} 
+            <Link
+              key={page.href}
               href={page.href}
-              className='group py-1 pl-3 pr-2 flex items-center justify-between gap-6 rounded-md border border-dashed hover:bg-gray-50'
+              className="group py-1 pl-3 pr-2 flex items-center justify-between gap-6 rounded-md border border-dashed hover:bg-gray-50"
             >
               {page.label}
-              <ChevronRight 
-                size={14} 
-                className='text-gray-300 group-hover:-translate-x-0.5 group-hover:text-gray-500 transition-all duration-300' 
+              <ChevronRight
+                size={14}
+                className="text-gray-300 group-hover:-translate-x-0.5 group-hover:text-gray-500 transition-all duration-300"
               />
             </Link>
           ))}
@@ -90,7 +107,7 @@ function NavbarMenuItem({ item, pathname }: { item: SiteNavbarItem; pathname: st
       <NavigationMenuItem>
         <Link
           href={item.href}
-          className={cn('group', buttonVariants({ variant: 'primary' }))}
+          className={cn('group', buttonVariants({ variant: 'default' }))}
         >
           {item.label}
         </Link>
@@ -100,16 +117,17 @@ function NavbarMenuItem({ item, pathname }: { item: SiteNavbarItem; pathname: st
 
   return (
     <NavigationMenuItem>
-      <Link 
+      <Link
         href={item.href}
-        className={cn('relative overflow-hidden inline-flex transition-opacity duration-200 group-hover/nav:opacity-40 hover:opacity-100!', {
-          'hover:underline underline-offset-38': true,
-          'text-blue-700': navItemActive(pathname, item.href),
-        })}
+        className={cn(
+          'relative overflow-hidden inline-flex transition-opacity duration-200 group-hover/nav:opacity-40 hover:opacity-100!',
+          {
+            'hover:underline underline-offset-38': true,
+            'text-primary': navItemActive(pathname, item.href),
+          }
+        )}
       >
-        <AnimatedText>
-          {item.label}
-        </AnimatedText>
+        <AnimatedText>{item.label}</AnimatedText>
       </Link>
     </NavigationMenuItem>
   );

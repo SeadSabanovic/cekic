@@ -2,9 +2,7 @@ import * as React from 'react';
 
 type FormDataType = Record<string, string | number | boolean>;
 
-export function EmailTemplate({ formData }: { 
-  formData: FormDataType 
-}) {
+export function EmailTemplate({ formData }: { formData: FormDataType }) {
   return (
     <div>
       <h1>New Form Submission</h1>
@@ -14,5 +12,5 @@ export function EmailTemplate({ formData }: {
         </div>
       ))}
     </div>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-"use client"
+'use client';
 import Navbar from './navbar';
 import Footer from './footer';
-import localFont from "next/font/local";
+import localFont from 'next/font/local';
 import { Toaster } from 'react-hot-toast';
 import { usePathname } from 'next/navigation';
 import type { SiteSettings } from '@/lib/site-settings';
@@ -12,38 +12,33 @@ interface ClientLayoutProps {
 }
 
 const geistSans = localFont({
-  src: "../../app/(frontend)/fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+  src: '../../app/(frontend)/fonts/GeistVF.woff',
+  variable: '--font-geist-sans',
+  weight: '100 900',
 });
 
 const geistMono = localFont({
-  src: "../../app/(frontend)/fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+  src: '../../app/(frontend)/fonts/GeistMonoVF.woff',
+  variable: '--font-geist-mono',
+  weight: '100 900',
 });
 
-export default function ClientLayout({ 
+export default function ClientLayout({
   children,
   settings,
 }: ClientLayoutProps) {
-
   const pathname = usePathname();
-  if (pathname.includes('/studio')) return (children);
-  
+  if (pathname.includes('/studio')) return children;
+
   return (
-    <div className={`${geistSans.variable} ${geistMono.variable} font-geistSans antialiased grid min-h-dvh grid-rows-[auto_1fr_auto]`}>
-      <Navbar 
-        settings={settings}
-      />
-      <main className='overflow-hidden'>
-        {children}
-      </main>
-      <Footer 
-        settings={settings} 
-      />
-      <Toaster 
-        position="bottom-right" 
+    <div
+      className={`${geistSans.variable} ${geistMono.variable} font-geistSans antialiased grid min-h-dvh grid-rows-[auto_1fr_auto]`}
+    >
+      <Navbar settings={settings} />
+      <main className="overflow-hidden">{children}</main>
+      <Footer />
+      <Toaster
+        position="bottom-right"
         toastOptions={{
           className: 'text-sm font-semibold antialiased',
           style: {
@@ -51,10 +46,10 @@ export default function ClientLayout({
             padding: '4px 8px',
             color: '#FFFFFF',
             fontWeight: '500',
-            backgroundColor: '#000000'
-          }
+            backgroundColor: '#000000',
+          },
         }}
       />
     </div>
-  )
+  );
 }

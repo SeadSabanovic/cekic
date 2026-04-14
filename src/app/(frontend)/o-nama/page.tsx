@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import Container from "@/components/global/container";
-import Heading from "@/components/shared/heading";
+import type { Metadata } from 'next';
+import Container from '@/components/global/container';
+import Heading from '@/components/shared/heading';
 
 export const metadata: Metadata = {
-  title: "O nama",
-  description: "Ko smo i kako pomažemo klijentima kroz web projekte.",
+  title: 'O nama',
+  description: 'Ko smo i kako pomažemo klijentima kroz web projekte.',
 };
 
 export default function AboutPage() {

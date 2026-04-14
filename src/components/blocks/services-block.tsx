@@ -1,93 +1,115 @@
-import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { stegaClean } from 'next-sanity';
-import { PageBuilderType } from '@/types';
 import Heading from '@/components/shared/heading';
 import Container from '@/components/global/container';
-import ButtonRenderer from '@/components/shared/button-renderer';
+import {
+  BlockButtonRow,
+  type BlockLinkItem,
+} from '@/components/blocks/block-button-row';
 import AnimatedUnderline from '@/components/shared/animated-underline';
 
-export type ServicesBlockProps = PageBuilderType<"servicesBlock">;
+export type ServiceCardItem = {
+  id: string;
+  href: string;
+  title: string;
+  description?: string;
+  imageSrc: string;
+  imageAlt?: string;
+};
+
+export type ServicesBlockProps = {
+  anchorId?: string;
+  heading?: string;
+  services?: ServiceCardItem[];
+  background?: 'default' | 'pattern';
+  topCornerRadius?: 'flat' | 'rounded';
+  headerActions?: BlockLinkItem[];
+  paddingTop?: 'none' | 'small' | 'medium' | 'default' | 'large';
+  paddingBottom?: 'none' | 'small' | 'medium' | 'default' | 'large';
+};
 
 export default function ServicesBlock(props: ServicesBlockProps) {
-
-  const { 
-    heading, 
-    services, 
-    background, 
-    topCornerRadius, 
-    buttons,
+  const {
+    heading,
+    services,
+    background,
+    topCornerRadius,
+    headerActions,
     anchorId,
-    paddingTop, 
-    paddingBottom 
+    paddingTop,
+    paddingBottom,
   } = props;
 
   return (
-    <section 
+    <section
       {...(anchorId ? { id: anchorId } : {})}
       className={cn('px-4 xl:px-10', {
-        'pattern-bg': stegaClean(background) === 'pattern',
-        'rounded-t-4xl border-t border-t-gray-200/60': stegaClean(topCornerRadius) === 'rounded'
+        'pattern-bg': background === 'pattern',
+        'rounded-t-4xl border-t border-t-gray-200/60':
+          topCornerRadius === 'rounded',
       })}
     >
-      <Container 
-        paddingTop={stegaClean(paddingTop) ?? undefined}
-        paddingBottom={stegaClean(paddingBottom) ?? undefined}
-        className='space-y-10 border-x border-dashed'
+      <Container
+        paddingTop={paddingTop}
+        paddingBottom={paddingBottom}
+        className="space-y-10 border-x border-dashed"
       >
-        <div className='py-4 flex items-center justify-between gap-6 border-y border-dashed'>
-          <Heading tag="h2" size="xl" className='max-w-[40rem] text-balance leading-tight'>
+        <div className="flex items-center justify-between gap-6 border-y border-dashed py-4">
+          <Heading
+            tag="h2"
+            size="xl"
+            className="max-w-160 text-balance leading-tight"
+          >
             {heading}
           </Heading>
-          {buttons && buttons.length > 0 && (
-            <div className='hidden md:block'>
-              <ButtonRenderer buttons={buttons} />  
+          {headerActions && headerActions.length > 0 && (
+            <div className="hidden md:block">
+              <BlockButtonRow items={headerActions} />
             </div>
           )}
         </div>
-        <div className='grid md:grid-cols-3 gap-x-6 gap-y-10'>
-          {services && services.map((service) => (
-            <ServiceCard key={service._id} service={service} />
+        <div className="grid gap-x-6 gap-y-10 md:grid-cols-3">
+          {services?.map((service) => (
+            <ServiceCard key={service.id} service={service} />
           ))}
         </div>
-        {buttons && buttons.length > 0 && (
-          <div className='md:hidden pt-4'>
-            <ButtonRenderer buttons={buttons} />  
+        {headerActions && headerActions.length > 0 && (
+          <div className="pt-4 md:hidden">
+            <BlockButtonRow items={headerActions} />
           </div>
         )}
       </Container>
     </section>
-  )
+  );
 }
 
-function ServiceCard({ service }: {
-  service: NonNullable<ServicesBlockProps['services']>[number];
-}) {
-
-  const { title, slug, shortDescription, image } = service;
-
+function ServiceCard({ service }: { service: ServiceCardItem }) {
   return (
-    <div aria-label={title ?? ''} className='relative pb-8 group border-b border-dashed'>
-      <Link href={`/services/${slug}`} className='relative space-y-4 md:space-y-6'>
-        <div className='p-4 rounded-3xl border border-dashed backdrop-blur-md backdrop-opacity-50'>
+    <div
+      aria-label={service.title}
+      className="group relative border-b border-dashed pb-8"
+    >
+      <Link href={service.href} className="relative space-y-4 md:space-y-6">
+        <div className="rounded-3xl border border-dashed p-4 backdrop-blur-md backdrop-opacity-50">
           <Image
-            src={image?.asset?.url ?? ''}
+            src={service.imageSrc}
             width={800}
             height={800}
-            alt={image?.asset?.altText ?? ''}
-            className='aspect-[3/2] rounded-2xl'
+            alt={service.imageAlt ?? service.title}
+            className="aspect-3/2 rounded-2xl"
           />
         </div>
-        <Heading tag="h2" size="md" className='pt-1 md:pt-0 text-balance'>
-          {title}
+        <Heading tag="h2" size="md" className="pt-1 text-balance md:pt-0">
+          {service.title}
         </Heading>
-        <p className='text-sm md:text-base md:text-balance text-neutral-500'>
-          {shortDescription}
-        </p>
+        {service.description && (
+          <p className="text-sm text-neutral-500 md:text-base md:text-balance">
+            {service.description}
+          </p>
+        )}
       </Link>
-      <AnimatedUnderline className='-translate-y-0.5' />
+      <AnimatedUnderline className="-translate-y-0.5" />
     </div>
-  )
+  );
 }

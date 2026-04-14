@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     if (!apiKey) {
       return Response.json(
         { error: 'Missing RESEND_API_KEY' },
-        { status: 500 },
+        { status: 500 }
       );
     }
 
@@ -26,10 +26,10 @@ export async function POST(request: NextRequest) {
       react: EmailTemplate({ formData }),
     });
 
-    if (error) { 
-      return Response.json({ error }, { status: 500 }); 
+    if (error) {
+      return Response.json({ error }, { status: 500 });
     }
-    
+
     return Response.json({ message: 'Message sent successfully' });
   } catch (error) {
     return Response.json({ error }, { status: 500 });

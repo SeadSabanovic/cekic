@@ -10,7 +10,7 @@ export type SiteSettings = {
   copyright?: string;
 };
 
-const siteName = process.env.NEXT_PUBLIC_SITE_NAME ?? "Čekić";
+const siteName = process.env.NEXT_PUBLIC_SITE_NAME ?? 'Čekić';
 
 export const siteSettings: SiteSettings = {
   siteTitle: siteName,

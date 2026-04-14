@@ -1,12 +1,18 @@
-import { defineConfig } from "sanity";
-import { visionTool } from "@sanity/vision";
-import { structureTool } from "sanity/structure";
-import { schema } from "@/sanity/schemas";
-import { structure } from "@/sanity/lib/structure";
-import { apiVersion, dataset, projectId, studioUrl, useCdn } from "@/sanity/lib/api";
+import { defineConfig } from 'sanity';
+import { visionTool } from '@sanity/vision';
+import { structureTool } from 'sanity/structure';
+import { schema } from '@/sanity/schemas';
+import { structure } from '@/sanity/lib/structure';
+import {
+  apiVersion,
+  dataset,
+  projectId,
+  studioUrl,
+  useCdn,
+} from '@/sanity/lib/api';
 
 const config = defineConfig({
-  title: process.env.NEXT_PUBLIC_SITE_NAME ?? "Studio",
+  title: process.env.NEXT_PUBLIC_SITE_NAME ?? 'Studio',
   useCdn,
   dataset,
   basePath: studioUrl,
