@@ -1,20 +1,19 @@
 'use client';
-import { useState, useEffect } from 'react';
+
+import { useState, useLayoutEffect } from 'react';
 
 export default function useScroll() {
   const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 100;
-      setScrolled(isScrolled);
+      setScrolled(window.scrollY > 100);
     };
 
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    /* Odmah uskladi s trenutnim scrollom (npr. restore nakon refresha) prije prvog paint-a. */
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return scrolled;

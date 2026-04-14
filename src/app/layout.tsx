@@ -2,7 +2,12 @@ import './(frontend)/globals.css';
 import { Geist } from 'next/font/google';
 import { cn } from '@/lib/utils';
 
-const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
+const geistSans = Geist({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-geist-sans',
+  adjustFontFallback: true,
+  preload: true,
+});
 
 export default function RootLayout({
   children,
@@ -10,7 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="bs-BA" className={cn('font-sans', geist.variable)}>
+    <html
+      lang="bs-BA"
+      className={cn(geistSans.className, geistSans.variable, 'antialiased')}
+    >
       <body>{children}</body>
     </html>
   );

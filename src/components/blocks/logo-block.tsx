@@ -30,7 +30,7 @@ export default function LogoBlock(props: LogoBlockProps) {
       <Container className="border-x border-dashed border-x-gray-200 px-0">
         <div className="py-6 md:py-10">
           <div className="relative mx-auto mt-4 w-fit bg-white py-2 px-10 pattern-bg border-y border-y-gray-100 md:mt-7">
-            <h2 className="text-center font-geistMono text-xs font-medium text-gray-500 uppercase md:text-sm">
+            <h2 className="text-center text-xs font-medium text-gray-500 uppercase md:text-sm">
               {heading}
             </h2>
             <EdgeBlur />

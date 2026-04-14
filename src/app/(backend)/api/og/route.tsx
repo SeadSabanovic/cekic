@@ -27,7 +27,7 @@ export async function GET(request: Request) {
         }}
       >
         <div className="flex text-xl">{process.env.NEXT_PUBLIC_SITE_NAME}</div>
-        <h1 tw="text-[120px] font-bold font-geist">{title}</h1>
+        <h1 tw="text-[120px] font-bold font-sans">{title}</h1>
       </div>
     </div>,
     dimensions
