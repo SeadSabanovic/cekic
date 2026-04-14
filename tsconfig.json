@@ -33,8 +33,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/sanity/schemas/page-builder/blocks/feature-block.ts",
-    "src/sanity/schemas/objects/single-image.ts",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [

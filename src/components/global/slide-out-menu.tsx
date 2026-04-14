@@ -8,13 +8,13 @@ import { buttonVariants } from "../ui/button";
 import Link from "next/link";
 import AnimatedUnderline from "../shared/animated-underline";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
-import { GeneralSettingsQueryResult } from "../../../sanity.types";
-import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '../ui/sheet';
+import type { SiteSettings } from "@/lib/site-settings";
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '../ui/sheet';
 import { siteNavigation, type SiteNavbarItem } from "@/lib/site-navigation";
 
 export default function SlideOutMenu({ children, settings }: {
   children: React.ReactNode;
-  settings: GeneralSettingsQueryResult;
+  settings: SiteSettings;
 }) {
 
   const router = useRouter();
@@ -25,6 +25,7 @@ export default function SlideOutMenu({ children, settings }: {
     showContact,
     contactTitle,
     contactEmail,
+    contactPhone,
     socialLinks,
     ctaButtons,
     menuItems,
@@ -32,7 +33,7 @@ export default function SlideOutMenu({ children, settings }: {
 
   const slideItems = menuItems.length > 0 ? menuItems : siteNavigation.navbar;
 
-  return(
+  return (
     <Sheet>
       <SheetTrigger asChild>
         {children}
@@ -40,6 +41,8 @@ export default function SlideOutMenu({ children, settings }: {
       <SheetContent className='overflow-y-scroll pb-44'>
         <SheetHeader className='z-20 fixed top-0 pt-[26px] right-7 w-[338px] md:w-[330px] h-20 border-b border-dashed border-b-gray-200 bg-white/95'>
           <SiteLogo settings={settings} theme='dark' />
+          <SheetDescription className='sr-only'>Cekic{settings.copyright}
+          </SheetDescription>
         </SheetHeader>
         <SheetTitle className='mt-16 px-0 py-6 antialiased font-normal text-gray-400'>
           {menuTitle}
@@ -61,21 +64,32 @@ export default function SlideOutMenu({ children, settings }: {
               {contactTitle}
             </SheetTitle>
             <div className="mt-2 space-y-4">
-              <a 
-                href={`mailto:${contactEmail}`} 
-                className="relative w-fit block text-2xl tracking-tight group"
-              >
-                {contactEmail}
-                <AnimatedUnderline className='h-[2px]' />
-              </a>
+              {contactEmail ? (
+                <a
+                  href={`mailto:${contactEmail}`}
+                  className="relative w-fit block text-2xl tracking-tight group"
+                >
+                  {contactEmail}
+                  <AnimatedUnderline className='h-[2px]' />
+                </a>
+              ) : null}
+              {contactPhone ? (
+                <a
+                  href={`tel:${contactPhone.replace(/\s/g, '')}`}
+                  className="relative w-fit block text-2xl tracking-tight group"
+                >
+                  {contactPhone}
+                  <AnimatedUnderline className='h-[2px]' />
+                </a>
+              ) : null}
             </div>
             {socialLinks.length > 0 && (
               <div className="mt-8 py-4 flex items-center gap-3 border-y border-dashed flex-wrap">
                 {socialLinks.map((item) => (
                   item.iconSrc ? (
-                    <a 
-                      key={item.id} 
-                      href={item.href} 
+                    <a
+                      key={item.id}
+                      href={item.href}
                       target="_blank" rel="noopener noreferrer"
                       className="p-3 border rounded-full hover:bg-black group transition-all duration-300"
                     >
@@ -137,7 +151,7 @@ function SlideMenuRow({
   if (item.kind === 'group') {
     return (
       <li>
-        <Collapsible 
+        <Collapsible
           open={openItems[item.id]}
           onOpenChange={(open) => (
             setOpenItems(prev => ({ ...prev, [item.id]: open }))
@@ -146,11 +160,11 @@ function SlideMenuRow({
         >
           <CollapsibleTrigger className="relative flex items-center gap-2 text-3xl tracking-tight group">
             <span className="relative">
-              {item.label} 
+              {item.label}
               <AnimatedUnderline className='h-[2px]' />
             </span>
-            <ChevronDown 
-              size={23} 
+            <ChevronDown
+              size={23}
               className={cn('translate-y-0.5 rotate-0 transition-transform duration-200', {
                 'rotate-180': openItems[item.id]
               })}
@@ -159,7 +173,7 @@ function SlideMenuRow({
           <CollapsibleContent className="flex flex-col gap-y-1 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 transition-all duration-200">
             {item.items.map((sub) => (
               <SheetClose key={sub.href}>
-                <button 
+                <button
                   type="button"
                   onClick={() => {
                     router.push(sub.href);
@@ -171,7 +185,7 @@ function SlideMenuRow({
                   <AnimatedUnderline className='h-[1.5px] bg-gray-500 group-hover:bg-black' />
                 </button>
               </SheetClose>
-            ))}                        
+            ))}
           </CollapsibleContent>
         </Collapsible>
       </li>
@@ -181,7 +195,7 @@ function SlideMenuRow({
   return (
     <li>
       <SheetClose asChild>
-        <button 
+        <button
           type="button"
           onClick={() => router.push(item.href)}
           className='relative block text-3xl tracking-tight group w-full text-left'

@@ -5,11 +5,11 @@ import Heading from '../shared/heading';
 import SiteLogo from '../shared/site-logo';
 import { ExternalLink } from 'lucide-react';
 import AnimatedUnderline from '../shared/animated-underline';
-import { GeneralSettingsQueryResult } from '../../../sanity.types';
 import { siteNavigation, type SiteFooterColumn, type SiteFooterLink } from '@/lib/site-navigation';
+import type { SiteSettings } from '@/lib/site-settings';
 
 interface FooterProps {
-  settings: GeneralSettingsQueryResult;
+  settings: SiteSettings;
 }
 
 export default function Footer({ settings }: FooterProps) {

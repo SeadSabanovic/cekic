@@ -1,39 +1,25 @@
 import { MetadataRoute } from "next";
-import { client } from "@/sanity/lib/client";
-import { sitemapQuery } from "@/sanity/lib/queries/misc";
 
-type SitemapPathRow = { href: string | null; _updatedAt: string };
+export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = process.env.VERCEL
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  try {
-    const paths = await client.fetch<SitemapPathRow[]>(sitemapQuery);
+  const now = new Date();
 
-    if (!paths) return [];
-
-    const baseUrl = process.env.VERCEL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000";
-
-      return [
-        {
-          url: baseUrl,
-          lastModified: new Date(),
-          changeFrequency: "weekly",
-          priority: 1,
-        },
-        ...paths
-          .filter((path): path is { href: string; _updatedAt: string } =>
-            Boolean(path.href)
-          )
-          .map((path) => ({
-            url: new URL(path.href, baseUrl).toString(),
-            lastModified: new Date(path._updatedAt),
-            changeFrequency: "weekly" as const,
-            priority: 1,
-          })),
-      ];
-  } catch (error) {
-    console.error("Failed to generate sitemap:", error);
-    return [];
-  }
+  return [
+    { url: baseUrl, lastModified: now, changeFrequency: "weekly", priority: 1 },
+    {
+      url: new URL("/o-nama", baseUrl).toString(),
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: new URL("/kontakt", baseUrl).toString(),
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+  ];
 }

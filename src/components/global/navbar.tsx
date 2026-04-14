@@ -9,12 +9,12 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { ChevronRight, Menu } from 'lucide-react';
 import AnimatedText from '../shared/animated-text';
-import { GeneralSettingsQueryResult } from '../../../sanity.types';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { siteNavigation, type SiteNavbarItem } from '@/lib/site-navigation';
+import type { SiteSettings } from '@/lib/site-settings';
 
 interface NavbarProps {
-  settings: GeneralSettingsQueryResult;
+  settings: SiteSettings;
 }
 
 function navItemActive(pathname: string, href: string) {

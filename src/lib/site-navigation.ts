@@ -79,6 +79,7 @@ export const siteNavigation = {
     showContact: false,
     contactTitle: "Kontakt",
     contactEmail: "",
+    contactPhone: "",
     /** Tekstualni linkovi; ako dodaš iconSrc, prikazuje se i ikona */
     socialLinks: [] as SiteSocialLink[],
     ctaButtons: [] as SiteSlideCta[],
@@ -95,9 +96,6 @@ export const siteNavigation = {
         ],
       },
     ] satisfies SiteFooterColumn[],
-    legal: [
-      { id: "privacy", label: "Privatnost", href: "/privatnost" },
-      { id: "terms", label: "Uslovi", href: "/uslovi" },
-    ],
+    legal: [],
   },
 };

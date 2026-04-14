@@ -2,10 +2,10 @@
 import Image from 'next/image';
 import { cn, scrollToElement } from '@/lib/utils';
 import { usePathname, useRouter } from 'next/navigation';
-import { GeneralSettingsQueryResult } from '../../../sanity.types';
+import type { SiteSettings } from '@/lib/site-settings';
 
 export default function SiteLogo({ settings, location, theme }: {
-  settings: GeneralSettingsQueryResult;
+  settings: SiteSettings;
   location?: 'footer' | 'navbar';
   theme?: 'light' | 'dark';
 }) {
@@ -13,7 +13,7 @@ export default function SiteLogo({ settings, location, theme }: {
   const pathname = usePathname();
   const router = useRouter();
 
-  const { siteTitle, siteLogo } = settings ?? {};
+  const { siteTitle, siteLogoUrl } = settings;
 
   return (
     <button
@@ -23,7 +23,7 @@ export default function SiteLogo({ settings, location, theme }: {
         'text-white': theme === 'light'
       })}
     >
-      {!siteLogo ? (
+      {!siteLogoUrl ? (
         <span
           className={cn('font-semibold tracking-tighter text-xl', {
             'text-3xl': location === 'footer'
@@ -36,7 +36,7 @@ export default function SiteLogo({ settings, location, theme }: {
           priority
           width={140}
           height={140}
-          src={siteLogo?.asset?.url ?? ''}
+          src={siteLogoUrl}
           alt={`${siteTitle} Logo`}
           className='w-[140px] h-auto object-contain'
         />

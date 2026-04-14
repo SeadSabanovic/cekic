@@ -1,20 +1,11 @@
-import type { StructureBuilder, StructureResolver, StructureResolverContext } from "sanity/structure";
-import { SettingsItem } from "./items/settings-item";
-import { PagesItem } from "./items/pages-item";
-import { BlogItem } from "./items/blog-item";
-export const structure: StructureResolver = (
-  S: StructureBuilder, 
-  context: StructureResolverContext
-) => (
+import type { StructureResolver } from "sanity/structure";
+
+export const structure: StructureResolver = (S) =>
   S.list()
-    .title('Content')
+    .title("Sadržaj")
     .items([
-      S.divider(),
-      SettingsItem(S),
-      S.divider(),
-      PagesItem(S),
-      S.divider(),
-      BlogItem(S, context),
-      S.divider(),
-    ])
-)
+      S.listItem()
+        .title("Primjeri")
+        .schemaType("example")
+        .child(S.documentTypeList("example").title("Primjeri")),
+    ]);

@@ -1,30 +1,19 @@
-import { defineConfig } from 'sanity';
-import { schema } from '@/sanity/schemas';
-import { media } from 'sanity-plugin-media';
-import { visionTool } from '@sanity/vision';
-import { structureTool } from 'sanity/structure';
-import { structure } from '@/sanity/lib/structure';
-import { simplerColorInput } from 'sanity-plugin-simpler-color-input'
-import { defaultDocumentNode } from '@/sanity/lib/structure/default-document-node';
-import { apiVersion, dataset, projectId, studioUrl, useCdn } from '@/sanity/lib/api';
+import { defineConfig } from "sanity";
+import { visionTool } from "@sanity/vision";
+import { structureTool } from "sanity/structure";
+import { schema } from "@/sanity/schemas";
+import { structure } from "@/sanity/lib/structure";
+import { apiVersion, dataset, projectId, studioUrl, useCdn } from "@/sanity/lib/api";
 
 const config = defineConfig({
-  title: process.env.NEXT_PUBLIC_SITE_NAME,
-  useCdn: useCdn,
-  dataset: dataset,
+  title: process.env.NEXT_PUBLIC_SITE_NAME ?? "Studio",
+  useCdn,
+  dataset,
   basePath: studioUrl,
-  projectId: projectId,
-  apiVersion: apiVersion,
-  plugins: [
-    structureTool({
-      structure,
-      defaultDocumentNode
-    }),
-    media(),
-    visionTool(),
-    simplerColorInput()
-  ],
-  schema: schema,
-})
+  projectId,
+  apiVersion,
+  plugins: [structureTool({ structure }), visionTool()],
+  schema,
+});
 
-export default config
+export default config;

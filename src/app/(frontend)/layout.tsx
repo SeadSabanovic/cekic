@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-import Container from "@/components/global/container";
-import { sanityFetch } from "@/sanity/lib/sanity-fetch";
 import ClientLayout from "@/components/global/client-layout";
-import { generalSettingsQuery } from "@/sanity/lib/queries/singletons/settings";
-import type { GeneralSettingsQueryResult } from "../../../sanity.types";
+import { siteSettings } from "@/lib/site-settings";
 
 export const metadata: Metadata = {
   title: {
@@ -18,29 +15,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  const { data: settings } = await sanityFetch<GeneralSettingsQueryResult | null>({
-    query: generalSettingsQuery,
-  });
-
-  if (!settings) return (
-    <Container className="py-16 flex flex-col items-center justify-center gap-3 min-h-dvh pattern-bg--2 text-center px-6">
-      <p className="text-lg font-semibold text-neutral-900">
-        Sanity još nije konfigurisan
-      </p>
-      <p className="max-w-md text-sm text-neutral-600 text-balance">
-        U Studiju kreiraj dokument <strong>General</strong> postavki (singleton) i popuni osnovna polja, ili provjeri varijable okruženja za projekat i dataset.
-      </p>
-    </Container>
-  )
-  
   return (
-    <>
-      <ClientLayout
-        settings={settings}
-      >
-        {children}
-      </ClientLayout>
-    </>
+    <ClientLayout settings={siteSettings}>
+      {children}
+    </ClientLayout>
   );
 }
