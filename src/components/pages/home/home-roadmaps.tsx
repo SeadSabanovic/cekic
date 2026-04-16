@@ -35,9 +35,12 @@ export default function HomeRoadmapsSection() {
               </div>
 
               <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {section.maps.map((map) => (
+                {section.maps.map((map, index) => (
                   <li key={map.id}>
-                    <RoadmapCard map={map} />
+                    <RoadmapCard
+                      map={map}
+                      enabled={index < 3}
+                    />
                   </li>
                 ))}
               </ul>
