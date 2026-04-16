@@ -11,8 +11,8 @@ export default function AnimatedText({
       transition={{ ease: [0.6, 0.05, -0.01, 0.9], duration: 0.4 }}
       className="h-5"
     >
-      <span className="flex items-center h-5">{children}</span>
-      <span className="flex items-center h-5">{children}</span>
+      <span className="flex h-5 items-center">{children}</span>
+      <span className="flex h-5 items-center">{children}</span>
     </motion.div>
   );
 }

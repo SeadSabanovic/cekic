@@ -70,7 +70,7 @@ export default function DemoBlokoviPage() {
       />
 
       <PortableTextBlock alignment="left" anchorId="tekst">
-        <div className="prose prose-neutral dark:prose-invert max-w-none">
+        <div className="prose max-w-none prose-neutral dark:prose-invert">
           <p>
             <strong>PortableTextBlock</strong> sada prima običan sadržaj (ovdje
             paragrafi). Možeš koristiti prose klase iz Tailwind Typography ako
@@ -320,7 +320,7 @@ export default function DemoBlokoviPage() {
             <input
               type="text"
               name="name"
-              className="border-input rounded-md border bg-background px-3 py-2"
+              className="rounded-md border border-input bg-background px-3 py-2"
               placeholder="Tvoje ime"
             />
           </label>
@@ -329,7 +329,7 @@ export default function DemoBlokoviPage() {
             <input
               type="email"
               name="email"
-              className="border-input rounded-md border bg-background px-3 py-2"
+              className="rounded-md border border-input bg-background px-3 py-2"
               placeholder="email@primjer.ba"
             />
           </label>
@@ -338,13 +338,13 @@ export default function DemoBlokoviPage() {
             <textarea
               name="message"
               rows={4}
-              className="border-input rounded-md border bg-background px-3 py-2"
+              className="rounded-md border border-input bg-background px-3 py-2"
               placeholder="Kratko opiši zahtjev…"
             />
           </label>
           <button
             type="button"
-            className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-4 py-2 text-sm font-medium"
+            className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >
             Pošalji (mock)
           </button>

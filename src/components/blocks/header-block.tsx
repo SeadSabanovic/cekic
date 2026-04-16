@@ -22,7 +22,7 @@ export default function HeaderBlock(props: HeaderBlockProps) {
     >
       <Container className="border-x border-dashed">
         <div className="pt-36 pb-20 md:pt-52 md:pb-36">
-          <Heading tag="h1" size="xxl" className="text-balance leading-normal">
+          <Heading tag="h1" size="xxl" className="leading-normal text-balance">
             {heading}
           </Heading>
           {body && (

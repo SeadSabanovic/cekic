@@ -16,7 +16,7 @@ const SheetOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Overlay
     className={cn(
-      'fixed inset-0 z-50 bg-black/60 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+      'fixed inset-0 z-50 bg-black/60 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0',
       className
     )}
     {...props}
@@ -61,8 +61,8 @@ const SheetContent = React.forwardRef<
       className={cn(sheetVariants({ side }), className)}
       {...props}
     >
-      <SheetPrimitive.Close className="z-30 fixed right-5 top-[26px] group rounded-xs opacity-70 transition-opacity hover:opacity-100 disabled:pointer-events-none data-[state=open]:bg-black outline-hidden">
-        <X className="h-6 w-6 text-black group-hover:rotate-180 transition-all duration-300" />
+      <SheetPrimitive.Close className="group fixed top-[26px] right-5 z-30 rounded-xs opacity-70 outline-hidden transition-opacity hover:opacity-100 disabled:pointer-events-none data-[state=open]:bg-black">
+        <X className="h-6 w-6 text-black transition-all duration-300 group-hover:rotate-180" />
         <span className="sr-only">Close</span>
       </SheetPrimitive.Close>
       {children}

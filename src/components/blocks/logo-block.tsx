@@ -29,14 +29,14 @@ export default function LogoBlock(props: LogoBlockProps) {
     >
       <Container className="border-x border-dashed border-x-gray-200 px-0">
         <div className="py-6 md:py-10">
-          <div className="relative mx-auto mt-4 w-fit bg-white py-2 px-10 pattern-bg border-y border-y-gray-100 md:mt-7">
+          <div className="pattern-bg relative mx-auto mt-4 w-fit border-y border-y-gray-100 bg-white px-10 py-2 md:mt-7">
             <h2 className="text-center text-xs font-medium text-gray-500 uppercase md:text-sm">
               {heading}
             </h2>
             <EdgeBlur />
           </div>
           <div className="relative mt-10 mb-6 overflow-clip md:mt-16 md:mb-8">
-            <div className="animate-logo-marquee relative z-30 flex w-max items-center gap-16 border-y border-dashed py-4 pl-[4.8rem] md:gap-40 md:py-10">
+            <div className="relative z-30 flex w-max animate-logo-marquee items-center gap-16 border-y border-dashed py-4 pl-[4.8rem] md:gap-40 md:py-10">
               {items.map((item, index) => (
                 <div key={`${item.id}-${index}`}>
                   {item.href ? (

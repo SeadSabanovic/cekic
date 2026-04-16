@@ -7,10 +7,10 @@ export default function SiteLogo() {
       href="/"
       aria-label="Go to home page"
       className={cn(
-        'hover:scale-[0.95] transition-transform duration-300 ease-in-out'
+        'transition-transform duration-300 ease-in-out hover:scale-[0.95]'
       )}
     >
-      <span className="font-semibold tracking-tighter text-xl">Čekić</span>
+      <span className="text-xl font-semibold tracking-tighter">Čekić</span>
     </Link>
   );
 }

@@ -46,13 +46,13 @@ export default function HeroBlock(props: HeroBlockProps) {
       })}
     >
       <Container
-        className={cn('border-x border-dashed space-y-10 xl:-space-y-6', {
+        className={cn('space-y-10 border-x border-dashed xl:-space-y-6', {
           'pb-7 md:pb-12': mediaType === 'image',
         })}
       >
         <div
           className={cn(
-            'grid grid-cols-12 gap-3 pt-36 pb-16 md:gap-6 md:px-14 md:pb-24 md:pt-52 xl:gap-14 xl:pb-36 md:border-x md:border-dashed',
+            'grid grid-cols-12 gap-3 pt-36 pb-16 md:gap-6 md:border-x md:border-dashed md:px-14 md:pt-52 md:pb-24 xl:gap-14 xl:pb-36',
             { 'pb-6': mediaType === 'image' }
           )}
         >
@@ -60,7 +60,7 @@ export default function HeroBlock(props: HeroBlockProps) {
             <Heading
               size="xxxl"
               tag="h1"
-              className="text-balance leading-tight md:max-w-160"
+              className="leading-tight text-balance md:max-w-160"
             >
               {heading}
             </Heading>

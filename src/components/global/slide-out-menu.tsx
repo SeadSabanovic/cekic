@@ -51,16 +51,16 @@ export default function SlideOutMenu({
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent className="overflow-y-scroll pb-44">
-        <SheetHeader className="z-20 fixed top-0 pt-[26px] right-7 w-[338px] md:w-[330px] h-20 border-b border-dashed border-b-gray-200 bg-white/95">
+        <SheetHeader className="fixed top-0 right-7 z-20 h-20 w-[338px] border-b border-dashed border-b-gray-200 bg-white/95 pt-[26px] md:w-[330px]">
           <SiteLogo />
           <SheetDescription className="sr-only">
             Cekic{settings.copyright}
           </SheetDescription>
         </SheetHeader>
-        <SheetTitle className="mt-16 px-0 py-6 antialiased font-normal text-gray-400">
+        <SheetTitle className="mt-16 px-0 py-6 font-normal text-gray-400 antialiased">
           {menuTitle}
         </SheetTitle>
-        <ul className="px-0 flex flex-col gap-4 text-black">
+        <ul className="flex flex-col gap-4 px-0 text-black">
           {slideItems.map((item) => (
             <SlideMenuRow
               key={item.id}
@@ -73,14 +73,14 @@ export default function SlideOutMenu({
         </ul>
         {showContact && (
           <>
-            <SheetTitle className="border-t border-dashed mt-8 px-0 pt-8 antialiased font-normal text-gray-400">
+            <SheetTitle className="mt-8 border-t border-dashed px-0 pt-8 font-normal text-gray-400 antialiased">
               {contactTitle}
             </SheetTitle>
             <div className="mt-2 space-y-4">
               {contactEmail ? (
                 <a
                   href={`mailto:${contactEmail}`}
-                  className="relative w-fit block text-2xl tracking-tight group"
+                  className="group relative block w-fit text-2xl tracking-tight"
                 >
                   {contactEmail}
                   <AnimatedUnderline className="h-[2px]" />
@@ -89,7 +89,7 @@ export default function SlideOutMenu({
               {contactPhone ? (
                 <a
                   href={`tel:${contactPhone.replace(/\s/g, '')}`}
-                  className="relative w-fit block text-2xl tracking-tight group"
+                  className="group relative block w-fit text-2xl tracking-tight"
                 >
                   {contactPhone}
                   <AnimatedUnderline className="h-[2px]" />
@@ -97,7 +97,7 @@ export default function SlideOutMenu({
               ) : null}
             </div>
             {socialLinks.length > 0 && (
-              <div className="mt-8 py-4 flex items-center gap-3 border-y border-dashed flex-wrap">
+              <div className="mt-8 flex flex-wrap items-center gap-3 border-y border-dashed py-4">
                 {socialLinks.map((item) =>
                   item.iconSrc ? (
                     <a
@@ -105,7 +105,7 @@ export default function SlideOutMenu({
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 border rounded-full hover:bg-black group transition-all duration-300"
+                      className="group rounded-full border p-3 transition-all duration-300 hover:bg-black"
                     >
                       <Image
                         src={item.iconSrc}
@@ -132,8 +132,8 @@ export default function SlideOutMenu({
           </>
         )}
         {ctaButtons.length > 0 && (
-          <div className="pt-10 fixed bottom-1 right-0 w-full md:w-[380px] px-4 pb-4 bg-linear-to-t from-white via-white to-transparent">
-            <div className="flex flex-col md:flex-row gap-3">
+          <div className="fixed right-0 bottom-1 w-full bg-linear-to-t from-white via-white to-transparent px-4 pt-10 pb-4 md:w-[380px]">
+            <div className="flex flex-col gap-3 md:flex-row">
               {ctaButtons.map((btn) => (
                 <SheetClose key={btn.id} asChild>
                   <Link
@@ -183,7 +183,7 @@ function SlideMenuRow({
           }
           className="space-y-3.5"
         >
-          <CollapsibleTrigger className="relative flex items-center gap-2 text-3xl tracking-tight group">
+          <CollapsibleTrigger className="group relative flex items-center gap-2 text-3xl tracking-tight">
             <span className="relative">
               {item.label}
               <AnimatedUnderline className="h-[2px]" />
@@ -198,7 +198,7 @@ function SlideMenuRow({
               )}
             />
           </CollapsibleTrigger>
-          <CollapsibleContent className="flex flex-col gap-y-1 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 transition-all duration-200">
+          <CollapsibleContent className="flex flex-col gap-y-1 transition-all duration-200 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0">
             {item.items.map((sub) => (
               <SheetClose key={sub.href}>
                 <button
@@ -207,7 +207,7 @@ function SlideMenuRow({
                     router.push(sub.href);
                     setOpenItems((prev) => ({ ...prev, [item.id]: false }));
                   }}
-                  className="relative block text-xl tracking-tight text-gray-500 hover:text-black group"
+                  className="group relative block text-xl tracking-tight text-gray-500 hover:text-black"
                 >
                   {sub.label}
                   <AnimatedUnderline className="h-[1.5px] bg-gray-500 group-hover:bg-black" />
@@ -226,7 +226,7 @@ function SlideMenuRow({
         <button
           type="button"
           onClick={() => router.push(item.href)}
-          className="relative block text-3xl tracking-tight group w-full text-left"
+          className="group relative block w-full text-left text-3xl tracking-tight"
         >
           {item.label}
           <AnimatedUnderline className="h-[2px]" />

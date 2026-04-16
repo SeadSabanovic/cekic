@@ -12,12 +12,12 @@ export default function ContactPage() {
   const { contactEmail, contactPhone } = siteNavigation.slideOut;
 
   return (
-    <div className="px-4 xl:px-10 pattern-bg">
-      <Container className="px-4 pt-32 md:pt-40 pb-14 md:pb-24 border-x border-dashed space-y-8">
+    <div className="pattern-bg px-4 xl:px-10">
+      <Container className="space-y-8 border-x border-dashed px-4 pt-32 pb-14 md:pt-40 md:pb-24">
         <Heading tag="h1" size="xxl" className="max-w-3xl text-balance">
           Kontakt
         </Heading>
-        <p className="max-w-3xl text-lg text-neutral-600 leading-relaxed text-balance">
+        <p className="max-w-3xl text-lg leading-relaxed text-balance text-neutral-600">
           Pišite nam za ponudu, savjet ili pitanje vezano za vaš projekat.
         </p>
 

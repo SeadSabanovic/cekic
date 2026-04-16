@@ -14,7 +14,7 @@ export default function BackButton() {
       className="flex items-center gap-1"
     >
       <ChevronLeft size={18} aria-hidden="true" />
-      <span className="relative group font-medium">
+      <span className="group relative font-medium">
         Back
         <AnimatedUnderline />
       </span>

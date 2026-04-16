@@ -59,7 +59,7 @@ export default function ServicesBlock(props: ServicesBlockProps) {
           <Heading
             tag="h2"
             size="xl"
-            className="max-w-160 text-balance leading-tight"
+            className="max-w-160 leading-tight text-balance"
           >
             {heading}
           </Heading>

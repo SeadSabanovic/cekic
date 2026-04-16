@@ -17,9 +17,9 @@ export default function ClientLayout({
   if (pathname.includes('/studio')) return children;
 
   return (
-    <div className="grid min-h-dvh grid-rows-[auto_1fr_auto]">
+    <div className="min-h-screen">
       <Navbar settings={settings} />
-      <main className="overflow-hidden">{children}</main>
+      <main>{children}</main>
       <Footer />
     </div>
   );

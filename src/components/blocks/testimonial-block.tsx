@@ -81,7 +81,7 @@ function TestimonialCard({
         classNames
       )}
     >
-      <h2 className="text-pretty text-base md:text-xl">{testimonial.quote}</h2>
+      <h2 className="text-base text-pretty md:text-xl">{testimonial.quote}</h2>
       <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
         <div className="flex items-center gap-4">
           <Image
