@@ -12,13 +12,15 @@ export default function HomeRoadmapsSection() {
         paddingTop="default"
         paddingBottom="large"
       >
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold tracking-[0.12em] text-primary uppercase">
-            Mape puta
-          </p>
-          <p className="mt-4 text-balance text-muted-foreground md:text-lg">
-            Od male popravke do ozbiljnog zanata — sve je raščlanjeno kao
-            inženjerski plan: koraci, granice i jasno šta dolazi sljedeće.
+        <div className="relative pt-10 pb-12 text-center">
+          <Heading tag="h2" size="xl">
+            Putokazi
+          </Heading>
+          <p className="mx-auto mt-4 max-w-3xl text-balance text-muted-foreground md:text-lg">
+            Zaboravi na sate besciljnog pretraživanja YouTube-a. Svaki putokaz
+            je dekomponovan na jasne korake, neophodan alat i tehničke cake koje
+            majstori inače čuvaju za sebe. Tvoj plan rada, od prve mjere do
+            finalnog udarca.
           </p>
         </div>
 
@@ -37,10 +39,7 @@ export default function HomeRoadmapsSection() {
               <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {section.maps.map((map, index) => (
                   <li key={map.id}>
-                    <RoadmapCard
-                      map={map}
-                      enabled={index < 3}
-                    />
+                    <RoadmapCard map={map} enabled={index < 3} />
                   </li>
                 ))}
               </ul>

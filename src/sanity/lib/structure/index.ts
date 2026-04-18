@@ -5,7 +5,7 @@ export const structure: StructureResolver = (S) =>
     .title('Sadržaj')
     .items([
       S.listItem()
-        .title('Primjeri')
-        .schemaType('example')
-        .child(S.documentTypeList('example').title('Primjeri')),
+        .title('Putokazi')
+        .schemaType('putokaz')
+        .child(S.documentTypeList('putokaz').title('Putokazi')),
     ]);

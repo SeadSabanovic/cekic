@@ -1,0 +1,67 @@
+'use client';
+
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import type { PutokaziSectionFilterItem } from '@/lib/home-roadmaps-data';
+
+type PutokaziFiltersToolbarProps = {
+  items: PutokaziSectionFilterItem[];
+};
+
+function hrefForFilter(id: PutokaziSectionFilterItem['id']) {
+  if (id === 'sve') return '/putokazi';
+  const params = new URLSearchParams({ sekcija: id });
+  return `/putokazi?${params.toString()}`;
+}
+
+function isFilterActive(
+  id: PutokaziSectionFilterItem['id'],
+  sekcija: string | null
+) {
+  if (id === 'sve') return !sekcija || sekcija === 'sve';
+  return sekcija === id;
+}
+
+export default function PutokaziFiltersToolbar({
+  items,
+}: PutokaziFiltersToolbarProps) {
+  const searchParams = useSearchParams();
+  const sekcija = searchParams.get('sekcija');
+
+  return (
+    <div
+      className={cn(
+        'relative z-20 overflow-x-auto border border-dashed px-4 py-3 md:px-10',
+        'pattern-bg--2 backdrop-blur-md'
+      )}
+      role="navigation"
+      aria-label="Filtriranje putokaza po sekciji, alatima i materijalima"
+    >
+      <ul className="relative z-20 flex w-max min-w-full items-center justify-start gap-2 lg:w-auto">
+        {items.map((item) => {
+          const active = isFilterActive(item.id, sekcija);
+          return (
+            <li key={item.id} className="text-nowrap">
+              <Button
+                asChild
+                variant={active ? 'default' : 'outline'}
+                size="sm"
+              >
+                <Link
+                  href={hrefForFilter(item.id)}
+                  scroll={false}
+                  aria-current={active ? 'true' : undefined}
+                >
+                  {item.label}
+                </Link>
+              </Button>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}

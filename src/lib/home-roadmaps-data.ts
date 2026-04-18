@@ -21,7 +21,7 @@ import {
   Zap,
 } from 'lucide-react';
 
-export type RoadmapCategory = 'uradi-sam' | 'zanatlijski-putevi';
+export type RoadmapCategory = 'uradi-sam' | 'zanatski-putevi';
 
 export type RoadmapDifficulty = 'pocetni' | 'srednji' | 'napredni';
 
@@ -33,6 +33,11 @@ export interface RoadmapItem {
   difficulty: RoadmapDifficulty;
   duration: string;
   icon: LucideIcon;
+  /** Opcionalna naslovna slika (npr. iz CMS-a). */
+  cover?: {
+    url: string;
+    alt: string;
+  } | null;
 }
 
 export const difficultyLabel: Record<RoadmapDifficulty, string> = {
@@ -55,8 +60,8 @@ export const roadmapSections: RoadmapSection[] = [
     lead: 'Mali koraci koji vraćaju osjećaj kontrole: od zida do odvoda, jasni redoslijed i mir u glavi — bez panike i bez žurbe.',
     maps: [
       {
-        id: 'farbanje-jednog-zida',
-        title: 'Farbanje (osvježavanje) jednog zida',
+        id: 'farbanje-zidova',
+        title: 'Farbanje zidova',
         description:
           'Kako zaštititi podove, izvući čiste linije krep trakom i nanijeti boju bez tragova valjka.',
         category: 'uradi-sam',
@@ -177,8 +182,8 @@ export const roadmapSections: RoadmapSection[] = [
     ],
   },
   {
-    id: 'zanatlijski-putevi',
-    title: 'Zanatlijski putevi',
+    id: 'zanatski-putevi',
+    title: 'Zanatski putevi',
     lead: 'Strukturiran put do zanata koji traje: alat, sigurnost, materijali i praksa — korak po korak, kao pravi obrtnik.',
     maps: [
       {
@@ -186,7 +191,7 @@ export const roadmapSections: RoadmapSection[] = [
         title: 'Električar',
         description:
           'Od razvođenja bužira u grubim radovima do šemiranja razvodnih ormara i finomontaže rasvjete.',
-        category: 'zanatlijski-putevi',
+        category: 'zanatski-putevi',
         difficulty: 'srednji',
         duration: 'više mjeseci',
         icon: Zap,
@@ -196,7 +201,7 @@ export const roadmapSections: RoadmapSection[] = [
         title: 'Keramičar',
         description:
           'Priprema podloga, hidroizolacija, precizno sječenje i polaganje pločica velikog formata.',
-        category: 'zanatlijski-putevi',
+        category: 'zanatski-putevi',
         difficulty: 'srednji',
         duration: 'više mjeseci',
         icon: Palette,
@@ -206,7 +211,7 @@ export const roadmapSections: RoadmapSection[] = [
         title: 'Vodoinstalater',
         description:
           'Montaža vodoopskrbnih cijevi, odvodnih sistema i sanitarija (tzv. "bijela tehnika").',
-        category: 'zanatlijski-putevi',
+        category: 'zanatski-putevi',
         difficulty: 'srednji',
         duration: 'više mjeseci',
         icon: Droplets,
@@ -216,7 +221,7 @@ export const roadmapSections: RoadmapSection[] = [
         title: 'Gipsar (Suva gradnja)',
         description:
           'Izrada pregradnih zidova, spuštenih plafona i termoizolacije pomoću metalnih konstrukcija i rigips ploča.',
-        category: 'zanatlijski-putevi',
+        category: 'zanatski-putevi',
         difficulty: 'srednji',
         duration: 'više mjeseci',
         icon: Layers,
@@ -226,7 +231,7 @@ export const roadmapSections: RoadmapSection[] = [
         title: 'Stolar (Namještaj po mjeri)',
         description:
           'Od rada na CNC mašinama do sklapanja kuhinja, plakara i obrade masivnog drveta.',
-        category: 'zanatlijski-putevi',
+        category: 'zanatski-putevi',
         difficulty: 'napredni',
         duration: 'duži period',
         icon: Hammer,
@@ -236,7 +241,7 @@ export const roadmapSections: RoadmapSection[] = [
         title: 'Moler / Fasader',
         description:
           'Obrada zidova, gletovanje, dekorativne tehnike (npr. Sahara) i postavljanje termo-fasada.',
-        category: 'zanatlijski-putevi',
+        category: 'zanatski-putevi',
         difficulty: 'srednji',
         duration: 'više mjeseci',
         icon: Paintbrush,
@@ -246,7 +251,7 @@ export const roadmapSections: RoadmapSection[] = [
         title: 'Podopolagač (Parketar/Laminat)',
         description:
           'Priprema estriha, brušenje i lakiranje parketa ili brzo polaganje modernih vinil podova.',
-        category: 'zanatlijski-putevi',
+        category: 'zanatski-putevi',
         difficulty: 'srednji',
         duration: 'više mjeseci',
         icon: LayoutGrid,
@@ -256,7 +261,7 @@ export const roadmapSections: RoadmapSection[] = [
         title: 'Bravar / Zavarivač',
         description:
           'Izrada metalnih konstrukcija, ograda, te rad sa različitim tehnikama zavarivanja (REL, MIG/MAG, TIG).',
-        category: 'zanatlijski-putevi',
+        category: 'zanatski-putevi',
         difficulty: 'napredni',
         duration: 'duži period',
         icon: Flame,
@@ -266,7 +271,7 @@ export const roadmapSections: RoadmapSection[] = [
         title: 'Monter grijanja i klimatizacije (HVAC)',
         description:
           'Postavljanje podnog grijanja, toplotnih pumpi i klima uređaja.',
-        category: 'zanatlijski-putevi',
+        category: 'zanatski-putevi',
         difficulty: 'srednji',
         duration: 'više mjeseci',
         icon: Fan,
@@ -276,7 +281,7 @@ export const roadmapSections: RoadmapSection[] = [
         title: 'Serviser bijele tehnike',
         description:
           'Dijagnostika i popravka veš mašina, frižidera i ugradbenih pećnica (elektronika + mehanika).',
-        category: 'zanatlijski-putevi',
+        category: 'zanatski-putevi',
         difficulty: 'srednji',
         duration: 'više mjeseci',
         icon: WashingMachine,
@@ -286,7 +291,7 @@ export const roadmapSections: RoadmapSection[] = [
         title: 'Automehaničar',
         description:
           'Redovno održavanje, mehanika motora i dijagnostika kvarova na modernim vozilima.',
-        category: 'zanatlijski-putevi',
+        category: 'zanatski-putevi',
         difficulty: 'srednji',
         duration: 'više mjeseci',
         icon: Car,
@@ -296,7 +301,7 @@ export const roadmapSections: RoadmapSection[] = [
         title: 'Monter stolarije (PVC i Aluminijum)',
         description:
           'Ugradnja prozora, kliznih stijena i roletni, sa fokusom na RAL montažu i dihtovanje.',
-        category: 'zanatlijski-putevi',
+        category: 'zanatski-putevi',
         difficulty: 'srednji',
         duration: 'više mjeseci',
         icon: PanelLeft,
@@ -304,3 +309,27 @@ export const roadmapSections: RoadmapSection[] = [
     ],
   },
 ];
+
+export type PutokaziSectionFilterId =
+  | 'sve'
+  | RoadmapCategory
+  | 'alati'
+  | 'materijali';
+
+export type PutokaziSectionFilterItem = {
+  id: PutokaziSectionFilterId;
+  label: string;
+};
+
+/** Stavke za horizontalnu traku filtera na /putokazi (?sekcija=…). */
+export function getPutokaziSectionFilters(): PutokaziSectionFilterItem[] {
+  return [
+    { id: 'sve', label: 'Sve' },
+    ...roadmapSections.map((s) => ({
+      id: s.id,
+      label: s.id === 'uradi-sam' ? 'Uradi sam' : s.title,
+    })),
+    { id: 'alati', label: 'Alati' },
+    { id: 'materijali', label: 'Materijali' },
+  ];
+}

@@ -63,6 +63,12 @@ export const siteNavigation = {
       href: '/o-nama',
     },
     {
+      id: 'putokazi',
+      kind: 'single',
+      label: 'Putokazi',
+      href: '/putokazi',
+    },
+    {
       id: 'contact',
       kind: 'single',
       label: 'Kontakt',
@@ -92,6 +98,7 @@ export const siteNavigation = {
         title: 'Navigacija',
         links: [
           { id: 'f-home', label: 'Početna', href: '/' },
+          { id: 'f-putokazi', label: 'Putokazi', href: '/putokazi' },
           { id: 'f-about', label: 'O nama', href: '/o-nama' },
         ],
       },
