@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { Suspense } from 'react';
 import Container from '@/components/global/container';
 import PutokaziFiltersToolbar from '@/components/pages/putokazi/putokazi-filters-toolbar';
 import RoadmapCard from '@/components/ui/cards/roadmap-card';
@@ -16,15 +15,6 @@ export const metadata: Metadata = {
   description:
     'Pregled svih projekata — praktični primjeri izvedenih radova i slučajeva iz prakse.',
 };
-
-function ProjektiFiltersFallback() {
-  return (
-    <div
-      className="pattern-bg--2 relative -mx-4 mt-6 mb-8 h-[46px] animate-pulse border-y border-dashed py-3 pl-4 md:mt-8 md:mb-10 md:pl-0"
-      aria-hidden
-    />
-  );
-}
 
 type PageProps = {
   searchParams: Promise<{ sekcija?: string | string[] }>;
@@ -53,12 +43,11 @@ export default async function ProjektiPage({ searchParams }: PageProps) {
       />
       <div className="pattern-bg px-4 md:px-10">
         <Container className="p-0!">
-          <Suspense fallback={<ProjektiFiltersFallback />}>
-            <PutokaziFiltersToolbar
-              items={filterItems}
-              pathnameBase="/projekti"
-            />
-          </Suspense>
+          <PutokaziFiltersToolbar
+            items={filterItems}
+            pathnameBase="/projekti"
+            activeTrade={trade}
+          />
         </Container>
       </div>
       <div className="px-4 xl:px-10">

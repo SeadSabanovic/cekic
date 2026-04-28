@@ -1,10 +1,9 @@
-'use client';
-
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import type { PutokaziListTradeFilter } from '@/sanity/lib/queries/putokaz-list';
+
 export type PutokaziFilterChip = {
   id: string;
   label: string;
@@ -14,6 +13,8 @@ type PutokaziFiltersToolbarProps = {
   items: PutokaziFilterChip[];
   /** Bazna putanja liste, npr. `/putokazi` ili `/projekti`. */
   pathnameBase?: string;
+  /** Aktivni filter iz URL-a (`?sekcija=`), određen na serveru. */
+  activeTrade: PutokaziListTradeFilter;
 };
 
 function hrefForFilter(id: string, pathnameBase: string) {
@@ -22,18 +23,17 @@ function hrefForFilter(id: string, pathnameBase: string) {
   return `${pathnameBase}?${params.toString()}`;
 }
 
-function isFilterActive(id: string, sekcija: string | null) {
-  if (id === 'sve') return !sekcija || sekcija === 'sve';
-  return sekcija === id;
+function isFilterActive(id: string, activeTrade: PutokaziListTradeFilter) {
+  if (id === 'sve') return activeTrade === 'sve';
+  return activeTrade === id;
 }
 
+/** Server komponenta — bez `useSearchParams`, nema potrebe za `Suspense`. */
 export default function PutokaziFiltersToolbar({
   items,
   pathnameBase = '/putokazi',
+  activeTrade,
 }: PutokaziFiltersToolbarProps) {
-  const searchParams = useSearchParams();
-  const sekcija = searchParams.get('sekcija');
-
   return (
     <div
       className={cn(
@@ -45,7 +45,7 @@ export default function PutokaziFiltersToolbar({
     >
       <ul className="relative z-20 flex w-max min-w-full items-center justify-start gap-2 lg:w-auto">
         {items.map((item) => {
-          const active = isFilterActive(item.id, sekcija);
+          const active = isFilterActive(item.id, activeTrade);
           return (
             <li key={item.id} className="text-nowrap">
               <Button

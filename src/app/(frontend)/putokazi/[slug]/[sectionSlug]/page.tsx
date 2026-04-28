@@ -4,33 +4,41 @@ import { notFound } from 'next/navigation';
 import { PortableText, type PortableTextComponents } from '@portabletext/react';
 import Container from '@/components/global/container';
 import { Button } from '@/components/ui/button';
-import { MOLER_ROADMAP_SLUG } from '@/lib/roadmap-public';
 import {
   fetchRoadmapHubBySlug,
+  fetchRoadmapHubSummaries,
   type RoadmapSectionPortable,
 } from '@/sanity/lib/queries/roadmap';
 
 export const revalidate = 60;
 
 type PageProps = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; sectionSlug: string }>;
 };
 
 export async function generateStaticParams() {
-  const hub = await fetchRoadmapHubBySlug(MOLER_ROADMAP_SLUG);
-  if (!hub?.sections?.length) return [];
-  return hub.sections.map((s) => ({ slug: s.slug }));
+  const hubs = await fetchRoadmapHubSummaries();
+  const entries = await Promise.all(
+    hubs.map(async (hub) => {
+      const full = await fetchRoadmapHubBySlug(hub.slug);
+      return (full?.sections ?? []).map((section) => ({
+        slug: hub.slug,
+        sectionSlug: section.slug,
+      }));
+    })
+  );
+  return entries.flat();
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const hub = await fetchRoadmapHubBySlug(MOLER_ROADMAP_SLUG);
-  const section = hub?.sections?.find((s) => s.slug === slug);
-  if (!section) return { title: 'Moler' };
+  const { slug, sectionSlug } = await params;
+  const hub = await fetchRoadmapHubBySlug(slug);
+  const section = hub?.sections?.find((s) => s.slug === sectionSlug);
+  if (!section) return { title: 'Putokaz' };
   return {
-    title: `${section.title} · ${hub?.title ?? 'Moler'}`,
+    title: `${section.title} · ${hub?.title ?? 'Putokaz'}`,
     description: section.lead?.trim() || hub?.lead?.trim() || undefined,
   };
 }
@@ -70,13 +78,13 @@ function hasPortableBody(body: RoadmapSectionPortable | null | undefined) {
   return Array.isArray(body) && body.length > 0;
 }
 
-export default async function MolerSectionPage({ params }: PageProps) {
-  const { slug } = await params;
-  const hub = await fetchRoadmapHubBySlug(MOLER_ROADMAP_SLUG);
+export default async function RoadmapSectionPage({ params }: PageProps) {
+  const { slug, sectionSlug } = await params;
+  const hub = await fetchRoadmapHubBySlug(slug);
   if (!hub) notFound();
 
   const sections = hub.sections ?? [];
-  const i = sections.findIndex((s) => s.slug === slug);
+  const i = sections.findIndex((s) => s.slug === sectionSlug);
   if (i === -1) notFound();
   const section = sections[i]!;
   const prev = i > 0 ? sections[i - 1]! : null;
@@ -99,7 +107,7 @@ export default async function MolerSectionPage({ params }: PageProps) {
               /
             </li>
             <li>
-              <Link href="/putokazi/moler" className="hover:text-foreground">
+              <Link href={`/putokazi/${hub.slug}`} className="hover:text-foreground">
                 {hub.title}
               </Link>
             </li>
@@ -134,7 +142,7 @@ export default async function MolerSectionPage({ params }: PageProps) {
           <div className="flex flex-wrap gap-2">
             {prev ? (
               <Button variant="outline" size="sm" asChild>
-                <Link href={`/putokazi/moler/${prev.slug}`}>
+                <Link href={`/putokazi/${hub.slug}/${prev.slug}`}>
                   ← {prev.title}
                 </Link>
               </Button>
@@ -143,14 +151,14 @@ export default async function MolerSectionPage({ params }: PageProps) {
             )}
             {next ? (
               <Button variant="outline" size="sm" asChild>
-                <Link href={`/putokazi/moler/${next.slug}`}>
+                <Link href={`/putokazi/${hub.slug}/${next.slug}`}>
                   {next.title} →
                 </Link>
               </Button>
             ) : null}
           </div>
           <Button variant="ghost" size="sm" className="sm:ml-auto" asChild>
-            <Link href="/putokazi/moler">Sadržaj (sve)</Link>
+            <Link href={`/putokazi/${hub.slug}`}>Sadržaj (sve)</Link>
           </Button>
         </div>
       </Container>
