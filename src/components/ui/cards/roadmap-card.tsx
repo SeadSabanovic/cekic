@@ -43,7 +43,7 @@ export default function RoadmapCard({
   const body = (
     <>
       {map.cover?.url ? (
-        <div className="relative mb-4 aspect-[16/10] w-full overflow-hidden rounded-lg border border-border/50">
+        <div className="relative mb-4 aspect-16/10 w-full overflow-hidden rounded-lg border border-border/50">
           <Image
             src={map.cover.url}
             alt={map.cover.alt}
@@ -112,9 +112,9 @@ export default function RoadmapCard({
         aria-disabled="true"
         aria-label={`${map.title} — uskoro dostupno`}
       >
-        <div className="pointer-events-none relative z-[1]">{body}</div>
+        <div className="pointer-events-none relative z-1">{body}</div>
         <span
-          className="absolute top-2 right-2 z-[2] rounded-md border border-border/80 bg-background/95 px-2 py-1.5 text-[11px] font-semibold tracking-wide text-muted-foreground uppercase shadow-sm"
+          className="absolute top-2 right-2 z-2 rounded-md border border-border/80 bg-background/95 px-2 py-1.5 text-[11px] font-semibold tracking-wide text-muted-foreground uppercase shadow-sm"
           aria-hidden
         >
           Uskoro
@@ -130,7 +130,7 @@ export default function RoadmapCard({
         className="absolute inset-0 z-0 rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         aria-labelledby={titleId}
       />
-      <div className="pointer-events-none relative z-[1]">{body}</div>
+      <div className="pointer-events-none relative z-1">{body}</div>
       <RoadmapBookmarkButton mapTitle={map.title} />
     </div>
   );
