@@ -1,4 +1,6 @@
 import type { LucideIcon } from 'lucide-react';
+
+import { putokaziTradeCategoryOptions } from '@/lib/putokazi-trade-categories';
 import {
   Bath,
   BrickWall,
@@ -33,6 +35,10 @@ export interface RoadmapItem {
   difficulty: RoadmapDifficulty;
   duration: string;
   icon: LucideIcon;
+  /** Porijeklo zapisa na listi /putokazi (za React key i ponašanje). */
+  listSource?: 'roadmapHub' | 'putokaz';
+  /** Oznaka iz CMS-a (`putokaz.kategorija`), npr. „Zidovi”. */
+  tradeLabel?: string | null;
   /** Opcionalna naslovna slika (npr. iz CMS-a). */
   cover?: {
     url: string;
@@ -310,26 +316,23 @@ export const roadmapSections: RoadmapSection[] = [
   },
 ];
 
-export type PutokaziSectionFilterId =
+/** Filteri na listi putokaza — logičan put gradnje (?sekcija=…). */
+export type PutokaziTradeFilterId =
   | 'sve'
-  | RoadmapCategory
-  | 'alati'
-  | 'materijali';
+  | (typeof putokaziTradeCategoryOptions)[number]['value'];
 
-export type PutokaziSectionFilterItem = {
-  id: PutokaziSectionFilterId;
+export type PutokaziTradeFilterItem = {
+  id: PutokaziTradeFilterId;
   label: string;
 };
 
-/** Stavke za horizontalnu traku filtera na /putokazi (?sekcija=…). */
-export function getPutokaziSectionFilters(): PutokaziSectionFilterItem[] {
+/** Redoslijed: sve → zidovi → … → metal; vrijednosti = `putokaz.kategorija` u CMS-u. */
+export function getPutokaziTradeFilters(): PutokaziTradeFilterItem[] {
   return [
     { id: 'sve', label: 'Sve' },
-    ...roadmapSections.map((s) => ({
-      id: s.id,
-      label: s.id === 'uradi-sam' ? 'Uradi sam' : s.title,
+    ...putokaziTradeCategoryOptions.map((o) => ({
+      id: o.value,
+      label: o.title,
     })),
-    { id: 'alati', label: 'Alati' },
-    { id: 'materijali', label: 'Materijali' },
   ];
 }

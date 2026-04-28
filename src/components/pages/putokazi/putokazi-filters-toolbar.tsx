@@ -5,28 +5,31 @@ import { useSearchParams } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import type { PutokaziSectionFilterItem } from '@/lib/home-roadmaps-data';
-
-type PutokaziFiltersToolbarProps = {
-  items: PutokaziSectionFilterItem[];
+export type PutokaziFilterChip = {
+  id: string;
+  label: string;
 };
 
-function hrefForFilter(id: PutokaziSectionFilterItem['id']) {
-  if (id === 'sve') return '/putokazi';
+type PutokaziFiltersToolbarProps = {
+  items: PutokaziFilterChip[];
+  /** Bazna putanja liste, npr. `/putokazi` ili `/projekti`. */
+  pathnameBase?: string;
+};
+
+function hrefForFilter(id: string, pathnameBase: string) {
+  if (id === 'sve') return pathnameBase;
   const params = new URLSearchParams({ sekcija: id });
-  return `/putokazi?${params.toString()}`;
+  return `${pathnameBase}?${params.toString()}`;
 }
 
-function isFilterActive(
-  id: PutokaziSectionFilterItem['id'],
-  sekcija: string | null
-) {
+function isFilterActive(id: string, sekcija: string | null) {
   if (id === 'sve') return !sekcija || sekcija === 'sve';
   return sekcija === id;
 }
 
 export default function PutokaziFiltersToolbar({
   items,
+  pathnameBase = '/putokazi',
 }: PutokaziFiltersToolbarProps) {
   const searchParams = useSearchParams();
   const sekcija = searchParams.get('sekcija');
@@ -38,7 +41,7 @@ export default function PutokaziFiltersToolbar({
         'pattern-bg--2 backdrop-blur-md'
       )}
       role="navigation"
-      aria-label="Filtriranje putokaza po sekciji, alatima i materijalima"
+      aria-label="Filtriranje putokaza po kategoriji (zidovi, podovi, …)"
     >
       <ul className="relative z-20 flex w-max min-w-full items-center justify-start gap-2 lg:w-auto">
         {items.map((item) => {
@@ -51,7 +54,7 @@ export default function PutokaziFiltersToolbar({
                 size="sm"
               >
                 <Link
-                  href={hrefForFilter(item.id)}
+                  href={hrefForFilter(item.id, pathnameBase)}
                   scroll={false}
                   aria-current={active ? 'true' : undefined}
                 >

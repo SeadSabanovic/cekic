@@ -84,6 +84,18 @@ export default function RoadmapCard({
       </p>
 
       <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
+        {map.tradeLabel ? (
+          <span
+            className={cn(
+              'rounded-md border px-2 py-0.5 font-medium',
+              enabled
+                ? 'border-primary/25 bg-primary/5 text-foreground/90'
+                : 'border-muted-foreground/25 bg-muted/40 text-foreground/70'
+            )}
+          >
+            {map.tradeLabel}
+          </span>
+        ) : null}
         <span
           className={cn(
             'rounded-md border px-2 py-0.5 font-medium',

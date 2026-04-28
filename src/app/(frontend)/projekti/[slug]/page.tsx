@@ -16,7 +16,7 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  const slugs = await fetchPutokaziSlugs('putokazi');
+  const slugs = await fetchPutokaziSlugs('projekti');
   return slugs.map((slug) => ({ slug }));
 }
 
@@ -24,8 +24,8 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const doc = await fetchPutokazBySlug(slug, 'putokazi');
-  if (!doc) return { title: 'Putokaz' };
+  const doc = await fetchPutokazBySlug(slug, 'projekti');
+  if (!doc) return { title: 'Projekt' };
   const description = doc.lead?.trim() || undefined;
   const cover = resolvePutokazCover(
     { title: doc.title, coverImage: doc.coverImage },
@@ -53,9 +53,9 @@ export async function generateMetadata({
   };
 }
 
-export default async function PutokazDetailPage({ params }: PageProps) {
+export default async function ProjektDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const doc = await fetchPutokazBySlug(slug, 'putokazi');
+  const doc = await fetchPutokazBySlug(slug, 'projekti');
   if (!doc) notFound();
 
   const cover = resolvePutokazCover(
@@ -87,7 +87,8 @@ export default async function PutokazDetailPage({ params }: PageProps) {
           </p>
         ) : null}
         <p className="max-w-2xl text-sm text-muted-foreground">
-          Koraci i detalji puta uskoro — ovo je početna stranica za sadržaj iz CMS-a.
+          Koraci i detalji projekta uskoro — ovo je početna stranica za sadržaj
+          iz CMS-a.
         </p>
       </Container>
     </div>

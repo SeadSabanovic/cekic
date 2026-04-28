@@ -5,21 +5,19 @@ import PutokaziFiltersToolbar from '@/components/pages/putokazi/putokazi-filters
 import RoadmapCard from '@/components/ui/cards/roadmap-card';
 import HeroBlock from '@/components/blocks/hero-block';
 import { getPutokaziTradeFilters } from '@/lib/home-roadmaps-data';
-import { roadmapHubSummaryToRoadmapItem } from '@/lib/roadmap-hub-to-roadmap-item';
 import { putokazListItemToRoadmapItem } from '@/lib/putokaz-to-roadmap-item';
 import { normalizePutokaziTradeQueryParam } from '@/lib/putokazi-trade-categories';
-import { fetchRoadmapHubSummaries } from '@/sanity/lib/queries/roadmap';
 import { fetchPutokaziList } from '@/sanity/lib/queries/putokaz-list';
 
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: 'Putokazi',
+  title: 'Projekti',
   description:
-    'Pregled svih mapa puta — strukturirani koraci za kućne popravke i zanate.',
+    'Pregled svih projekata — praktični primjeri izvedenih radova i slučajeva iz prakse.',
 };
 
-function PutokaziFiltersFallback() {
+function ProjektiFiltersFallback() {
   return (
     <div
       className="pattern-bg--2 relative -mx-4 mt-6 mb-8 h-[46px] animate-pulse border-y border-dashed py-3 pl-4 md:mt-8 md:mb-10 md:pl-0"
@@ -32,34 +30,34 @@ type PageProps = {
   searchParams: Promise<{ sekcija?: string | string[] }>;
 };
 
-export default async function PutokaziPage({ searchParams }: PageProps) {
+export default async function ProjektiPage({ searchParams }: PageProps) {
   const sp = await searchParams;
   const trade = normalizePutokaziTradeQueryParam(sp.sekcija);
   const filterItems = getPutokaziTradeFilters();
-  const putokazi = await fetchPutokaziList('putokazi', { trade });
-  const hubovi =
-    trade === 'sve' ? await fetchRoadmapHubSummaries() : ([] as const);
-  const cards = [
-    ...hubovi.map(roadmapHubSummaryToRoadmapItem),
-    ...putokazi.map(putokazListItemToRoadmapItem),
-  ].sort((a, b) => a.title.localeCompare(b.title, 'bs'));
+  const projekti = await fetchPutokaziList('projekti', { trade });
+  const cards = projekti.map(putokazListItemToRoadmapItem);
 
   return (
     <>
       <HeroBlock
-        heading="Putokazi"
+        heading="Projekti"
         body={
           <p className="leading-relaxed">
-            Sve što ti treba da pređeš put od znatiželje do zanata. Naši
-            putokazi te vode kroz proces učenja, nabavku opreme i biznis stranu
-            posla. Odaberi sistem gradnje i počni svoju novu karijeru danas.
+            Praktična uputstva za konkretne zahvate. Od sitnih popravki koje ti
+            štede novac, do složenijih projekata koji podižu vrijednost tvog
+            prostora. Svaki projekat dolazi sa preciznom listom alata,
+            materijala i provjerenim koracima koji garantuju rezultat bez
+            fušeraja.
           </p>
         }
       />
       <div className="pattern-bg px-4 md:px-10">
         <Container className="p-0!">
-          <Suspense fallback={<PutokaziFiltersFallback />}>
-            <PutokaziFiltersToolbar items={filterItems} />
+          <Suspense fallback={<ProjektiFiltersFallback />}>
+            <PutokaziFiltersToolbar
+              items={filterItems}
+              pathnameBase="/projekti"
+            />
           </Suspense>
         </Container>
       </div>
@@ -68,16 +66,15 @@ export default async function PutokaziPage({ searchParams }: PageProps) {
           {cards.length > 0 ? (
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {cards.map((map) => (
-                <li key={`${map.listSource ?? 'putokaz'}-${map.id}`}>
-                  <RoadmapCard map={map} detailHref={`/putokazi/${map.id}`} />
+                <li key={map.id}>
+                  <RoadmapCard map={map} detailHref={`/projekti/${map.id}`} />
                 </li>
               ))}
             </ul>
           ) : (
             <p className="mt-10 max-w-2xl text-muted-foreground">
-              {trade === 'sve'
-                ? 'Još nema putokaza u studiju. Dodaj dokument tipa „Putokaz” u Sanityju pa će se ovdje pojaviti automatski.'
-                : `Nema putokaza u kategoriji „${filterItems.find((f) => f.id === trade)?.label ?? trade}”. Postavi polje „Kategorija” na putokazu ili odaberi „Sve”.`}
+              Još nema projekata u studiju. Otvori dokument tipa „Putokaz” i
+              postavi sekciju na „Projekti” pa će se ovdje pojaviti automatski.
             </p>
           )}
         </Container>

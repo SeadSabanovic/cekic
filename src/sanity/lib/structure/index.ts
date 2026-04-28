@@ -6,6 +6,22 @@ export const structure: StructureResolver = (S) =>
     .items([
       S.listItem()
         .title('Putokazi')
+        .child(
+          S.documentList()
+            .title('Putokazi')
+            .id('putokazi-sadrzaj')
+            .filter(
+              `(_type == "roadmap") || (_type == "putokaz" && (!defined(sekcija) || sekcija == "putokazi"))`
+            )
+            .defaultOrdering([{ field: 'title', direction: 'asc' }])
+        ),
+      S.listItem()
+        .title('Projekti')
         .schemaType('putokaz')
-        .child(S.documentTypeList('putokaz').title('Putokazi')),
+        .child(
+          S.documentList()
+            .title('Projekti')
+            .schemaType('putokaz')
+            .filter(`_type == "putokaz" && sekcija == "projekti"`)
+        ),
     ]);
