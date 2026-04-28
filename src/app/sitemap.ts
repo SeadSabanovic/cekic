@@ -37,7 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  let roadmapEntries: MetadataRoute.Sitemap = [];
+  const roadmapEntries: MetadataRoute.Sitemap = [];
   try {
     const rows = await fetchRoadmapsForSitemap();
     for (const row of rows) {
