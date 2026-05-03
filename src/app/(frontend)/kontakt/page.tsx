@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Container from '@/components/global/container';
-import Heading from '@/components/shared/heading';
+import HeroBlock from '@/components/blocks/hero-block';
 import { siteNavigation } from '@/lib/site-navigation';
 
 export const metadata: Metadata = {
@@ -12,16 +12,21 @@ export default function ContactPage() {
   const { contactEmail, contactPhone } = siteNavigation.slideOut;
 
   return (
-    <div className="pattern-bg px-4 xl:px-10">
-      <Container className="space-y-8 border-x border-dashed px-4 pt-32 pb-14 md:pt-40 md:pb-24">
-        <Heading tag="h1" size="xxl" className="max-w-3xl text-balance">
-          Kontakt
-        </Heading>
-        <p className="max-w-3xl text-lg leading-relaxed text-balance text-neutral-600">
-          Pišite nam za ponudu, savjet ili pitanje vezano za vaš projekat.
-        </p>
-
-        <div className="space-y-3 text-neutral-700">
+    <>
+      <HeroBlock
+        heading="Kontakt"
+        body={
+          <p className="leading-relaxed">
+            Pišite nam za ponudu, savjet ili pitanje vezano za vaš projekat.
+          </p>
+        }
+        actions={[
+          { label: 'Početna', href: '/', variant: 'default' },
+          { label: 'O nama', href: '/o-nama', variant: 'ghost' },
+        ]}
+      />
+      <div className="px-4 xl:px-10">
+        <Container className="space-y-3 border-x border-dashed px-4 py-16 text-neutral-700 md:py-24">
           <p>
             Email:{' '}
             <a
@@ -40,8 +45,8 @@ export default function ContactPage() {
               {contactPhone || '+387 60 000 000'}
             </a>
           </p>
-        </div>
-      </Container>
-    </div>
+        </Container>
+      </div>
+    </>
   );
 }
