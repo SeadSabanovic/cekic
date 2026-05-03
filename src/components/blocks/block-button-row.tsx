@@ -25,6 +25,7 @@ export function BlockButtonRow({ items, className }: BlockButtonRowProps) {
           href={item.href}
           className={buttonVariants({
             variant: item.variant ?? 'default',
+            size: 'lg',
           })}
         >
           {item.label}
