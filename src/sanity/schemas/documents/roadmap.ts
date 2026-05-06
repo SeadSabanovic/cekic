@@ -31,6 +31,21 @@ export default defineType({
       rows: 4,
     }),
     defineField({
+      name: 'coverImage',
+      title: 'Naslovna slika',
+      description: 'Slika za kartice i hero sekcije ovog zanata.',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: 'alt',
+          type: 'string',
+          title: 'Alternativni tekst',
+          description: 'Kratak opis slike (pristupacnost i SEO).',
+        }),
+      ],
+    }),
+    defineField({
       name: 'sections',
       title: 'Poglavlja',
       description: 'Redoslijed ovdje = redoslijed u sadržaju i „Sljedeće / Prethodno”.',
@@ -40,11 +55,12 @@ export default defineType({
     }),
   ],
   preview: {
-    select: { title: 'title', slug: 'slug.current' },
-    prepare({ title, slug }) {
+    select: { title: 'title', slug: 'slug.current', media: 'coverImage' },
+    prepare({ title, slug, media }) {
       return {
         title: title ?? 'Bez naslova',
         subtitle: slug ? `Putokazi • /${slug}` : '',
+        media,
       };
     },
   },

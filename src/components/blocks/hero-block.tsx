@@ -87,7 +87,7 @@ export default function HeroBlock(props: HeroBlockProps) {
                 height={800}
                 src={image.src}
                 alt={image.alt}
-                className={cn('rounded-2xl object-cover md:rounded-3xl', {
+                className={cn('rounded-2xl w-full object-cover md:rounded-3xl', {
                   'max-h-120': image.short,
                 })}
               />

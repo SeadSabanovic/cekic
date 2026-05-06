@@ -24,6 +24,12 @@ export type RoadmapHubQuery = {
   title: string;
   slug: string;
   lead: string | null;
+  coverImage?: {
+    asset?: { _ref: string } | null;
+    alt?: string | null;
+    hotspot?: unknown;
+    crop?: unknown;
+  } | null;
   sections: RoadmapSectionQuery[];
 };
 
@@ -33,6 +39,12 @@ const roadmapBySlugQuery = groq`
     title,
     "slug": slug.current,
     lead,
+    coverImage {
+      asset,
+      alt,
+      hotspot,
+      crop
+    },
     sections[]{
       _key,
       title,
@@ -70,6 +82,12 @@ export type RoadmapHubSummary = {
   title: string;
   slug: string;
   lead: string | null;
+  coverImage?: {
+    asset?: { _ref: string } | null;
+    alt?: string | null;
+    hotspot?: unknown;
+    crop?: unknown;
+  } | null;
 };
 
 const roadmapHubsListQuery = groq`
@@ -77,7 +95,13 @@ const roadmapHubsListQuery = groq`
     _id,
     title,
     "slug": slug.current,
-    lead
+    lead,
+    coverImage {
+      asset,
+      alt,
+      hotspot,
+      crop
+    }
   }
 `;
 

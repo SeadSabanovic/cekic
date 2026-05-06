@@ -5,7 +5,7 @@ export const homePageContent = {
   metaTitle: 'Početna',
   description:
     'Čekić — predstavite svoj brend, usluge i kontakt na jednom mjestu.',
-  headline: 'Zanat je u tvojim rukama',
+  headline: 'Postani nezamjenjiv, zanat je u tvojim rukama',
 } as const;
 
 export function getHomeMetadata(): Metadata {

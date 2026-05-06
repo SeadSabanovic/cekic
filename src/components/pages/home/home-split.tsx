@@ -5,7 +5,6 @@ import Container from '@/components/global/container';
 import Heading from '@/components/shared/heading';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import Image from 'next/image';
 
 const panels = [
   {
@@ -31,8 +30,8 @@ export default function HomeSplitSection() {
     <section aria-labelledby="home-split-eyebrow">
       <Container
         className="border-x border-dashed"
-        paddingTop="medium"
-        paddingBottom="medium"
+        paddingTop="default"
+        paddingBottom="default"
       >
         <Heading
           tag="h2"

@@ -1,51 +1,120 @@
+import Image from 'next/image';
+import Link from 'next/link';
+
 import Container from '@/components/global/container';
 import Heading from '@/components/shared/heading';
-import { roadmapSections } from '@/lib/home-roadmaps-data';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
+import { putokazListItemToRoadmapItem } from '@/lib/putokaz-to-roadmap-item';
+import { roadmapHubSummaryToRoadmapItem } from '@/lib/roadmap-hub-to-roadmap-item';
+import { fetchRoadmapHubSummaries } from '@/sanity/lib/queries/roadmap';
+import { fetchPutokaziList } from '@/sanity/lib/queries/putokaz-list';
 
-import RoadmapCard from './roadmap-card';
+export const revalidate = 60;
 
-export default function HomeRoadmapsSection() {
+export default async function HomeRoadmapsSection() {
+  const [putokazi, hubovi] = await Promise.all([
+    fetchPutokaziList('putokazi', { trade: 'sve' }),
+    fetchRoadmapHubSummaries(),
+  ]);
+
+  const cards = [
+    ...hubovi.map(roadmapHubSummaryToRoadmapItem),
+    ...putokazi.map(putokazListItemToRoadmapItem),
+  ].sort((a, b) => a.title.localeCompare(b.title, 'bs'));
+  const previewCards =
+    cards.length > 0 && cards.length < 5
+      ? Array.from({ length: 5 }, (_, i) => cards[i % cards.length])
+      : cards;
+
   return (
     <section className="border-t border-dashed">
       <Container
         className="border-x px-6 md:px-10"
         paddingTop="default"
-        paddingBottom="large"
+        paddingBottom="default"
       >
-        <div className="relative pt-10 pb-12 text-center">
+        <div>
           <Heading tag="h2" size="xl">
-            Putokazi
+            Karijerni putokazi
           </Heading>
-          <p className="mx-auto mt-4 max-w-3xl text-balance text-muted-foreground md:text-lg">
+          <p className="mt-4 max-w-3xl text-balance text-muted-foreground md:text-lg">
             Zaboravi na sate besciljnog pretraživanja YouTube-a. Svaki putokaz
             je dekomponovan na jasne korake, neophodan alat i tehničke cake koje
             majstori inače čuvaju za sebe. Tvoj plan rada, od prve mjere do
             finalnog udarca.
           </p>
         </div>
+        {previewCards.length > 0 ? (
+          <div className="relative -mx-6 mt-10 overflow-hidden md:-mx-10">
+            <Carousel
+              opts={{ align: 'start', loop: previewCards.length > 3 }}
+              className="relative w-full px-6 md:px-10"
+            >
+              <CarouselContent className="overflow-visible!">
+                {previewCards.map((map, idx) => (
+                  <CarouselItem
+                    key={`${map.listSource ?? 'putokaz'}-${map.id}-${idx}`}
+                    className="basis-[78%] pl-4 sm:basis-[60%] lg:basis-1/3"
+                  >
+                    <article className="group relative h-[360px] overflow-hidden rounded-2xl border border-border/60 bg-muted/20">
+                      {map.cover?.url ? (
+                        <Image
+                          src={map.cover.url}
+                          alt={map.cover.alt}
+                          fill
+                          sizes="(max-width: 640px) 82vw, 300px"
+                          className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                        />
+                      ) : (
+                        <div className="flex h-full items-center justify-center bg-linear-to-b from-muted/80 to-muted">
+                          <map.icon className="size-12 text-muted-foreground" />
+                        </div>
+                      )}
 
-        <div className="mt-16 flex flex-col gap-20 md:mt-20 md:gap-24">
-          {roadmapSections.map((section) => (
-            <div key={section.id}>
-              <div className="mb-8 max-w-3xl">
-                <Heading tag="h2" size="md" className="text-balance">
-                  {section.title}
-                </Heading>
-                <p className="mt-3 leading-relaxed text-pretty text-muted-foreground md:text-lg">
-                  {section.lead}
-                </p>
-              </div>
+                      <Link
+                        href={`/putokazi/${map.id}`}
+                        className="absolute inset-0 z-10 rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                        aria-label={`Otvori putokaz: ${map.title}`}
+                      />
 
-              <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {section.maps.map((map, index) => (
-                  <li key={map.id}>
-                    <RoadmapCard map={map} enabled={index < 3} />
-                  </li>
+                      <div className="absolute inset-x-0 top-0 z-20 flex items-start justify-between p-4 text-white">
+                        <div className="max-w-[80%]">
+                          <p className="line-clamp-1 text-sm font-semibold tracking-tight">
+                            {map.title}
+                          </p>
+                          <p className="mt-0.5 text-xs text-white/80">
+                            @{map.id}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="absolute inset-x-0 bottom-0 z-20 p-4 text-white">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="line-clamp-1 rounded-full bg-white/15 px-2.5 py-1 text-[11px] font-medium backdrop-blur-sm">
+                            {map.tradeLabel ?? 'Putokaz'}
+                          </span>
+                        </div>
+                      </div>
+                    </article>
+                  </CarouselItem>
                 ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+              </CarouselContent>
+              <CarouselPrevious className="left-4 hidden md:flex" />
+              <CarouselNext className="right-4 hidden md:flex" />
+            </Carousel>
+          </div>
+        ) : (
+          <p className="mt-10 max-w-2xl text-muted-foreground">
+            Još nema putokaza u studiju. Dodaj dokument tipa „Putokaz” ili
+            „Roadmap Hub” u Sanityju pa će se ovdje pojaviti automatski.
+          </p>
+        )}
       </Container>
     </section>
   );

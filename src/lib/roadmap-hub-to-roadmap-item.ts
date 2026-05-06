@@ -1,12 +1,18 @@
 import { MapPinned } from 'lucide-react';
 
 import type { RoadmapItem } from '@/lib/home-roadmaps-data';
+import { resolvePutokazCover } from '@/lib/putokaz-cover';
 import type { RoadmapHubSummary } from '@/sanity/lib/queries/roadmap';
 
 /** Kartica na /putokazi — link vodi na hub rutu `/putokazi/{slug}`. */
 export function roadmapHubSummaryToRoadmapItem(
   hub: RoadmapHubSummary
 ): RoadmapItem {
+  const thumb = resolvePutokazCover(
+    { title: hub.title, coverImage: hub.coverImage },
+    { w: 720, h: 400 }
+  );
+
   return {
     id: hub.slug,
     title: hub.title,
@@ -17,8 +23,8 @@ export function roadmapHubSummaryToRoadmapItem(
     difficulty: 'pocetni',
     duration: '\u2014',
     icon: MapPinned,
-    tradeLabel: 'Hub',
+    tradeLabel: 'Zanat',
     listSource: 'roadmapHub',
-    cover: null,
+    cover: thumb,
   };
 }
