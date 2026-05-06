@@ -30,25 +30,22 @@ export default function HomeSplitSection() {
   return (
     <section aria-labelledby="home-split-eyebrow">
       <Container
-        className="relative border-x border-dashed px-6 md:px-10"
+        className="border-x border-dashed"
         paddingTop="medium"
         paddingBottom="medium"
       >
-        <Image
-          src="https://images.pexels.com/photos/18022596/pexels-photo-18022596.jpeg?_gl=1*cr02r8*_ga*MjA0MTQwODUxLjE3NjMzMjUxNzE.*_ga_8JE65Q40S6*czE3Nzc4NDE2ODckbzEwJGcxJHQxNzc3ODQyOTY1JGo1JGwwJGgw"
-          alt="Split background"
-          width={1000}
-          height={1000}
-          className="absolute inset-0 size-full object-cover opacity-30"
-        />
         <Heading
           tag="h2"
           size="xl"
           id="home-split-eyebrow"
           className="relative z-10 text-center"
         >
-          Tvoj plan
+          Tvoj plan. <span className="text-muted-foreground">Tvoj tempo.</span>
         </Heading>
+        <p className="mt-3 max-w-3xl mx-auto text-center leading-relaxed text-balance text-muted-foreground md:text-lg">
+          Uči svojim tempom i označi savladano gradivo. Tvoj napredak ostaje
+          sačuvan na tvom uređaju.
+        </p>
 
         <div className="mt-10 grid gap-6 sm:mt-12 lg:mt-14 lg:grid-cols-2 lg:gap-8">
           {panels.map((panel) => (
