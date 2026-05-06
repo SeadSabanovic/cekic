@@ -37,9 +37,30 @@ export async function generateMetadata({
   const { slug } = await params;
   const hub = await fetchRoadmapHubBySlug(slug);
   if (hub) {
+    const description = hub.lead?.trim() || undefined;
+    const cover = resolvePutokazCover(
+      { title: hub.title, coverImage: hub.coverImage },
+      { w: 1200, h: 630 }
+    );
     return {
       title: hub.title,
-      description: hub.lead?.trim() || undefined,
+      description,
+      openGraph: {
+        title: hub.title,
+        description,
+        ...(cover
+          ? {
+              images: [
+                {
+                  url: cover.url,
+                  alt: cover.alt,
+                  width: 1200,
+                  height: 630,
+                },
+              ],
+            }
+          : {}),
+      },
     };
   }
   const doc = await fetchPutokazBySlug(slug, 'putokazi');
@@ -76,6 +97,10 @@ export default async function PutokazDetailPage({ params }: PageProps) {
   const hub = await fetchRoadmapHubBySlug(slug);
   if (hub) {
     const sections = hub.sections ?? [];
+    const hubCover = resolvePutokazCover(
+      { title: hub.title, coverImage: hub.coverImage },
+      { w: 1400, h: 800 }
+    );
     return (
       <>
         <HeroBlock
@@ -89,6 +114,17 @@ export default async function PutokazDetailPage({ params }: PageProps) {
               </p>
             )
           }
+          {...(hubCover
+            ? {
+                mediaType: 'image' as const,
+                bottomCornerRadius: 'rounded' as const,
+                image: {
+                  src: hubCover.url,
+                  alt: hubCover.alt,
+                  short: false,
+                },
+              }
+            : {})}
         />
         <div className="pattern-bg px-4 xl:px-10">
           <Container className="border-x border-dashed px-4 py-16 md:py-24">

@@ -26,7 +26,6 @@ export default function Home() {
           alt: 'Majstor radi u radionici',
           short: false,
         }}
-        overlayType="dark"
         actions={[
           { label: 'Putokazi', href: '/putokazi', variant: 'default' },
           { label: 'Projekti', href: '/projekti', variant: 'secondary' },

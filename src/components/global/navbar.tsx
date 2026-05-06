@@ -7,7 +7,7 @@ import SiteLogo from '../shared/site-logo';
 import SlideOutMenu from './slide-out-menu';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { ChevronRight, Menu } from 'lucide-react';
+import { ChevronRight, Menu, Search } from 'lucide-react';
 import AnimatedText from '../shared/animated-text';
 import {
   NavigationMenu,
@@ -54,13 +54,21 @@ export default function Navbar({ settings }: NavbarProps) {
               ))}
             </NavigationMenuList>
           </NavigationMenu>
+          <button
+            type="button"
+            aria-label="Otvori pretragu"
+            className="cursor-pointer rounded-full border border-gray-200/60 p-2.5 transition-colors duration-300 ease-in-out hover:bg-gray-50"
+          >
+            <Search size={18} aria-hidden />
+          </button>
           {showSlideOutMenu && (
             <SlideOutMenu settings={settings}>
               <button
+                type="button"
                 aria-label="Otvori meni"
                 className="cursor-pointer rounded-full border border-gray-200/60 p-2.5 transition-colors duration-300 ease-in-out hover:bg-gray-50"
               >
-                <Menu size={18} />
+                <Menu size={18} aria-hidden />
               </button>
             </SlideOutMenu>
           )}

@@ -1,8 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 import Container from '@/components/global/container';
 import Heading from '@/components/shared/heading';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import {
   Carousel,
   CarouselContent,
@@ -41,14 +44,27 @@ export default async function HomeRoadmapsSection() {
       >
         <div>
           <Heading tag="h2" size="xl">
-            Karijerni putokazi
+            Istraži tražena zanimanja
           </Heading>
           <p className="mt-4 max-w-3xl text-balance text-muted-foreground md:text-lg">
-            Zaboravi na sate besciljnog pretraživanja YouTube-a. Svaki putokaz
-            je dekomponovan na jasne korake, neophodan alat i tehničke cake koje
-            majstori inače čuvaju za sebe. Tvoj plan rada, od prve mjere do
-            finalnog udarca.
+            Odaberi profesiju koja ti najviše odgovara i kreni sa učenjem već
+            danas.
           </p>
+          <div className="group mt-8 w-fit">
+            <Link
+              href="/putokazi"
+              className={cn(
+                buttonVariants({ variant: 'default', size: 'lg' }),
+                'inline-flex items-center gap-2'
+              )}
+            >
+              <span>Kreni učiti</span>
+              <ArrowRight
+                className="size-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
+                aria-hidden
+              />
+            </Link>
+          </div>
         </div>
         {previewCards.length > 0 ? (
           <div className="relative -mx-6 mt-10 overflow-hidden md:-mx-10">
