@@ -7,7 +7,10 @@ import HeroBlock from '@/components/blocks/hero-block';
 import Heading from '@/components/shared/heading';
 import { cn } from '@/lib/utils';
 import { resolvePutokazCover } from '@/lib/putokaz-cover';
-import { fetchRoadmapHubBySlug, fetchRoadmapHubSummaries } from '@/sanity/lib/queries/roadmap';
+import {
+  fetchRoadmapHubBySlug,
+  fetchRoadmapHubSummaries,
+} from '@/sanity/lib/queries/roadmap';
 import {
   fetchPutokazBySlug,
   fetchPutokaziSlugs,
@@ -94,12 +97,13 @@ export default async function PutokazDetailPage({ params }: PageProps) {
                 Sadržaj
               </h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                Poglavlja dolaze iz CMS-a; redoslijed u studiju = redoslijed ovdje.
+                Poglavlja dolaze iz CMS-a; redoslijed u studiju = redoslijed
+                ovdje.
               </p>
               {sections.length === 0 ? (
                 <p className="mt-8 text-sm text-muted-foreground">
-                  Nema poglavlja — u dokumentu dodaj barem jedno poglavlje u polju
-                  „Poglavlja”.
+                  Nema poglavlja — u dokumentu dodaj barem jedno poglavlje u
+                  polju „Poglavlja”.
                 </p>
               ) : (
                 <nav
@@ -157,7 +161,7 @@ export default async function PutokazDetailPage({ params }: PageProps) {
     <div className="pattern-bg px-4 xl:px-10">
       <Container className="space-y-6 border-x border-dashed px-4 pt-32 pb-14 md:space-y-8 md:pt-40 md:pb-24">
         {cover ? (
-          <div className="relative aspect-21/9 min-h-44 w-full max-h-80 overflow-hidden rounded-2xl border border-border/60 md:min-h-56">
+          <div className="relative aspect-21/9 max-h-80 min-h-44 w-full overflow-hidden rounded-2xl border border-border/60 md:min-h-56">
             <Image
               src={cover.url}
               alt={cover.alt}
@@ -177,7 +181,8 @@ export default async function PutokazDetailPage({ params }: PageProps) {
           </p>
         ) : null}
         <p className="max-w-2xl text-sm text-muted-foreground">
-          Koraci i detalji puta uskoro — ovo je početna stranica za sadržaj iz CMS-a.
+          Koraci i detalji puta uskoro — ovo je početna stranica za sadržaj iz
+          CMS-a.
         </p>
       </Container>
     </div>

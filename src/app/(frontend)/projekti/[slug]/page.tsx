@@ -67,7 +67,7 @@ export default async function ProjektDetailPage({ params }: PageProps) {
     <div className="pattern-bg px-4 xl:px-10">
       <Container className="space-y-6 border-x border-dashed px-4 pt-32 pb-14 md:space-y-8 md:pt-40 md:pb-24">
         {cover ? (
-          <div className="relative aspect-21/9 min-h-44 w-full max-h-80 overflow-hidden rounded-2xl border border-border/60 md:min-h-56">
+          <div className="relative aspect-21/9 max-h-80 min-h-44 w-full overflow-hidden rounded-2xl border border-border/60 md:min-h-56">
             <Image
               src={cover.url}
               alt={cover.alt}

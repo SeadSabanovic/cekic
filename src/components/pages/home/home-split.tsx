@@ -41,7 +41,7 @@ export default function HomeSplitSection() {
         >
           Tvoj plan. <span className="text-muted-foreground">Tvoj tempo.</span>
         </Heading>
-        <p className="mt-3 max-w-3xl mx-auto text-center leading-relaxed text-balance text-muted-foreground md:text-lg">
+        <p className="mx-auto mt-3 max-w-3xl text-center leading-relaxed text-balance text-muted-foreground md:text-lg">
           Uči svojim tempom i označi savladano gradivo. Tvoj napredak ostaje
           sačuvan na tvom uređaju.
         </p>

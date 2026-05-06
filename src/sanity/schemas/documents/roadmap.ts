@@ -48,7 +48,8 @@ export default defineType({
     defineField({
       name: 'sections',
       title: 'Poglavlja',
-      description: 'Redoslijed ovdje = redoslijed u sadržaju i „Sljedeće / Prethodno”.',
+      description:
+        'Redoslijed ovdje = redoslijed u sadržaju i „Sljedeće / Prethodno”.',
       type: 'array',
       of: [{ type: 'roadmapSection' }],
       validation: (Rule) => Rule.required().min(1),

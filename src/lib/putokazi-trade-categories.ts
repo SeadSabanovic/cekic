@@ -44,8 +44,7 @@ export function isPutokaziTradeKategorija(
   value: string | undefined | null
 ): value is PutokaziTradeKategorija {
   return (
-    !!value &&
-    (putokaziTradeCategoryIds as readonly string[]).includes(value)
+    !!value && (putokaziTradeCategoryIds as readonly string[]).includes(value)
   );
 }
 

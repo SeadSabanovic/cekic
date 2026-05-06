@@ -20,7 +20,11 @@ export function resolvePutokazCover(
   if (!ref || !doc.coverImage) return null;
 
   const built = urlForImage(
-    doc.coverImage as { asset: { _ref: string }; hotspot?: unknown; crop?: unknown }
+    doc.coverImage as {
+      asset: { _ref: string };
+      hotspot?: unknown;
+      crop?: unknown;
+    }
   );
   const url = built?.width(size.w).height(size.h).fit('crop').url();
   if (!url) return null;

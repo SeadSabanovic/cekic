@@ -9,7 +9,9 @@ import {
 import type { PutokazListItem } from '@/sanity/lib/queries/putokaz-list';
 
 /** Pretvara Sanity `putokaz` u oblik koji očekuje `RoadmapCard` (ikona i placeholder polja). */
-export function putokazListItemToRoadmapItem(doc: PutokazListItem): RoadmapItem {
+export function putokazListItemToRoadmapItem(
+  doc: PutokazListItem
+): RoadmapItem {
   const thumb = resolvePutokazCover(
     { title: doc.title, coverImage: doc.coverImage },
     { w: 720, h: 400 }

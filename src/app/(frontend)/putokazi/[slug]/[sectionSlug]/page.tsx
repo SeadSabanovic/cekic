@@ -107,7 +107,10 @@ export default async function RoadmapSectionPage({ params }: PageProps) {
               /
             </li>
             <li>
-              <Link href={`/putokazi/${hub.slug}`} className="hover:text-foreground">
+              <Link
+                href={`/putokazi/${hub.slug}`}
+                className="hover:text-foreground"
+              >
                 {hub.title}
               </Link>
             </li>
@@ -118,7 +121,7 @@ export default async function RoadmapSectionPage({ params }: PageProps) {
           </ol>
         </nav>
 
-        <h1 className="mt-8 max-w-3xl text-balance text-3xl font-semibold tracking-tight md:text-4xl">
+        <h1 className="mt-8 max-w-3xl text-3xl font-semibold tracking-tight text-balance md:text-4xl">
           {section.title}
         </h1>
         {section.lead?.trim() ? (
