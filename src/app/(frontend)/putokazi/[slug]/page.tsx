@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { BarChart3, Clock3, TrendingUp, Wallet, type LucideIcon } from 'lucide-react';
 import Container from '@/components/global/container';
 import HeroBlock from '@/components/blocks/hero-block';
 import Heading from '@/components/shared/heading';
@@ -21,6 +22,27 @@ export const revalidate = 60;
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
+
+type HubStatItem = {
+  label: string;
+  value: string;
+  icon: LucideIcon;
+};
+
+const defaultHubStats: HubStatItem[] = [
+  { label: 'Zarada', value: '1.200 – 2.500 KM', icon: Wallet },
+  { label: 'Težina', value: 'Početni nivo', icon: BarChart3 },
+  { label: 'Vrijeme', value: '3 – 4 mjeseca', icon: Clock3 },
+  { label: 'Potražnja', value: 'Jako visoka', icon: TrendingUp },
+];
+
+const hubStatsBySlug: Record<string, HubStatItem[]> = {
+  moler: defaultHubStats,
+};
+
+function getHubStats(slug: string): HubStatItem[] {
+  return hubStatsBySlug[slug] ?? defaultHubStats;
+}
 
 export async function generateStaticParams() {
   const [putokaziSlugs, hubs] = await Promise.all([
@@ -97,6 +119,7 @@ export default async function PutokazDetailPage({ params }: PageProps) {
   const hub = await fetchRoadmapHubBySlug(slug);
   if (hub) {
     const sections = hub.sections ?? [];
+    const stats = getHubStats(hub.slug);
     const hubCover = resolvePutokazCover(
       { title: hub.title, coverImage: hub.coverImage },
       { w: 1400, h: 800 }
@@ -128,6 +151,28 @@ export default async function PutokazDetailPage({ params }: PageProps) {
         />
         <div className="pattern-bg px-4 xl:px-10">
           <Container className="border-x border-dashed px-4 py-16 md:py-24">
+            <div className="mx-auto mb-12 grid max-w-6xl gap-4 md:mb-14 md:grid-cols-2 xl:grid-cols-4">
+              {stats.map((item) => (
+                <article
+                  key={`${hub.slug}-${item.label}`}
+                  className="rounded-xl border border-dashed border-border/80 bg-background/60 p-5"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+                        {item.label}
+                      </p>
+                      <p className="mt-2 text-lg leading-tight font-semibold text-foreground md:text-xl">
+                        {item.value}
+                      </p>
+                    </div>
+                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/70 bg-background/80 text-muted-foreground">
+                      <item.icon className="size-4" aria-hidden />
+                    </span>
+                  </div>
+                </article>
+              ))}
+            </div>
             <div className="mx-auto max-w-3xl">
               <h2 className="text-lg font-semibold tracking-tight text-foreground">
                 Sadržaj
