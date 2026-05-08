@@ -2,13 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import {
-  BarChart3,
-  Clock3,
-  TrendingUp,
-  Wallet,
-  type LucideIcon,
-} from 'lucide-react';
+import { Clock3, TrendingUp, Wallet, type LucideIcon } from 'lucide-react';
 import Container from '@/components/global/container';
 import HeroBlock from '@/components/blocks/hero-block';
 import Heading from '@/components/shared/heading';
@@ -36,8 +30,7 @@ type HubStatItem = {
 };
 
 const defaultHubStats: HubStatItem[] = [
-  { label: 'Zarada', value: '1.200 – 2.500 KM', icon: Wallet },
-  { label: 'Težina', value: 'Početni nivo', icon: BarChart3 },
+  { label: 'Zarada', value: '€19,42 – €25,00 / h', icon: Wallet },
   { label: 'Vrijeme', value: '3 – 4 mjeseca', icon: Clock3 },
   { label: 'Potražnja', value: 'Jako visoka', icon: TrendingUp },
 ];
@@ -160,7 +153,7 @@ export default async function PutokazDetailPage({ params }: PageProps) {
           paddingBottom="default"
           className="border-x border-dashed"
         >
-          <div className="mb-12 grid gap-4 md:mb-14 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mb-12 grid gap-4 md:mb-14 md:grid-cols-3">
             {stats.map((item) => (
               <article
                 key={`${hub.slug}-${item.label}`}
@@ -183,9 +176,9 @@ export default async function PutokazDetailPage({ params }: PageProps) {
             ))}
           </div>
           <div className="">
-              <Heading tag="h2" size="md">
-                Sadržaj
-              </Heading>
+            <Heading tag="h2" size="md">
+              Sadržaj
+            </Heading>
             <p className="mt-2 text-sm text-muted-foreground">
               Poglavlja dolaze iz CMS-a; redoslijed u studiju = redoslijed
               ovdje.
