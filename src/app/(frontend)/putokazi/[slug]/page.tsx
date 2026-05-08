@@ -2,7 +2,13 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { BarChart3, Clock3, TrendingUp, Wallet, type LucideIcon } from 'lucide-react';
+import {
+  BarChart3,
+  Clock3,
+  TrendingUp,
+  Wallet,
+  type LucideIcon,
+} from 'lucide-react';
 import Container from '@/components/global/container';
 import HeroBlock from '@/components/blocks/hero-block';
 import Heading from '@/components/shared/heading';
@@ -149,83 +155,85 @@ export default async function PutokazDetailPage({ params }: PageProps) {
               }
             : {})}
         />
-        <div className="pattern-bg px-4 xl:px-10">
-          <Container className="border-x border-dashed px-4 py-16 md:py-24">
-            <div className="mx-auto mb-12 grid max-w-6xl gap-4 md:mb-14 md:grid-cols-2 xl:grid-cols-4">
-              {stats.map((item) => (
-                <article
-                  key={`${hub.slug}-${item.label}`}
-                  className="rounded-xl border border-dashed border-border/80 bg-background/60 p-5"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
-                        {item.label}
-                      </p>
-                      <p className="mt-2 text-lg leading-tight font-semibold text-foreground md:text-xl">
-                        {item.value}
-                      </p>
-                    </div>
-                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/70 bg-background/80 text-muted-foreground">
-                      <item.icon className="size-4" aria-hidden />
-                    </span>
+        <Container
+          paddingTop="medium"
+          paddingBottom="default"
+          className="border-x border-dashed"
+        >
+          <div className="mb-12 grid gap-4 md:mb-14 md:grid-cols-2 xl:grid-cols-4">
+            {stats.map((item) => (
+              <article
+                key={`${hub.slug}-${item.label}`}
+                className="rounded-xl border border-dashed border-border/80 bg-background/60 p-5"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+                      {item.label}
+                    </p>
+                    <p className="mt-2 text-lg leading-tight font-semibold text-foreground md:text-xl">
+                      {item.value}
+                    </p>
                   </div>
-                </article>
-              ))}
-            </div>
-            <div className="mx-auto max-w-3xl">
-              <h2 className="text-lg font-semibold tracking-tight text-foreground">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/70 bg-background/80 text-muted-foreground">
+                    <item.icon className="size-4" aria-hidden />
+                  </span>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="">
+              <Heading tag="h2" size="md">
                 Sadržaj
-              </h2>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Poglavlja dolaze iz CMS-a; redoslijed u studiju = redoslijed
-                ovdje.
+              </Heading>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Poglavlja dolaze iz CMS-a; redoslijed u studiju = redoslijed
+              ovdje.
+            </p>
+            {sections.length === 0 ? (
+              <p className="mt-8 text-sm text-muted-foreground">
+                Nema poglavlja — u dokumentu dodaj barem jedno poglavlje u polju
+                „Poglavlja”.
               </p>
-              {sections.length === 0 ? (
-                <p className="mt-8 text-sm text-muted-foreground">
-                  Nema poglavlja — u dokumentu dodaj barem jedno poglavlje u
-                  polju „Poglavlja”.
-                </p>
-              ) : (
-                <nav
-                  className="mt-8 border border-dashed border-border/80 bg-background/40"
-                  aria-label="Sadržaj mape puta"
-                >
-                  <ol className="divide-y divide-dashed divide-border/80">
-                    {sections.map((section, index) => (
-                      <li key={section._key}>
-                        <Link
-                          href={`/putokazi/${hub.slug}/${section.slug}`}
-                          className={cn(
-                            'group flex gap-4 px-4 py-4 transition-colors',
-                            'hover:bg-muted/40 focus-visible:bg-muted/40 focus-visible:outline-none'
-                          )}
+            ) : (
+              <nav
+                className="mt-8 border border-dashed border-border/80 bg-background/40"
+                aria-label="Sadržaj mape puta"
+              >
+                <ol className="divide-y divide-dashed divide-border/80">
+                  {sections.map((section, index) => (
+                    <li key={section._key}>
+                      <Link
+                        href={`/putokazi/${hub.slug}/${section.slug}`}
+                        className={cn(
+                          'group flex gap-4 px-4 py-4 transition-colors',
+                          'hover:bg-muted/40 focus-visible:bg-muted/40 focus-visible:outline-none'
+                        )}
+                      >
+                        <span
+                          className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-dashed border-border text-sm font-medium text-muted-foreground tabular-nums group-hover:border-foreground/30 group-hover:text-foreground"
+                          aria-hidden
                         >
-                          <span
-                            className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-dashed border-border text-sm font-medium text-muted-foreground tabular-nums group-hover:border-foreground/30 group-hover:text-foreground"
-                            aria-hidden
-                          >
-                            {index + 1}
+                          {index + 1}
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block font-medium text-foreground group-hover:underline">
+                            {section.title}
                           </span>
-                          <span className="min-w-0 flex-1">
-                            <span className="block font-medium text-foreground group-hover:underline">
-                              {section.title}
+                          {section.lead?.trim() ? (
+                            <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">
+                              {section.lead}
                             </span>
-                            {section.lead?.trim() ? (
-                              <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">
-                                {section.lead}
-                              </span>
-                            ) : null}
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ol>
-                </nav>
-              )}
-            </div>
-          </Container>
-        </div>
+                          ) : null}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            )}
+          </div>
+        </Container>
       </>
     );
   }
