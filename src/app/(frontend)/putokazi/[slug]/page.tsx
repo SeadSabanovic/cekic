@@ -132,6 +132,7 @@ export default async function PutokazDetailPage({ params }: PageProps) {
     );
     return (
       <>
+        {/* Hero Block */}
         <HeroBlock
           heading={hub.title}
           body={
@@ -155,12 +156,10 @@ export default async function PutokazDetailPage({ params }: PageProps) {
               }
             : {})}
         />
-        <Container
-          paddingTop="medium"
-          paddingBottom="default"
-          className="border-x border-dashed"
-        >
-          <div className="mb-12 grid gap-4 md:mb-14 md:grid-cols-3">
+
+        {/* Stats */}
+        <Container paddingTop="small" paddingBottom="small">
+          <div className="grid gap-4 md:grid-cols-3">
             {stats.map((item) => (
               <article
                 key={`${hub.slug}-${item.label}`}
@@ -182,26 +181,48 @@ export default async function PutokazDetailPage({ params }: PageProps) {
               </article>
             ))}
           </div>
+        </Container>
 
-          <section className="mb-12 md:mb-14">
-            <Heading tag="h2" size="xl">
-              O zanimanju
-            </Heading>
-            {Array.isArray(hub.aboutOccupation) &&
-            hub.aboutOccupation.length > 0 ? (
-              <div className="mt-8 max-w-3xl border-l border-dashed px-5">
-                <PortableText value={hub.aboutOccupation} />
-              </div>
-            ) : (
-              <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground md:text-lg">
-                Dodaj opis zanimanja u Sanity polju „O zanimanju”.
-              </p>
-            )}
-          </section>
+        {/* About Occupation */}
+        <Container
+          paddingTop="small"
+          paddingBottom="small"
+          className="border-x border-dashed border-t"
+        >
+          <div className="grid grid-cols-12 gap-3 pt-6 pb-10 md:gap-6 md:px-10 md:pt-10 md:pb-14 xl:gap-14">
+            <div className="col-span-12 lg:col-span-4">
+              <Heading
+                id="about-occupation-heading"
+                tag="h2"
+                size="xl"
+                className="leading-tight text-balance md:max-w-160 lg:sticky lg:top-32"
+              >
+                O zanimanju
+              </Heading>
+            </div>
+            <div className="col-span-12 lg:col-span-8 xl:col-span-6">
+              {Array.isArray(hub.aboutOccupation) &&
+              hub.aboutOccupation.length > 0 ? (
+                <div>
+                  <PortableText value={hub.aboutOccupation} />
+                </div>
+              ) : (
+                <p className="mt-3 text-base leading-relaxed text-muted-foreground md:mt-0 md:text-lg">
+                  Dodaj opis zanimanja u Sanity polju „O zanimanju”.
+                </p>
+              )}
+            </div>
+          </div>
+        </Container>
 
+        <Container
+          paddingTop="small"
+          paddingBottom="default"
+          className="border-x border-dashed"
+        >
           <div>
-            <Heading tag="h2" size="md">
-              Sadržaj
+            <Heading tag="h2" size="lg">
+              Karijerni putokaz
             </Heading>
             {sections.length === 0 ? (
               <p className="mt-8 text-sm text-muted-foreground">
