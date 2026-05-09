@@ -111,7 +111,7 @@ export default async function HomeRoadmapsSection() {
                         {map.title}
                       </p>
                       <div
-                        className="mt-2.5 flex gap-1 sm:gap-1.5"
+                        className="mt-2.5 flex flex-wrap gap-1 sm:gap-1.5"
                         role="group"
                         aria-label="Zarada, vrijeme do samostalne zarade i potražnja na tržištu"
                       >
