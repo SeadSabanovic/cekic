@@ -6,6 +6,7 @@ import { Clock3, TrendingUp, Wallet, type LucideIcon } from 'lucide-react';
 import Container from '@/components/global/container';
 import HeroBlock from '@/components/blocks/hero-block';
 import Heading from '@/components/shared/heading';
+import PortableText from '@/components/shared/portable-text';
 import { cn } from '@/lib/utils';
 import { resolvePutokazCover } from '@/lib/putokaz-cover';
 import {
@@ -16,6 +17,7 @@ import {
   fetchPutokazBySlug,
   fetchPutokaziSlugs,
 } from '@/sanity/lib/queries/putokaz-list';
+import type { RoadmapHubStats } from '@/sanity/lib/queries/roadmap';
 
 export const revalidate = 60;
 
@@ -30,17 +32,22 @@ type HubStatItem = {
 };
 
 const defaultHubStats: HubStatItem[] = [
-  { label: 'Zarada', value: '€19,42 – €25,00 / h', icon: Wallet },
-  { label: 'Vrijeme', value: '3 – 4 mjeseca', icon: Clock3 },
-  { label: 'Potražnja', value: 'Jako visoka', icon: TrendingUp },
+  { label: 'Zarada', value: '--', icon: Wallet },
+  { label: 'Vrijeme', value: '--', icon: Clock3 },
+  { label: 'Potražnja', value: '--', icon: TrendingUp },
 ];
 
-const hubStatsBySlug: Record<string, HubStatItem[]> = {
-  moler: defaultHubStats,
-};
-
-function getHubStats(slug: string): HubStatItem[] {
-  return hubStatsBySlug[slug] ?? defaultHubStats;
+function getHubStats(stats?: RoadmapHubStats | null): HubStatItem[] {
+  if (!stats) return defaultHubStats;
+  return [
+    { label: 'Zarada', value: stats.zarada?.trim() || '--', icon: Wallet },
+    { label: 'Vrijeme', value: stats.vrijeme?.trim() || '--', icon: Clock3 },
+    {
+      label: 'Potražnja',
+      value: stats.potraznja?.trim() || '--',
+      icon: TrendingUp,
+    },
+  ];
 }
 
 export async function generateStaticParams() {
@@ -118,7 +125,7 @@ export default async function PutokazDetailPage({ params }: PageProps) {
   const hub = await fetchRoadmapHubBySlug(slug);
   if (hub) {
     const sections = hub.sections ?? [];
-    const stats = getHubStats(hub.slug);
+    const stats = getHubStats(hub.stats);
     const hubCover = resolvePutokazCover(
       { title: hub.title, coverImage: hub.coverImage },
       { w: 1400, h: 800 }
@@ -175,14 +182,27 @@ export default async function PutokazDetailPage({ params }: PageProps) {
               </article>
             ))}
           </div>
-          <div className="">
+
+          <section className="mb-12 md:mb-14">
+            <Heading tag="h2" size="lg">
+              O zanimanju
+            </Heading>
+            {Array.isArray(hub.aboutOccupation) &&
+            hub.aboutOccupation.length > 0 ? (
+              <div className="mt-4 max-w-3xl p-4">
+                <PortableText value={hub.aboutOccupation} />
+              </div>
+            ) : (
+              <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                Dodaj opis zanimanja u Sanity polju „O zanimanju”.
+              </p>
+            )}
+          </section>
+
+          <div>
             <Heading tag="h2" size="md">
               Sadržaj
             </Heading>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Poglavlja dolaze iz CMS-a; redoslijed u studiju = redoslijed
-              ovdje.
-            </p>
             {sections.length === 0 ? (
               <p className="mt-8 text-sm text-muted-foreground">
                 Nema poglavlja — u dokumentu dodaj barem jedno poglavlje u polju

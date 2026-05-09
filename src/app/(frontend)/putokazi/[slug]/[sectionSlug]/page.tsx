@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { PortableText, type PortableTextComponents } from '@portabletext/react';
 import Container from '@/components/global/container';
 import { Button } from '@/components/ui/button';
+import PortableText from '@/components/shared/portable-text';
 import {
   fetchRoadmapHubBySlug,
   fetchRoadmapHubSummaries,
@@ -42,37 +42,6 @@ export async function generateMetadata({
     description: section.lead?.trim() || hub?.lead?.trim() || undefined,
   };
 }
-
-const bodyComponents: PortableTextComponents = {
-  block: {
-    normal: ({ children }) => (
-      <p className="mt-4 max-w-2xl text-base leading-relaxed text-neutral-700 first:mt-0 md:text-lg">
-        {children}
-      </p>
-    ),
-  },
-  marks: {
-    strong: ({ children }) => (
-      <strong className="font-semibold text-foreground">{children}</strong>
-    ),
-  },
-  list: {
-    bullet: ({ children }) => (
-      <ul className="mt-4 list-disc space-y-2 pl-6 text-neutral-700 md:text-lg">
-        {children}
-      </ul>
-    ),
-    number: ({ children }) => (
-      <ol className="mt-4 list-decimal space-y-2 pl-6 text-neutral-700 md:text-lg">
-        {children}
-      </ol>
-    ),
-  },
-  listItem: {
-    bullet: ({ children }) => <li>{children}</li>,
-    number: ({ children }) => <li>{children}</li>,
-  },
-};
 
 function hasPortableBody(body: RoadmapSectionPortable | null | undefined) {
   return Array.isArray(body) && body.length > 0;
@@ -132,7 +101,7 @@ export default async function RoadmapSectionPage({ params }: PageProps) {
 
         {hasPortableBody(section.body) ? (
           <div className="mt-10 max-w-2xl">
-            <PortableText value={section.body!} components={bodyComponents} />
+            <PortableText value={section.body!} />
           </div>
         ) : (
           <p className="mt-10 max-w-2xl text-sm leading-relaxed text-muted-foreground">

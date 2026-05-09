@@ -31,7 +31,7 @@ export default defineType({
       title: 'Sadržaj',
       description: 'Glavni tekst poglavlja (opciono).',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: [{ type: 'block' }, { type: 'horizontalRule' }],
     }),
   ],
   preview: {

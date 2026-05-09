@@ -10,6 +10,11 @@ const publishedRoadmap = groq`
 `;
 
 export type RoadmapSectionPortable = PortableTextBlock[];
+export type RoadmapHubStats = {
+  zarada: string | null;
+  vrijeme: string | null;
+  potraznja: string | null;
+};
 
 export type RoadmapSectionQuery = {
   _key: string;
@@ -24,12 +29,14 @@ export type RoadmapHubQuery = {
   title: string;
   slug: string;
   lead: string | null;
+  aboutOccupation?: PortableTextBlock[] | null;
   coverImage?: {
     asset?: { _ref: string } | null;
     alt?: string | null;
     hotspot?: unknown;
     crop?: unknown;
   } | null;
+  stats?: RoadmapHubStats | null;
   sections: RoadmapSectionQuery[];
 };
 
@@ -39,11 +46,17 @@ const roadmapBySlugQuery = groq`
     title,
     "slug": slug.current,
     lead,
+    aboutOccupation,
     coverImage {
       asset,
       alt,
       hotspot,
       crop
+    },
+    stats{
+      zarada,
+      vrijeme,
+      potraznja
     },
     sections[]{
       _key,
@@ -82,12 +95,14 @@ export type RoadmapHubSummary = {
   title: string;
   slug: string;
   lead: string | null;
+  aboutOccupation?: PortableTextBlock[] | null;
   coverImage?: {
     asset?: { _ref: string } | null;
     alt?: string | null;
     hotspot?: unknown;
     crop?: unknown;
   } | null;
+  stats?: RoadmapHubStats | null;
 };
 
 const roadmapHubsListQuery = groq`
@@ -96,11 +111,17 @@ const roadmapHubsListQuery = groq`
     title,
     "slug": slug.current,
     lead,
+    aboutOccupation,
     coverImage {
       asset,
       alt,
       hotspot,
       crop
+    },
+    stats{
+      zarada,
+      vrijeme,
+      potraznja
     }
   }
 `;
