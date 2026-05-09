@@ -187,7 +187,7 @@ export default async function PutokazDetailPage({ params }: PageProps) {
         <Container
           paddingTop="small"
           paddingBottom="small"
-          className="border-x border-dashed border-t"
+          className="border-x border-t border-dashed"
         >
           <div className="grid grid-cols-12 gap-3 pt-6 pb-10 md:gap-6 md:px-10 md:pt-10 md:pb-14 xl:gap-14">
             <div className="col-span-12 lg:col-span-4">
@@ -215,57 +215,64 @@ export default async function PutokazDetailPage({ params }: PageProps) {
           </div>
         </Container>
 
+        {/* Career Roadmap */}
         <Container
           paddingTop="small"
           paddingBottom="default"
-          className="border-x border-dashed"
+          className="border-x border-t border-dashed"
         >
-          <div>
-            <Heading tag="h2" size="lg">
-              Karijerni putokaz
-            </Heading>
-            {sections.length === 0 ? (
-              <p className="mt-8 text-sm text-muted-foreground">
-                Nema poglavlja — u dokumentu dodaj barem jedno poglavlje u polju
-                „Poglavlja”.
-              </p>
-            ) : (
-              <nav
-                className="mt-8 border border-dashed border-border/80 bg-background/40"
-                aria-label="Sadržaj mape puta"
+          <div className="grid grid-cols-12 gap-3 pt-6 pb-10 md:gap-6 md:px-10 md:pt-10 md:pb-14 xl:gap-14">
+            <div className="col-span-12 lg:col-span-4">
+              <Heading
+                id="career-roadmap-heading"
+                tag="h2"
+                size="xl"
+                className="leading-tight text-balance md:max-w-160 lg:sticky lg:top-32"
               >
-                <ol className="divide-y divide-dashed divide-border/80">
-                  {sections.map((section, index) => (
-                    <li key={section._key}>
-                      <Link
-                        href={`/putokazi/${hub.slug}/${section.slug}`}
-                        className={cn(
-                          'group flex gap-4 px-4 py-4 transition-colors',
-                          'hover:bg-muted/40 focus-visible:bg-muted/40 focus-visible:outline-none'
-                        )}
-                      >
-                        <span
-                          className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-dashed border-border text-sm font-medium text-muted-foreground tabular-nums group-hover:border-foreground/30 group-hover:text-foreground"
-                          aria-hidden
+                Karijerni putokaz
+              </Heading>
+            </div>
+            <div className="col-span-12 lg:col-span-8 xl:col-span-6">
+              {sections.length === 0 ? (
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:mt-0 md:text-base">
+                  Nema poglavlja — u dokumentu dodaj barem jedno poglavlje u
+                  polju „Poglavlja”.
+                </p>
+              ) : (
+                <nav
+                  className="mt-3 border-border/80 md:mt-0"
+                  aria-label="Sadržaj mape puta"
+                >
+                  <ol className="divide-y divide-dashed">
+                    {sections.map((section, index) => (
+                      <li key={section._key}>
+                        <Link
+                          href={`/putokazi/${hub.slug}/${section.slug}`}
+                          className={cn('group flex gap-4 px-4 py-4')}
                         >
-                          {index + 1}
-                        </span>
-                        <span className="min-w-0 flex-1">
-                          <span className="block font-medium text-foreground group-hover:underline">
-                            {section.title}
+                          <span
+                            className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-dashed border-border text-sm font-medium text-muted-foreground tabular-nums group-hover:border-foreground/30 group-hover:text-foreground"
+                            aria-hidden
+                          >
+                            {index + 1}
                           </span>
-                          {section.lead?.trim() ? (
-                            <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">
-                              {section.lead}
+                          <span className="min-w-0 flex-1">
+                            <span className="block text-right font-medium text-foreground group-hover:underline">
+                              {section.title}
                             </span>
-                          ) : null}
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ol>
-              </nav>
-            )}
+                            {section.lead?.trim() ? (
+                              <p className="mt-1 block text-right leading-relaxed text-balance text-muted-foreground">
+                                {section.lead}
+                              </p>
+                            ) : null}
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ol>
+                </nav>
+              )}
+            </div>
           </div>
         </Container>
       </>
