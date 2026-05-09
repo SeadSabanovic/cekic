@@ -184,12 +184,12 @@ export default async function PutokazDetailPage({ params }: PageProps) {
           </div>
 
           <section className="mb-12 md:mb-14">
-            <Heading tag="h2" size="lg">
+            <Heading tag="h2" size="xl">
               O zanimanju
             </Heading>
             {Array.isArray(hub.aboutOccupation) &&
             hub.aboutOccupation.length > 0 ? (
-              <div className="mt-4 max-w-3xl p-4">
+              <div className="mt-8 max-w-3xl border-l border-dashed px-5">
                 <PortableText value={hub.aboutOccupation} />
               </div>
             ) : (
