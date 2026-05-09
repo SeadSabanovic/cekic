@@ -4,9 +4,9 @@ import PutokaziFiltersToolbar from '@/components/pages/putokazi/putokazi-filters
 import RoadmapCard from '@/components/ui/cards/roadmap-card';
 import HeroBlock from '@/components/blocks/hero-block';
 import { getPutokaziTradeFilters } from '@/lib/home-roadmaps-data';
-import { putokazListItemToRoadmapItem } from '@/lib/putokaz-to-roadmap-item';
+import { projekatListItemToRoadmapItem } from '@/lib/putokaz-to-roadmap-item';
 import { normalizePutokaziTradeQueryParam } from '@/lib/putokazi-trade-categories';
-import { fetchPutokaziList } from '@/sanity/lib/queries/putokaz-list';
+import { fetchProjektiList } from '@/sanity/lib/queries/putokaz-list';
 
 export const revalidate = 60;
 
@@ -24,8 +24,8 @@ export default async function ProjektiPage({ searchParams }: PageProps) {
   const sp = await searchParams;
   const trade = normalizePutokaziTradeQueryParam(sp.sekcija);
   const filterItems = getPutokaziTradeFilters();
-  const projekti = await fetchPutokaziList('projekti', { trade });
-  const cards = projekti.map(putokazListItemToRoadmapItem);
+  const projekti = await fetchProjektiList({ trade });
+  const cards = projekti.map(projekatListItemToRoadmapItem);
 
   return (
     <>
@@ -55,15 +55,19 @@ export default async function ProjektiPage({ searchParams }: PageProps) {
           {cards.length > 0 ? (
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {cards.map((map) => (
-                <li key={map.id}>
-                  <RoadmapCard map={map} detailHref={`/projekti/${map.id}`} />
+                <li key={`${map.listSource ?? 'projekat'}-${map.id}`}>
+                  <RoadmapCard
+                    map={map}
+                    detailHref={`/projekti/${map.id}`}
+                    enabled={!map.locked}
+                  />
                 </li>
               ))}
             </ul>
           ) : (
             <p className="mt-10 max-w-2xl text-muted-foreground">
-              Još nema projekata u studiju. Otvori dokument tipa „Putokaz” i
-              postavi sekciju na „Projekti” pa će se ovdje pojaviti automatski.
+              Još nema projekata u studiju. U listi „Projekti” kreiraj dokument
+              tipa „Projekt” pa će se ovdje pojaviti automatski.
             </p>
           )}
         </Container>

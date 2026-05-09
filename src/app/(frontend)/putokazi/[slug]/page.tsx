@@ -52,7 +52,7 @@ function getHubStats(stats?: RoadmapHubStats | null): HubStatItem[] {
 
 export async function generateStaticParams() {
   const [putokaziSlugs, hubs] = await Promise.all([
-    fetchPutokaziSlugs('putokazi'),
+    fetchPutokaziSlugs(),
     fetchRoadmapHubSummaries(),
   ]);
   const set = new Set<string>([...putokaziSlugs, ...hubs.map((h) => h.slug)]);
@@ -91,7 +91,7 @@ export async function generateMetadata({
       },
     };
   }
-  const doc = await fetchPutokazBySlug(slug, 'putokazi');
+  const doc = await fetchPutokazBySlug(slug);
   if (!doc) return { title: 'Putokaz' };
   const description = doc.lead?.trim() || undefined;
   const cover = resolvePutokazCover(
@@ -279,7 +279,7 @@ export default async function PutokazDetailPage({ params }: PageProps) {
     );
   }
 
-  const doc = await fetchPutokazBySlug(slug, 'putokazi');
+  const doc = await fetchPutokazBySlug(slug);
   if (!doc) notFound();
 
   const cover = resolvePutokazCover(

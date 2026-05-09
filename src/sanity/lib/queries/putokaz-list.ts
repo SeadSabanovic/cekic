@@ -2,75 +2,79 @@ import { groq } from 'next-sanity';
 
 import type { PutokaziTradeKategorija } from '@/lib/putokazi-trade-categories';
 import { client } from '@/sanity/lib/client';
-
-export type PutokazSekcija = 'putokazi' | 'projekti';
+import type { RoadmapHubStats } from '@/sanity/lib/queries/roadmap';
 
 export type PutokaziListTradeFilter = 'sve' | PutokaziTradeKategorija;
 
-/** Samo objavljeni dokumenti (bez nacrta u `drafts.**`). */
+const tradeCardProjection = groq`{
+  _id,
+  title,
+  "slug": slug.current,
+  kategorija,
+  lead,
+  locked,
+  stats {
+    zarada,
+    vrijeme,
+    potraznja
+  },
+  coverImage {
+    asset,
+    alt,
+    hotspot,
+    crop
+  }
+}`;
+
 const publishedPutokazFilter = groq`
   _type == "putokaz"
   && defined(slug.current)
   && !(_id in path("drafts.**"))
 `;
 
-const sekcijaFilter = groq`
-  select(
-    $sekcija == "putokazi" => !defined(sekcija) || sekcija == "putokazi",
-    sekcija == $sekcija
-  )
+const publishedProjekatFilter = groq`
+  _type == "projekat"
+  && defined(slug.current)
+  && !(_id in path("drafts.**"))
 `;
 
-/** Filter po `?sekcija=` na listi: „sve” ili prazno = svi; inače samo `kategorija == trade`. */
+/** Filter po kategoriji na listi: „sve” ili prazno = svi; inače samo `kategorija == trade`. */
 const tradeListFilter = groq`
   (!defined($trade) || $trade == "" || $trade == "sve" || kategorija == $trade)
 `;
 
 const putokaziListQuery = groq`
-  *[${publishedPutokazFilter} && ${sekcijaFilter} && ${tradeListFilter}] | order(title asc) {
-    _id,
-    title,
-    "slug": slug.current,
-    sekcija,
-    kategorija,
-    lead,
-    coverImage {
-      asset,
-      alt,
-      hotspot,
-      crop
-    }
-  }
+  *[${publishedPutokazFilter} && ${tradeListFilter}] | order(title asc) ${tradeCardProjection}
+`;
+
+const projektiListQuery = groq`
+  *[${publishedProjekatFilter} && ${tradeListFilter}] | order(title asc) ${tradeCardProjection}
 `;
 
 const putokazBySlugQuery = groq`
-  *[${publishedPutokazFilter} && ${sekcijaFilter} && slug.current == $slug][0]{
-    _id,
-    title,
-    "slug": slug.current,
-    sekcija,
-    kategorija,
-    lead,
-    coverImage {
-      asset,
-      alt,
-      hotspot,
-      crop
-    }
-  }
+  *[${publishedPutokazFilter} && slug.current == $slug][0] ${tradeCardProjection}
+`;
+
+const projekatBySlugQuery = groq`
+  *[${publishedProjekatFilter} && slug.current == $slug][0] ${tradeCardProjection}
 `;
 
 const putokaziSlugsQuery = groq`
-  *[${publishedPutokazFilter} && ${sekcijaFilter}].slug.current
+  *[${publishedPutokazFilter}].slug.current
 `;
 
-export type PutokazListItem = {
+const projektiSlugsQuery = groq`
+  *[${publishedProjekatFilter}].slug.current
+`;
+
+export type TradeCardListItem = {
   _id: string;
   title: string;
   slug: string;
-  sekcija?: PutokazSekcija;
   kategorija?: PutokaziTradeKategorija | null;
   lead: string | null;
+  locked?: boolean | null;
+  stats?: RoadmapHubStats | null;
   coverImage?: {
     asset?: { _ref: string } | null;
     alt?: string | null;
@@ -79,23 +83,39 @@ export type PutokazListItem = {
   } | null;
 };
 
-export async function fetchPutokaziList(
-  sekcija: PutokazSekcija = 'putokazi',
-  options?: { trade?: PutokaziListTradeFilter }
-): Promise<PutokazListItem[]> {
+/** @deprecated Koristi `TradeCardListItem`. */
+export type PutokazListItem = TradeCardListItem;
+
+export async function fetchPutokaziList(options?: {
+  trade?: PutokaziListTradeFilter;
+}): Promise<TradeCardListItem[]> {
   const trade = options?.trade ?? 'sve';
-  return client.fetch(putokaziListQuery, { sekcija, trade });
+  return client.fetch(putokaziListQuery, { trade });
+}
+
+export async function fetchProjektiList(options?: {
+  trade?: PutokaziListTradeFilter;
+}): Promise<TradeCardListItem[]> {
+  const trade = options?.trade ?? 'sve';
+  return client.fetch(projektiListQuery, { trade });
 }
 
 export async function fetchPutokazBySlug(
-  slug: string,
-  sekcija: PutokazSekcija = 'putokazi'
-): Promise<PutokazListItem | null> {
-  return client.fetch(putokazBySlugQuery, { slug, sekcija });
+  slug: string
+): Promise<TradeCardListItem | null> {
+  return client.fetch(putokazBySlugQuery, { slug });
 }
 
-export async function fetchPutokaziSlugs(
-  sekcija: PutokazSekcija = 'putokazi'
-): Promise<string[]> {
-  return client.fetch(putokaziSlugsQuery, { sekcija });
+export async function fetchProjekatBySlug(
+  slug: string
+): Promise<TradeCardListItem | null> {
+  return client.fetch(projekatBySlugQuery, { slug });
+}
+
+export async function fetchPutokaziSlugs(): Promise<string[]> {
+  return client.fetch(putokaziSlugsQuery);
+}
+
+export async function fetchProjektiSlugs(): Promise<string[]> {
+  return client.fetch(projektiSlugsQuery);
 }

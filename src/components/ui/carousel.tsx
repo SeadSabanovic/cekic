@@ -132,24 +132,28 @@ function Carousel({
   );
 }
 
-function CarouselContent({ className, ...props }: React.ComponentProps<'div'>) {
+function CarouselContent({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<'div'>) {
   const { carouselRef, orientation } = useCarousel();
 
   return (
     <div
       ref={carouselRef}
-      className={cn('overflow-hidden', className)}
+      className={cn(className, 'overflow-hidden!')}
       data-slot="carousel-content"
       {...props}
     >
       <div
         className={cn(
           'flex',
-          orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
-          className
+          orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col'
         )}
-        {...props}
-      />
+      >
+        {children}
+      </div>
     </div>
   );
 }
@@ -188,8 +192,8 @@ function CarouselPrevious({
       className={cn(
         'absolute touch-manipulation rounded-full',
         orientation === 'horizontal'
-          ? 'top-1/2 -left-12 -translate-y-1/2'
-          : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
+          ? 'top-1/2 -left-12 -translate-y-1/2 active:-translate-y-1/2!'
+          : '-top-12 left-1/2 -translate-x-1/2 rotate-90 active:translate-y-0!',
         className
       )}
       disabled={!canScrollPrev}
@@ -218,8 +222,8 @@ function CarouselNext({
       className={cn(
         'absolute touch-manipulation rounded-full',
         orientation === 'horizontal'
-          ? 'top-1/2 -right-12 -translate-y-1/2'
-          : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
+          ? 'top-1/2 -right-12 -translate-y-1/2 active:-translate-y-1/2!'
+          : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90 active:translate-y-0!',
         className
       )}
       disabled={!canScrollNext}

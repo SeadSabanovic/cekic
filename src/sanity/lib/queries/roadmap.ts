@@ -95,6 +95,7 @@ export type RoadmapHubSummary = {
   title: string;
   slug: string;
   lead: string | null;
+  locked?: boolean | null;
   aboutOccupation?: PortableTextBlock[] | null;
   coverImage?: {
     asset?: { _ref: string } | null;
@@ -111,6 +112,7 @@ const roadmapHubsListQuery = groq`
     title,
     "slug": slug.current,
     lead,
+    locked,
     aboutOccupation,
     coverImage {
       asset,

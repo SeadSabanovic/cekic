@@ -3,11 +3,12 @@ import { defineField, defineType } from 'sanity';
 import { putokaziTradeCategoryOptions } from '@/lib/putokazi-trade-categories';
 
 /**
- * Osnovni putokaz (mapa puta) — proširivo kasnije koracima, blokovima, itd.
+ * DIY projekt za /projekti — isti oblik kao `putokaz`, ali odvojen `_type`
+ * da se zona odredi listom u Studiju (nema ručnog polja „Sekcija”).
  */
 export default defineType({
-  name: 'putokaz',
-  title: 'Putokaz',
+  name: 'projekat',
+  title: 'Projekt',
   type: 'document',
   fields: [
     defineField({
@@ -34,7 +35,7 @@ export default defineType({
       name: 'kategorija',
       title: 'Kategorija (filter na sajtu)',
       description:
-        'Odaberi jednu kategoriju da se putokaz pojavi pod odgovarajućim filterom na /putokazi. Ako ostane prazno, vidi se samo pod „Sve”.',
+        'Odaberi jednu kategoriju da se projekt pojavi pod odgovarajućim filterom na /projekti. Ako ostane prazno, vidi se samo pod „Sve”.',
       type: 'string',
       options: {
         list: putokaziTradeCategoryOptions.map((o) => ({
@@ -45,35 +46,9 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'stats',
-      title: 'Brzi podaci (kartice)',
-      description:
-        'Za početnu i liste: zarada, vrijeme do samostalne zarade, potražnja na tržištu. Prazno = prikazuje se „--”.',
-      type: 'object',
-      fields: [
-        defineField({
-          name: 'zarada',
-          title: 'Zarada',
-          type: 'string',
-        }),
-        defineField({
-          name: 'vrijeme',
-          title: 'Vrijeme',
-          type: 'string',
-        }),
-        defineField({
-          name: 'potraznja',
-          title: 'Potražnja',
-          type: 'string',
-        }),
-      ],
-      options: { collapsible: true, collapsed: true },
-    }),
-    defineField({
       name: 'coverImage',
       title: 'Naslovna slika',
-      description:
-        'Za karticu na listi putokaza i zaglavlje stranice pojedinačnog putokaza.',
+      description: 'Za karticu na listi projekata i zaglavlje stranice projekta.',
       type: 'image',
       options: { hotspot: true },
       fields: [
@@ -89,7 +64,7 @@ export default defineType({
       name: 'locked',
       title: 'Zaključano (Uskoro)',
       description:
-        'Ako je uključeno, stranica ostaje objavljena, ali na početnoj kartici u karuselu prikazujemo „Uskoro” umjesto običnog linka.',
+        'Ako je uključeno, stranica ostaje objavljena, ali na listi projekata kartica izgleda kao „Uskoro” (nije klikabilna).',
       type: 'boolean',
       initialValue: false,
     }),
@@ -107,7 +82,7 @@ export default defineType({
       const lock = locked ? ' • Uskoro' : '';
       return {
         title: title ?? 'Bez naslova',
-        subtitle: `Putokazi${slug ? ` • /${slug}` : ''}${kat}${lock}`,
+        subtitle: `Projekti${slug ? ` • /${slug}` : ''}${kat}${lock}`,
         media,
       };
     },

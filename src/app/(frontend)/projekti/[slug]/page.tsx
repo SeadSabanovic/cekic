@@ -5,8 +5,8 @@ import Container from '@/components/global/container';
 import Heading from '@/components/shared/heading';
 import { resolvePutokazCover } from '@/lib/putokaz-cover';
 import {
-  fetchPutokazBySlug,
-  fetchPutokaziSlugs,
+  fetchProjekatBySlug,
+  fetchProjektiSlugs,
 } from '@/sanity/lib/queries/putokaz-list';
 
 export const revalidate = 60;
@@ -16,7 +16,7 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  const slugs = await fetchPutokaziSlugs('projekti');
+  const slugs = await fetchProjektiSlugs();
   return slugs.map((slug) => ({ slug }));
 }
 
@@ -24,7 +24,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const doc = await fetchPutokazBySlug(slug, 'projekti');
+  const doc = await fetchProjekatBySlug(slug);
   if (!doc) return { title: 'Projekt' };
   const description = doc.lead?.trim() || undefined;
   const cover = resolvePutokazCover(
@@ -55,7 +55,7 @@ export async function generateMetadata({
 
 export default async function ProjektDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const doc = await fetchPutokazBySlug(slug, 'projekti');
+  const doc = await fetchProjekatBySlug(slug);
   if (!doc) notFound();
 
   const cover = resolvePutokazCover(

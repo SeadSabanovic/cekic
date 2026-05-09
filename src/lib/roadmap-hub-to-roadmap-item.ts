@@ -1,6 +1,7 @@
 import { MapPinned } from 'lucide-react';
 
 import type { RoadmapItem } from '@/lib/home-roadmaps-data';
+import { toRoadmapCardStats } from '@/lib/roadmap-card-stats';
 import { resolvePutokazCover } from '@/lib/putokaz-cover';
 import type { RoadmapHubSummary } from '@/sanity/lib/queries/roadmap';
 
@@ -16,6 +17,7 @@ export function roadmapHubSummaryToRoadmapItem(
   return {
     id: hub.slug,
     title: hub.title,
+    locked: hub.locked === true,
     description:
       hub.lead?.trim() ||
       'Mapa puta s poglavljima — uredi naslov, uvod i poglavlja u studiju.',
@@ -26,5 +28,6 @@ export function roadmapHubSummaryToRoadmapItem(
     tradeLabel: 'Zanat',
     listSource: 'roadmapHub',
     cover: thumb,
+    cardStats: toRoadmapCardStats(hub.stats),
   };
 }

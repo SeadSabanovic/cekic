@@ -1,6 +1,6 @@
 /**
  * Kategorije „logičan put gradnje” — moraju se poklapati sa URL parametrom
- * `?sekcija=` i sa vrijednošću polja `kategorija` na Sanity dokumentu `putokaz`.
+ * `?sekcija=` (filter zanata) i sa poljem `kategorija` na `putokaz` / `projekat`.
  */
 export const putokaziTradeCategoryIds = [
   'zidovi',

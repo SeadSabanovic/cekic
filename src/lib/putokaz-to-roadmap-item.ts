@@ -1,16 +1,19 @@
 import { MapPinned } from 'lucide-react';
 
 import type { RoadmapItem } from '@/lib/home-roadmaps-data';
+import { toRoadmapCardStats } from '@/lib/roadmap-card-stats';
 import { resolvePutokazCover } from '@/lib/putokaz-cover';
 import {
   isPutokaziTradeKategorija,
   putokaziTradeCategoryLabels,
 } from '@/lib/putokazi-trade-categories';
-import type { PutokazListItem } from '@/sanity/lib/queries/putokaz-list';
+import type { TradeCardListItem } from '@/sanity/lib/queries/putokaz-list';
 
-/** Pretvara Sanity `putokaz` u oblik koji očekuje `RoadmapCard` (ikona i placeholder polja). */
-export function putokazListItemToRoadmapItem(
-  doc: PutokazListItem
+type TradeCardListSource = 'putokaz' | 'projekat';
+
+function tradeCardToRoadmapItem(
+  doc: TradeCardListItem,
+  listSource: TradeCardListSource
 ): RoadmapItem {
   const thumb = resolvePutokazCover(
     { title: doc.title, coverImage: doc.coverImage },
@@ -22,18 +25,33 @@ export function putokazListItemToRoadmapItem(
       ? putokaziTradeCategoryLabels[doc.kategorija]
       : null;
 
+  const placeholderLead =
+    listSource === 'projekat'
+      ? 'Projekt iz CMS-a; sadržaj koraka i detalja se dodaje u studiju.'
+      : 'Putokaz iz CMS-a; sadržaj koraka i detalja se dodaje u studiju.';
+
   return {
-    listSource: 'putokaz',
+    listSource,
     id: doc.slug,
     title: doc.title,
-    description:
-      doc.lead?.trim() ||
-      'Putokaz iz CMS-a; sadržaj koraka i detalja se dodaje u studiju.',
+    locked: doc.locked === true,
+    description: doc.lead?.trim() || placeholderLead,
     category: 'uradi-sam',
     difficulty: 'pocetni',
     duration: '\u2014',
     icon: MapPinned,
     tradeLabel,
     cover: thumb,
+    cardStats: toRoadmapCardStats(doc.stats),
   };
+}
+
+/** Kartica za listu putokaza (`/putokazi`). */
+export function putokazListItemToRoadmapItem(doc: TradeCardListItem): RoadmapItem {
+  return tradeCardToRoadmapItem(doc, 'putokaz');
+}
+
+/** Kartica za listu projekata (`/projekti`). */
+export function projekatListItemToRoadmapItem(doc: TradeCardListItem): RoadmapItem {
+  return tradeCardToRoadmapItem(doc, 'projekat');
 }

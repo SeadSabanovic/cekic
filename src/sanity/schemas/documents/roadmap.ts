@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity';
 
 /**
  * Hub mapa puta (npr. „Postani moler”) — URL: /putokazi/{slug}.
- * U Studiju živi pod istom listom „Putokazi” kao i kartice `putokaz`.
+ * U Studiju: lista „Karijerni putokazi” (structure).
  */
 export default defineType({
   name: 'roadmap',
@@ -91,13 +91,27 @@ export default defineType({
       of: [{ type: 'roadmapSection' }],
       validation: (Rule) => Rule.required().min(1),
     }),
+    defineField({
+      name: 'locked',
+      title: 'Zaključano (Uskoro)',
+      description:
+        'Ako je uključeno, hub ostaje objavljen, ali na početnoj kartici u karuselu prikazujemo „Uskoro” umjesto običnog linka.',
+      type: 'boolean',
+      initialValue: false,
+    }),
   ],
   preview: {
-    select: { title: 'title', slug: 'slug.current', media: 'coverImage' },
-    prepare({ title, slug, media }) {
+    select: {
+      title: 'title',
+      slug: 'slug.current',
+      locked: 'locked',
+      media: 'coverImage',
+    },
+    prepare({ title, slug, locked, media }) {
+      const lock = locked ? ' • Uskoro' : '';
       return {
         title: title ?? 'Bez naslova',
-        subtitle: slug ? `Putokazi • /${slug}` : '',
+        subtitle: slug ? `Putokazi • /${slug}${lock}` : lock || '',
         media,
       };
     },

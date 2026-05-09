@@ -6,6 +6,13 @@ export type RoadmapCategory = 'uradi-sam' | 'zanatski-putevi';
 
 export type RoadmapDifficulty = 'pocetni' | 'srednji' | 'napredni';
 
+/** Zarada, vrijeme do zarade, potražnja — minikartice ispod naslova (npr. početna). */
+export type RoadmapCardStats = {
+  zarada: string;
+  vrijeme: string;
+  potraznja: string;
+};
+
 export interface RoadmapItem {
   id: string;
   title: string;
@@ -14,15 +21,22 @@ export interface RoadmapItem {
   difficulty: RoadmapDifficulty;
   duration: string;
   icon: LucideIcon;
-  /** Porijeklo zapisa na listi /putokazi (za React key i ponašanje). */
-  listSource?: 'roadmapHub' | 'putokaz';
-  /** Oznaka iz CMS-a (`putokaz.kategorija`), npr. „Zidovi”. */
+  /** Porijeklo zapisa na listi (za React key i ponašanje). */
+  listSource?: 'roadmapHub' | 'putokaz' | 'projekat';
+  /** Oznaka iz CMS-a (`kategorija`), npr. „Zidovi”. */
   tradeLabel?: string | null;
   /** Opcionalna naslovna slika (npr. iz CMS-a). */
   cover?: {
     url: string;
     alt: string;
   } | null;
+  /**
+   * Iz CMS polja `locked` — kartica ostaje vidljiva, ali kao „Uskoro”
+   * (npr. početni karusel bez linka).
+   */
+  locked?: boolean;
+  /** Zarada, vrijeme, potražnja — prikaz ispod naslova na kartici. */
+  cardStats: RoadmapCardStats;
 }
 
 export const difficultyLabel: Record<RoadmapDifficulty, string> = {

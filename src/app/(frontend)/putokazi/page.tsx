@@ -26,7 +26,7 @@ export default async function PutokaziPage({ searchParams }: PageProps) {
   const sp = await searchParams;
   const trade = normalizePutokaziTradeQueryParam(sp.sekcija);
   const filterItems = getPutokaziTradeFilters();
-  const putokazi = await fetchPutokaziList('putokazi', { trade });
+  const putokazi = await fetchPutokaziList({ trade });
   const hubovi =
     trade === 'sve' ? await fetchRoadmapHubSummaries() : ([] as const);
   const cards = [
@@ -57,7 +57,11 @@ export default async function PutokaziPage({ searchParams }: PageProps) {
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {cards.map((map) => (
                 <li key={`${map.listSource ?? 'putokaz'}-${map.id}`}>
-                  <RoadmapCard map={map} detailHref={`/putokazi/${map.id}`} />
+                  <RoadmapCard
+                    map={map}
+                    detailHref={`/putokazi/${map.id}`}
+                    enabled={!map.locked}
+                  />
                 </li>
               ))}
             </ul>
