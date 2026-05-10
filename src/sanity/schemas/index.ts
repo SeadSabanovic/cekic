@@ -8,5 +8,12 @@ import horizontalRule from './objects/horizontal-rule';
 import hubStatsBar from './objects/hub-stats-bar';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [horizontalRule, hubStatsBar, roadmapSection, roadmap, putokaz, projekat],
+  types: [
+    horizontalRule,
+    hubStatsBar,
+    roadmapSection,
+    roadmap,
+    putokaz,
+    projekat,
+  ],
 };

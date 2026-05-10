@@ -47,11 +47,15 @@ function tradeCardToRoadmapItem(
 }
 
 /** Kartica za listu putokaza (`/putokazi`). */
-export function putokazListItemToRoadmapItem(doc: TradeCardListItem): RoadmapItem {
+export function putokazListItemToRoadmapItem(
+  doc: TradeCardListItem
+): RoadmapItem {
   return tradeCardToRoadmapItem(doc, 'putokaz');
 }
 
 /** Kartica za listu projekata (`/projekti`). */
-export function projekatListItemToRoadmapItem(doc: TradeCardListItem): RoadmapItem {
+export function projekatListItemToRoadmapItem(
+  doc: TradeCardListItem
+): RoadmapItem {
   return tradeCardToRoadmapItem(doc, 'projekat');
 }

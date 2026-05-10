@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Clock3, Wallet } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 import Container from '@/components/global/container';
 import Heading from '@/components/shared/heading';
 import { Badge } from '@/components/ui/badge';
+import { RoadmapCoverStatBadges } from '@/components/ui/cards/roadmap-cover-stat-badges';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import {
@@ -75,6 +76,7 @@ export default async function HomeRoadmapsSection() {
               <CarouselContent className="px-6 md:px-10">
                 {cards.map((map) => {
                   const locked = map.locked === true;
+                  const { zarada, vrijeme } = map.cardStats;
                   const cardMedia = (
                     <div className="relative aspect-5/4 w-full shrink-0 overflow-hidden rounded-2xl bg-muted/30">
                       {map.cover?.url ? (
@@ -103,36 +105,17 @@ export default async function HomeRoadmapsSection() {
                           USKORO
                         </Badge>
                       ) : null}
+                      <RoadmapCoverStatBadges
+                        zarada={zarada}
+                        vrijeme={vrijeme}
+                      />
                     </div>
                   );
-                  const { zarada, vrijeme } = map.cardStats;
                   const cardFooter = (
                     <div className="flex flex-1 flex-col justify-center p-4">
                       <p className="line-clamp-3 text-lg font-semibold tracking-tight text-foreground">
                         {map.title}
                       </p>
-                      <div
-                        className="mt-2.5 flex flex-wrap gap-1 sm:gap-1.5"
-                        role="group"
-                        aria-label="Zarada i vrijeme do samostalne zarade"
-                      >
-                        <Badge
-                          variant="outline"
-                          title={`Zarada: ${zarada}`}
-                          className="h-auto min-h-6 min-w-0 border-green-500/20 bg-green-500/10 text-green-800"
-                        >
-                          <Wallet className="shrink-0" aria-hidden />
-                          <span className="min-w-0 truncate">{zarada}</span>
-                        </Badge>
-                        <Badge
-                          variant="outline"
-                          title={`Vrijeme: ${vrijeme}`}
-                          className="h-auto min-h-6 min-w-0 border-yellow-500/20 bg-yellow-500/10 text-yellow-800"
-                        >
-                          <Clock3 className="shrink-0" aria-hidden />
-                          <span className="min-w-0 truncate">{vrijeme}</span>
-                        </Badge>
-                      </div>
                     </div>
                   );
 

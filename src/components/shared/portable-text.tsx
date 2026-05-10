@@ -8,5 +8,7 @@ type PortableTextProps = {
 
 /** Centralizovan renderer za Sanity Portable Text sadržaj. */
 export default function PortableText({ value }: PortableTextProps) {
-  return <SanityPortableText value={value} components={portableTextComponents} />;
+  return (
+    <SanityPortableText value={value} components={portableTextComponents} />
+  );
 }

@@ -48,7 +48,8 @@ export default defineType({
     defineField({
       name: 'coverImage',
       title: 'Naslovna slika',
-      description: 'Za karticu na listi projekata i zaglavlje stranice projekta.',
+      description:
+        'Za karticu na listi projekata i zaglavlje stranice projekta.',
       type: 'image',
       options: { hotspot: true },
       fields: [

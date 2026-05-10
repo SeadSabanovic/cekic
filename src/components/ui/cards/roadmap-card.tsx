@@ -1,10 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { difficultyLabel, type RoadmapItem } from '@/lib/home-roadmaps-data';
 
 import { RoadmapBookmarkButton } from './roadmap-bookmark-button';
+import { RoadmapCoverStatBadges } from './roadmap-cover-stat-badges';
 
 export type RoadmapCardProps = {
   map: RoadmapItem;
@@ -13,6 +15,11 @@ export type RoadmapCardProps = {
   /** Kada je false, karta nije klikabilna i izgleda onemogućeno (npr. izvan MVP opsega). */
   enabled?: boolean;
   className?: string;
+  /**
+   * `putokazi` — kao karusel: slika 5/4, zarada/vrijeme na slici, ispod naslov.
+   * `projekti` — isti raspored slike i naslova, bez stat badgeva (projekti nemaju zaradu/vrijeme).
+   */
+  variant?: 'default' | 'putokazi' | 'projekti';
 };
 
 /**
@@ -24,10 +31,92 @@ export default function RoadmapCard({
   detailHref,
   enabled = true,
   className,
+  variant = 'default',
 }: RoadmapCardProps) {
   const Icon = map.icon;
   const titleId = `roadmap-title-${map.id}`;
   const href = detailHref ?? `/mape/${map.id}`;
+  const locked = !enabled;
+
+  if (variant === 'putokazi' || variant === 'projekti') {
+    const showCoverStatBadges = variant === 'putokazi';
+    const cardMedia = (
+      <div className="relative aspect-5/4 w-full shrink-0 overflow-hidden rounded-2xl bg-muted/30">
+        {map.cover?.url ? (
+          <Image
+            src={map.cover.url}
+            alt={map.cover.alt}
+            fill
+            className={cn(
+              'absolute inset-0 size-full rounded-2xl object-cover transition-transform duration-500',
+              !locked && 'group-hover:scale-[1.03]',
+              locked && 'opacity-60'
+            )}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            loading="lazy"
+          />
+        ) : (
+          <div className="flex size-full items-center justify-center bg-linear-to-b from-muted/80 to-muted">
+            <Icon className="size-12 text-muted-foreground" />
+          </div>
+        )}
+        {locked ? (
+          <Badge
+            className="pointer-events-none absolute top-3 left-3 z-20 h-auto min-h-6 min-w-0 backdrop-blur-sm"
+            aria-hidden
+          >
+            USKORO
+          </Badge>
+        ) : null}
+        {showCoverStatBadges ? (
+          <RoadmapCoverStatBadges
+            zarada={map.cardStats.zarada}
+            vrijeme={map.cardStats.vrijeme}
+          />
+        ) : null}
+      </div>
+    );
+
+    const cardFooter = (
+      <div className="flex flex-1 flex-col justify-center p-4">
+        <p
+          id={titleId}
+          className="line-clamp-3 text-lg font-semibold tracking-tight text-foreground"
+        >
+          {map.title}
+        </p>
+      </div>
+    );
+
+    return (
+      <article
+        className={cn(
+          'flex h-full flex-col bg-background',
+          locked && 'select-none',
+          className
+        )}
+      >
+        {locked ? (
+          <div
+            className="flex h-full min-h-0 flex-col rounded-2xl outline-none"
+            aria-label={`${map.title} — uskoro dostupno`}
+          >
+            {cardMedia}
+            {cardFooter}
+          </div>
+        ) : (
+          <Link
+            href={href}
+            className="group flex h-full min-h-0 flex-col rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            aria-labelledby={titleId}
+          >
+            {cardMedia}
+            {cardFooter}
+          </Link>
+        )}
+      </article>
+    );
+  }
 
   const shellClassName = cn(
     'group relative flex h-full flex-col rounded-xl border p-5 transition-all duration-200',

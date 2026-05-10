@@ -60,6 +60,7 @@ export default async function ProjektiPage({ searchParams }: PageProps) {
                     map={map}
                     detailHref={`/projekti/${map.id}`}
                     enabled={!map.locked}
+                    variant="projekti"
                   />
                 </li>
               ))}

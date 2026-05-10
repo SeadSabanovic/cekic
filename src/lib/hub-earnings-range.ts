@@ -79,7 +79,11 @@ export function resolveEarningsRangeForChart(e?: EarningsByRegion | null) {
     scaleFromCms != null ? scaleFromCms : defaultScaleMax(balkanMax, euMax);
 
   return {
-    balkan: { min: balkanMin, max: Math.max(balkanMin, balkanMax), label: 'Balkan' as const },
+    balkan: {
+      min: balkanMin,
+      max: Math.max(balkanMin, balkanMax),
+      label: 'Balkan' as const,
+    },
     eu: { min: euMin, max: Math.max(euMin, euMax), label: 'EU' as const },
     scaleMax,
     usesCmsValues: isEarningsByRegionComplete(normalized),

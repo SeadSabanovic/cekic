@@ -61,6 +61,7 @@ export default async function PutokaziPage({ searchParams }: PageProps) {
                     map={map}
                     detailHref={`/putokazi/${map.id}`}
                     enabled={!map.locked}
+                    variant="putokazi"
                   />
                 </li>
               ))}

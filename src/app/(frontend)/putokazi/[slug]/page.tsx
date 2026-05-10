@@ -178,7 +178,7 @@ export default async function PutokazDetailPage({ params }: PageProps) {
                     <Heading
                       tag="h2"
                       size="xs"
-                      className="mt-2 text-foreground leading-tight md:text-xl"
+                      className="mt-2 leading-tight text-foreground md:text-xl"
                     >
                       {item.value}
                     </Heading>

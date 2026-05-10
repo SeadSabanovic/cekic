@@ -1,5 +1,8 @@
 import type { RoadmapCardStats } from '@/lib/home-roadmaps-data';
-import type { EarningsByRegion, RoadmapHubStats } from '@/sanity/lib/queries/roadmap';
+import type {
+  EarningsByRegion,
+  RoadmapHubStats,
+} from '@/sanity/lib/queries/roadmap';
 
 import {
   isEarningsByRegionComplete,
