@@ -25,7 +25,7 @@ function RangeRow({
 
   return (
     <div className="space-y-1.5">
-      <div className="flex flex-wrap items-baseline justify-between gap-2 text-xs text-muted-foreground">
+      <div className="flex flex-wrap items-baseline justify-between gap-2 text-xs">
         <span className="font-medium tracking-wide text-foreground uppercase">
           {label}
         </span>
@@ -34,12 +34,12 @@ function RangeRow({
         </span>
       </div>
       <div
-        className="relative h-2.5 w-full overflow-hidden rounded-full bg-muted/80"
+        className="relative h-2.5 w-full overflow-hidden rounded-full bg-primary/10"
         role="presentation"
         aria-hidden
       >
         <div
-          className="absolute top-0 h-full rounded-full bg-primary/75"
+          className="absolute top-0 h-full rounded-full bg-primary"
           style={{
             left: `${leftPct}%`,
             width: `${widthPct}%`,
@@ -85,7 +85,7 @@ export default function HubEarningsRangeChart({
           </p>
         </div>
         <span
-          className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border/70 bg-background/80 text-muted-foreground"
+          className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-primary"
           aria-label="Zarada"
         >
           <Wallet className="size-4" aria-hidden />
@@ -107,7 +107,7 @@ export default function HubEarningsRangeChart({
         />
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 border-t border-dashed border-border/60 pt-4 text-[11px] text-muted-foreground tabular-nums">
+      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 border-t border-dashed border-border/60 pt-4 text-[11px] tabular-nums">
         <span>Skala: 0 – {formatEuro(scaleMax)}</span>
         <span className="hidden sm:inline" aria-hidden>
           ·

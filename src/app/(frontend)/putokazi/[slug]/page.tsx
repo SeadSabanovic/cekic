@@ -3,12 +3,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { unstable_noStore as noStore } from 'next/cache';
 import { notFound } from 'next/navigation';
-import { Clock3, TrendingUp, type LucideIcon } from 'lucide-react';
+import { ArrowRight, Clock3, TrendingUp, type LucideIcon } from 'lucide-react';
 import Container from '@/components/global/container';
 import HeroBlock from '@/components/blocks/hero-block';
 import Heading from '@/components/shared/heading';
 import HubEarningsRangeChart from '@/components/pages/putokazi/hub-earnings-range-chart';
+import {
+  HubPageTocMobile,
+  HubPageTocSidebar,
+} from '@/components/pages/putokazi/hub-page-toc';
 import PortableText from '@/components/shared/portable-text';
+import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { resolvePutokazCover } from '@/lib/putokaz-cover';
 import {
@@ -159,129 +164,158 @@ export default async function PutokazDetailPage({ params }: PageProps) {
             : {})}
         />
 
-        {/* Raspon zarade (CMS), zatim vrijeme i potražnja */}
-        <Container paddingTop="small" paddingBottom="small">
-          <HubEarningsRangeChart
-            earningsByRegion={hub.stats?.earningsByRegion}
-          />
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
-            {timeDemandStats.map((item) => (
-              <article
-                key={`${hub.slug}-${item.label}`}
-                className="rounded-xl border border-solid border-border/80 bg-background/60 p-5"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
-                      {item.label}
-                    </p>
-                    <Heading
-                      tag="h2"
-                      size="xs"
-                      className="mt-2 leading-tight text-foreground md:text-xl"
-                    >
-                      {item.value}
-                    </Heading>
-                  </div>
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/70 bg-background/80 text-muted-foreground">
-                    <item.icon className="size-4" aria-hidden />
-                  </span>
-                </div>
-              </article>
-            ))}
-          </div>
-        </Container>
-
-        {/* About Occupation */}
-        <Container
-          paddingTop="small"
-          paddingBottom="small"
-          className="border-x border-t border-dashed"
-        >
-          <div className="grid grid-cols-12 gap-3 pt-6 pb-10 md:gap-6 md:px-10 md:pt-10 md:pb-14 xl:gap-14">
-            <div className="col-span-12 lg:col-span-4">
-              <Heading
-                id="about-occupation-heading"
-                tag="h2"
-                size="xl"
-                className="leading-tight text-balance md:max-w-160 lg:sticky lg:top-32"
-              >
-                O zanimanju
-              </Heading>
-            </div>
-            <div className="col-span-12 lg:col-span-8 xl:col-span-6">
-              {Array.isArray(hub.aboutOccupation) &&
-              hub.aboutOccupation.length > 0 ? (
-                <div>
-                  <PortableText value={hub.aboutOccupation} />
-                </div>
-              ) : (
-                <p className="mt-3 text-base leading-relaxed text-muted-foreground md:mt-0 md:text-lg">
-                  Dodaj opis zanimanja u Sanity polju „O zanimanju”.
-                </p>
-              )}
-            </div>
-          </div>
-        </Container>
-
-        {/* Career Roadmap */}
         <Container
           paddingTop="small"
           paddingBottom="default"
           className="border-x border-t border-dashed"
         >
-          <div className="grid grid-cols-12 gap-3 pt-6 pb-10 md:gap-6 md:px-10 md:pt-10 md:pb-14 xl:gap-14">
-            <div className="col-span-12 lg:col-span-4">
-              <Heading
-                id="career-roadmap-heading"
-                tag="h2"
-                size="xl"
-                className="leading-tight text-balance md:max-w-160 lg:sticky lg:top-32"
+          <HubPageTocMobile />
+          <div className="mt-6 grid gap-8 lg:mt-8 lg:grid-cols-[minmax(0,1fr)_min(13.5rem,28%)] xl:grid-cols-[minmax(0,1fr)_15.5rem] xl:gap-12">
+            <div className="min-w-0 space-y-0">
+              <section
+                id="brzi-podaci"
+                className="scroll-mt-28 pb-8 md:pb-10"
+                aria-label="Brzi podaci"
               >
-                Karijerni putokaz
-              </Heading>
-            </div>
-            <div className="col-span-12 lg:col-span-8 xl:col-span-6">
-              {sections.length === 0 ? (
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:mt-0 md:text-base">
-                  Nema poglavlja — u dokumentu dodaj barem jedno poglavlje u
-                  polju „Poglavlja”.
-                </p>
-              ) : (
-                <nav
-                  className="mt-3 border-border/80 md:mt-0"
-                  aria-label="Sadržaj mape puta"
-                >
-                  <ol className="divide-y divide-dashed">
-                    {sections.map((section, index) => (
-                      <li key={section._key}>
-                        <Link
-                          href={`/putokazi/${hub.slug}/${section.slug}`}
-                          className={cn('group flex gap-4 px-4 py-4')}
-                        >
-                          <span
-                            className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-dashed border-border text-sm font-medium text-muted-foreground tabular-nums group-hover:border-foreground/30 group-hover:text-foreground"
-                            aria-hidden
+                <HubEarningsRangeChart
+                  earningsByRegion={hub.stats?.earningsByRegion}
+                />
+                <div className="mt-4 grid gap-4 md:grid-cols-2">
+                  {timeDemandStats.map((item) => (
+                    <article
+                      key={`${hub.slug}-${item.label}`}
+                      className="rounded-xl border border-solid border-border/80 bg-background/60 p-5"
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+                            {item.label}
+                          </p>
+                          <Heading
+                            tag="h2"
+                            size="xs"
+                            className="mt-2 leading-tight text-foreground md:text-xl"
                           >
-                            {index + 1}
-                          </span>
-                          <span className="min-w-0 flex-1">
-                            <span className="block text-right font-medium text-foreground group-hover:underline">
-                              {section.title}
-                            </span>
-                            {section.lead?.trim() ? (
-                              <p className="mt-1 block text-right leading-relaxed text-balance text-muted-foreground">
-                                {section.lead}
-                              </p>
-                            ) : null}
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ol>
-                </nav>
-              )}
+                            {item.value}
+                          </Heading>
+                        </div>
+                        <span
+                          className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-primary"
+                          aria-label={item.label}
+                        >
+                          <item.icon className="size-4" aria-hidden />
+                        </span>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+
+              <section
+                id="o-zanimanju"
+                className="scroll-mt-28 border-t border-dashed border-border/80 pt-8 pb-10 md:pt-10 md:pb-14"
+                aria-labelledby="about-occupation-heading"
+              >
+                <div className="grid grid-cols-12 gap-3 pt-2 md:gap-6 md:px-10 md:pt-0 xl:gap-14">
+                  <div className="col-span-12 lg:col-span-4">
+                    <Heading
+                      id="about-occupation-heading"
+                      tag="h2"
+                      size="xl"
+                      className="leading-tight text-balance md:max-w-160 lg:sticky lg:top-28 lg:z-10 lg:bg-background lg:py-1"
+                    >
+                      O zanimanju
+                    </Heading>
+                  </div>
+                  <div className="col-span-12 min-w-0 lg:col-span-8">
+                    {Array.isArray(hub.aboutOccupation) &&
+                    hub.aboutOccupation.length > 0 ? (
+                      <div>
+                        <PortableText value={hub.aboutOccupation} />
+                      </div>
+                    ) : (
+                      <p className="mt-3 text-base leading-relaxed text-muted-foreground md:mt-0 md:text-lg">
+                        Dodaj opis zanimanja u Sanity polju „O zanimanju”.
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </section>
+
+              <section
+                id="karijerni-putokaz"
+                className="scroll-mt-28 border-t border-dashed border-border/80 pt-8 pb-6 md:pt-10 md:pb-10"
+                aria-labelledby="career-roadmap-heading"
+              >
+                <div className="grid grid-cols-12 gap-3 pt-2 md:gap-6 md:px-10 md:pt-0 xl:gap-14">
+                  <div className="col-span-12 lg:col-span-4">
+                    <Heading
+                      id="career-roadmap-heading"
+                      tag="h2"
+                      size="xl"
+                      className="leading-tight text-balance md:max-w-160 lg:sticky lg:top-28 lg:z-10 lg:bg-background lg:py-1"
+                    >
+                      Karijerni putokaz
+                    </Heading>
+                  </div>
+                  <div className="col-span-12 min-w-0 lg:col-span-8">
+                    {sections.length === 0 ? (
+                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:mt-0 md:text-base">
+                        Nema poglavlja — u dokumentu dodaj barem jedno poglavlje
+                        u polju „Poglavlja”.
+                      </p>
+                    ) : (
+                      <nav
+                        className="mt-3 border-border/80 md:mt-0"
+                        aria-label="Sadržaj mape puta"
+                      >
+                        <ol className="divide-y divide-dashed">
+                          {sections.map((section, index) => (
+                            <li key={section._key} className="py-6 first:pt-2">
+                              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
+                                <span
+                                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-dashed border-border text-sm font-medium text-muted-foreground tabular-nums sm:mt-0.5"
+                                  aria-hidden
+                                >
+                                  {index + 1}
+                                </span>
+                                <div className="min-w-0 flex-1 space-y-3">
+                                  <Link
+                                    href={`/putokazi/${hub.slug}/${section.slug}`}
+                                    className={cn(
+                                      buttonVariants({
+                                        variant: 'default',
+                                        size: 'lg',
+                                      }),
+                                      'group/section inline-flex w-fit max-w-full items-center gap-2 text-left whitespace-normal'
+                                    )}
+                                  >
+                                    <span className="min-w-0 wrap-break-word">
+                                      {section.title}
+                                    </span>
+                                    <ArrowRight
+                                      className="size-4 shrink-0 transition-transform duration-200 group-hover/section:translate-x-0.5"
+                                      aria-hidden
+                                    />
+                                  </Link>
+                                  {section.lead?.trim() ? (
+                                    <p className="max-w-2xl text-base leading-relaxed text-pretty text-muted-foreground md:text-lg">
+                                      {section.lead}
+                                    </p>
+                                  ) : null}
+                                </div>
+                              </div>
+                            </li>
+                          ))}
+                        </ol>
+                      </nav>
+                    )}
+                  </div>
+                </div>
+              </section>
             </div>
+
+            <HubPageTocSidebar />
           </div>
         </Container>
       </>

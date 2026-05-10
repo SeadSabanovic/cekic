@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+
 import Container from '@/components/global/container';
-import { Button } from '@/components/ui/button';
 import PortableText from '@/components/shared/portable-text';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import {
   fetchRoadmapHubBySlug,
   fetchRoadmapHubSummaries,
@@ -111,27 +114,47 @@ export default async function RoadmapSectionPage({ params }: PageProps) {
         )}
 
         <div className="mt-12 flex flex-col gap-3 border-t border-dashed pt-10 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap items-center gap-3">
             {prev ? (
-              <Button variant="outline" size="sm" asChild>
-                <Link href={`/putokazi/${hub.slug}/${prev.slug}`}>
-                  ← {prev.title}
-                </Link>
-              </Button>
-            ) : (
-              <span />
-            )}
+              <Link
+                href={`/putokazi/${hub.slug}/${prev.slug}`}
+                className={cn(
+                  buttonVariants({ variant: 'default', size: 'lg' }),
+                  'group/prev inline-flex max-w-full items-center gap-2 whitespace-normal'
+                )}
+              >
+                <ArrowLeft
+                  className="size-4 shrink-0 transition-transform duration-200 group-hover/prev:-translate-x-0.5"
+                  aria-hidden
+                />
+                <span className="min-w-0 wrap-break-word">{prev.title}</span>
+              </Link>
+            ) : null}
             {next ? (
-              <Button variant="outline" size="sm" asChild>
-                <Link href={`/putokazi/${hub.slug}/${next.slug}`}>
-                  {next.title} →
-                </Link>
-              </Button>
+              <Link
+                href={`/putokazi/${hub.slug}/${next.slug}`}
+                className={cn(
+                  buttonVariants({ variant: 'default', size: 'lg' }),
+                  'group/next inline-flex max-w-full items-center gap-2 whitespace-normal'
+                )}
+              >
+                <span className="min-w-0 wrap-break-word">{next.title}</span>
+                <ArrowRight
+                  className="size-4 shrink-0 transition-transform duration-200 group-hover/next:translate-x-0.5"
+                  aria-hidden
+                />
+              </Link>
             ) : null}
           </div>
-          <Button variant="ghost" size="sm" className="sm:ml-auto" asChild>
-            <Link href={`/putokazi/${hub.slug}`}>Sadržaj (sve)</Link>
-          </Button>
+          <Link
+            href={`/putokazi/${hub.slug}`}
+            className={cn(
+              buttonVariants({ variant: 'outline', size: 'lg' }),
+              'sm:ml-auto'
+            )}
+          >
+            Sadržaj (sve)
+          </Link>
         </div>
       </Container>
     </div>
