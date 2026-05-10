@@ -48,31 +48,9 @@ export default defineType({
     defineField({
       name: 'stats',
       title: 'Stats bar',
-      description: 'Brzi podaci iznad sadržaja (npr. zarada, vrijeme, potražnja).',
-      type: 'object',
-      fields: [
-        defineField({
-          name: 'zarada',
-          title: 'Zarada',
-          type: 'string',
-          initialValue: '1.200 – 2.500 KM',
-          validation: (Rule) => Rule.required(),
-        }),
-        defineField({
-          name: 'vrijeme',
-          title: 'Vrijeme',
-          type: 'string',
-          initialValue: '3 – 4 mjeseca',
-          validation: (Rule) => Rule.required(),
-        }),
-        defineField({
-          name: 'potraznja',
-          title: 'Potražnja',
-          type: 'string',
-          initialValue: 'Jako visoka',
-          validation: (Rule) => Rule.required(),
-        }),
-      ],
+      description:
+        'Raspon zarade po regiji (grafikon), vrijeme i potražnja iznad sadržaja.',
+      type: 'hubStatsBar',
       options: { collapsible: true, collapsed: false },
     }),
     defineField({

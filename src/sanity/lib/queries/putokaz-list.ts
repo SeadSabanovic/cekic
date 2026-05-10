@@ -6,6 +6,18 @@ import type { RoadmapHubStats } from '@/sanity/lib/queries/roadmap';
 
 export type PutokaziListTradeFilter = 'sve' | PutokaziTradeKategorija;
 
+const statsProjection = groq`{
+  vrijeme,
+  potraznja,
+  earningsByRegion {
+    balkanMin,
+    balkanMax,
+    euMin,
+    euMax,
+    scaleMax
+  }
+}`;
+
 const tradeCardProjection = groq`{
   _id,
   title,
@@ -13,11 +25,7 @@ const tradeCardProjection = groq`{
   kategorija,
   lead,
   locked,
-  stats {
-    zarada,
-    vrijeme,
-    potraznja
-  },
+  stats ${statsProjection},
   coverImage {
     asset,
     alt,

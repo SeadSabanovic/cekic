@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Clock3, TrendingUp, Wallet } from 'lucide-react';
+import { ArrowRight, Clock3, Wallet } from 'lucide-react';
 
 import Container from '@/components/global/container';
 import Heading from '@/components/shared/heading';
@@ -105,7 +105,7 @@ export default async function HomeRoadmapsSection() {
                       ) : null}
                     </div>
                   );
-                  const { zarada, vrijeme, potraznja } = map.cardStats;
+                  const { zarada, vrijeme } = map.cardStats;
                   const cardFooter = (
                     <div className="flex flex-1 flex-col justify-center p-4">
                       <p className="line-clamp-3 text-lg font-semibold tracking-tight text-foreground">
@@ -114,7 +114,7 @@ export default async function HomeRoadmapsSection() {
                       <div
                         className="mt-2.5 flex flex-wrap gap-1 sm:gap-1.5"
                         role="group"
-                        aria-label="Zarada, vrijeme do samostalne zarade i potražnja na tržištu"
+                        aria-label="Zarada i vrijeme do samostalne zarade"
                       >
                         <Badge
                           variant="outline"
@@ -131,14 +131,6 @@ export default async function HomeRoadmapsSection() {
                         >
                           <Clock3 className="shrink-0" aria-hidden />
                           <span className="min-w-0 truncate">{vrijeme}</span>
-                        </Badge>
-                        <Badge
-                          variant="outline"
-                          title={`Potražnja: ${potraznja}`}
-                          className="h-auto min-h-6 min-w-0 border-blue-500/20 bg-blue-500/10 text-blue-800"
-                        >
-                          <TrendingUp className="shrink-0" aria-hidden />
-                          <span className="min-w-0 truncate">{potraznja}</span>
                         </Badge>
                       </div>
                     </div>

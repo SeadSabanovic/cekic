@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { unstable_noStore as noStore } from 'next/cache';
 import { notFound } from 'next/navigation';
-import { Clock3, TrendingUp, Wallet, type LucideIcon } from 'lucide-react';
+import { Clock3, TrendingUp, type LucideIcon } from 'lucide-react';
 import Container from '@/components/global/container';
 import HeroBlock from '@/components/blocks/hero-block';
 import Heading from '@/components/shared/heading';
+import HubEarningsRangeChart from '@/components/pages/putokazi/hub-earnings-range-chart';
 import PortableText from '@/components/shared/portable-text';
 import { cn } from '@/lib/utils';
 import { resolvePutokazCover } from '@/lib/putokaz-cover';
@@ -31,16 +33,15 @@ type HubStatItem = {
   icon: LucideIcon;
 };
 
-const defaultHubStats: HubStatItem[] = [
-  { label: 'Zarada', value: '--', icon: Wallet },
+const defaultHubTimeDemandStats: HubStatItem[] = [
   { label: 'Vrijeme', value: '--', icon: Clock3 },
   { label: 'Potražnja', value: '--', icon: TrendingUp },
 ];
 
-function getHubStats(stats?: RoadmapHubStats | null): HubStatItem[] {
-  if (!stats) return defaultHubStats;
+/** Stat kartice ispod raspona zarade (bez „Zarade” — ona je u grafikonu). */
+function getHubTimeDemandStats(stats?: RoadmapHubStats | null): HubStatItem[] {
+  if (!stats) return defaultHubTimeDemandStats;
   return [
-    { label: 'Zarada', value: stats.zarada?.trim() || '--', icon: Wallet },
     { label: 'Vrijeme', value: stats.vrijeme?.trim() || '--', icon: Clock3 },
     {
       label: 'Potražnja',
@@ -121,11 +122,12 @@ export async function generateMetadata({
 }
 
 export default async function PutokazDetailPage({ params }: PageProps) {
+  noStore();
   const { slug } = await params;
   const hub = await fetchRoadmapHubBySlug(slug);
   if (hub) {
     const sections = hub.sections ?? [];
-    const stats = getHubStats(hub.stats);
+    const timeDemandStats = getHubTimeDemandStats(hub.stats);
     const hubCover = resolvePutokazCover(
       { title: hub.title, coverImage: hub.coverImage },
       { w: 1400, h: 800 }
@@ -157,22 +159,29 @@ export default async function PutokazDetailPage({ params }: PageProps) {
             : {})}
         />
 
-        {/* Stats */}
+        {/* Raspon zarade (CMS), zatim vrijeme i potražnja */}
         <Container paddingTop="small" paddingBottom="small">
-          <div className="grid gap-4 md:grid-cols-3">
-            {stats.map((item) => (
+          <HubEarningsRangeChart
+            earningsByRegion={hub.stats?.earningsByRegion}
+          />
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            {timeDemandStats.map((item) => (
               <article
                 key={`${hub.slug}-${item.label}`}
-                className="rounded-xl border border-dashed border-border/80 bg-background/60 p-5"
+                className="rounded-xl border border-solid border-border/80 bg-background/60 p-5"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                       {item.label}
                     </p>
-                    <p className="mt-2 text-lg leading-tight font-semibold text-foreground md:text-xl">
+                    <Heading
+                      tag="h2"
+                      size="xs"
+                      className="mt-2 text-foreground leading-tight md:text-xl"
+                    >
                       {item.value}
-                    </p>
+                    </Heading>
                   </div>
                   <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/70 bg-background/80 text-muted-foreground">
                     <item.icon className="size-4" aria-hidden />

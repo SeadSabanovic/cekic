@@ -10,11 +10,31 @@ const publishedRoadmap = groq`
 `;
 
 export type RoadmapSectionPortable = PortableTextBlock[];
+export type EarningsByRegion = {
+  balkanMin?: number | null;
+  balkanMax?: number | null;
+  euMin?: number | null;
+  euMax?: number | null;
+  scaleMax?: number | null;
+};
+
 export type RoadmapHubStats = {
-  zarada: string | null;
+  earningsByRegion?: EarningsByRegion | null;
   vrijeme: string | null;
   potraznja: string | null;
 };
+
+const statsProjection = groq`{
+  vrijeme,
+  potraznja,
+  earningsByRegion {
+    balkanMin,
+    balkanMax,
+    euMin,
+    euMax,
+    scaleMax
+  }
+}`;
 
 export type RoadmapSectionQuery = {
   _key: string;
@@ -53,11 +73,7 @@ const roadmapBySlugQuery = groq`
       hotspot,
       crop
     },
-    stats{
-      zarada,
-      vrijeme,
-      potraznja
-    },
+    stats ${statsProjection},
     sections[]{
       _key,
       title,
@@ -71,7 +87,8 @@ const roadmapBySlugQuery = groq`
 export async function fetchRoadmapHubBySlug(
   slug: string
 ): Promise<RoadmapHubQuery | null> {
-  return client.fetch(roadmapBySlugQuery, { slug });
+  /** Bez API CDN-a — nakon izmjene u Studiju odmah vidiš nove min/max na hubu. */
+  return client.fetch(roadmapBySlugQuery, { slug }, { useCdn: false });
 }
 
 const roadmapsForSitemapQuery = groq`
@@ -120,11 +137,7 @@ const roadmapHubsListQuery = groq`
       hotspot,
       crop
     },
-    stats{
-      zarada,
-      vrijeme,
-      potraznja
-    }
+    stats ${statsProjection}
   }
 `;
 

@@ -48,25 +48,8 @@ export default defineType({
       name: 'stats',
       title: 'Brzi podaci (kartice)',
       description:
-        'Za početnu i liste: zarada, vrijeme do samostalne zarade, potražnja na tržištu. Prazno = prikazuje se „--”.',
-      type: 'object',
-      fields: [
-        defineField({
-          name: 'zarada',
-          title: 'Zarada',
-          type: 'string',
-        }),
-        defineField({
-          name: 'vrijeme',
-          title: 'Vrijeme',
-          type: 'string',
-        }),
-        defineField({
-          name: 'potraznja',
-          title: 'Potražnja',
-          type: 'string',
-        }),
-      ],
+        'Raspon zarade po regiji (za minikartice), vrijeme i potražnja. Prazno = „--”.',
+      type: 'hubStatsBar',
       options: { collapsible: true, collapsed: true },
     }),
     defineField({
