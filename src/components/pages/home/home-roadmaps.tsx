@@ -41,7 +41,7 @@ export default async function HomeRoadmapsSection() {
       >
         <div>
           <Heading tag="h2" size="xl">
-            Istraži tražena zanimanja
+            Najtraženija zanimanja
           </Heading>
           <p className="mt-4 max-w-3xl text-balance text-muted-foreground md:text-lg">
             Odaberi profesiju koja ti najviše odgovara i kreni sa učenjem već
@@ -76,7 +76,7 @@ export default async function HomeRoadmapsSection() {
                 {cards.map((map) => {
                   const locked = map.locked === true;
                   const cardMedia = (
-                    <div className="relative aspect-5/4 w-full shrink-0 overflow-hidden bg-muted/30">
+                    <div className="relative aspect-5/4 w-full shrink-0 overflow-hidden rounded-2xl bg-muted/30">
                       {map.cover?.url ? (
                         <Image
                           src={map.cover.url}
@@ -85,8 +85,9 @@ export default async function HomeRoadmapsSection() {
                           sizes="(max-width: 640px) 82vw, (max-width: 1024px) 45vw, 33vw"
                           loading="lazy"
                           className={cn(
-                            'object-cover transition-transform duration-500',
-                            !locked && 'group-hover:scale-[1.03]'
+                            'absolute inset-0 size-full rounded-2xl object-cover transition-transform duration-500',
+                            !locked && 'group-hover:scale-[1.03]',
+                            locked && 'opacity-60'
                           )}
                         />
                       ) : (
@@ -95,12 +96,12 @@ export default async function HomeRoadmapsSection() {
                         </div>
                       )}
                       {locked ? (
-                        <span
-                          className="pointer-events-none absolute top-3 left-3 z-20 rounded-full border border-border/80 bg-background/60 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-foreground backdrop-blur-sm"
+                        <Badge
+                          className="pointer-events-none absolute top-3 left-3 z-20 h-auto min-h-6 min-w-0 backdrop-blur-sm"
                           aria-hidden
                         >
-                          Uskoro
-                        </span>
+                          USKORO
+                        </Badge>
                       ) : null}
                     </div>
                   );
@@ -150,7 +151,7 @@ export default async function HomeRoadmapsSection() {
                     >
                       <article
                         className={cn(
-                          'flex h-full flex-col overflow-hidden rounded-2xl border border-dashed bg-background',
+                          'flex h-full flex-col bg-background',
                           locked && 'select-none'
                         )}
                       >
@@ -176,8 +177,14 @@ export default async function HomeRoadmapsSection() {
                   );
                 })}
               </CarouselContent>
-              <CarouselPrevious className="left-6 hidden bg-background/60! backdrop-blur-sm transition-colors duration-200 hover:bg-background/80! active:translate-x-0.5! md:flex" />
-              <CarouselNext className="right-6 hidden bg-background/60! backdrop-blur-sm hover:bg-background/80! md:flex" />
+              <CarouselPrevious
+                size="icon-lg"
+                className="left-6 hidden bg-primary! text-primary-foreground backdrop-blur-sm transition-colors duration-200 hover:bg-primary/80! hover:text-primary-foreground/80 active:translate-x-0.5! disabled:opacity-0! md:flex"
+              />
+              <CarouselNext
+                size="icon-lg"
+                className="right-6 hidden bg-primary! text-primary-foreground backdrop-blur-sm hover:bg-primary/80! hover:text-primary-foreground/80 disabled:opacity-0! md:flex"
+              />
             </Carousel>
           </div>
         ) : (
