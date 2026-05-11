@@ -1,14 +1,11 @@
 import AnimatedUnderline from '@/components/shared/animated-underline';
+import { HUB_PAGE_TOC_ENTRIES } from '@/components/pages/putokazi/hub-page-toc-data';
 import { cn } from '@/lib/utils';
 
-const HUB_PAGE_SECTIONS = [
-  { href: '#brzi-podaci', label: 'Brzi podaci' },
-  { href: '#o-zanimanju', label: 'O zanimanju' },
-  { href: '#karijerni-putokaz', label: 'Karijerni putokaz' },
-] as const;
+import { HubPageTocSidebar } from '@/components/pages/putokazi/hub-page-toc-sidebar.client';
 
 const tocLinkClassName =
-  'group relative text-sm font-medium transition-colors md:text-base';
+  'group relative text-xs font-medium text-muted-foreground transition-colors hover:text-foreground md:text-sm';
 
 /** Kompaktan TOC ispod heroa na užim ekranima. */
 export function HubPageTocMobile({ className }: { className?: string }) {
@@ -20,7 +17,7 @@ export function HubPageTocMobile({ className }: { className?: string }) {
       )}
       aria-label="Na stranici"
     >
-      {HUB_PAGE_SECTIONS.map(({ href, label }) => (
+      {HUB_PAGE_TOC_ENTRIES.map(({ href, label }) => (
         <a
           key={href}
           href={href}
@@ -34,25 +31,4 @@ export function HubPageTocMobile({ className }: { className?: string }) {
   );
 }
 
-/** Sticky TOC desno (lg+). */
-export function HubPageTocSidebar({ className }: { className?: string }) {
-  return (
-    <aside className={cn('hidden lg:block', className)}>
-      <nav className="sticky top-28 self-start" aria-label="Na stranici">
-        <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
-          Na stranici
-        </p>
-        <ul className="mt-3 space-y-2.5">
-          {HUB_PAGE_SECTIONS.map(({ href, label }) => (
-            <li key={href}>
-              <a href={href} className={cn(tocLinkClassName, 'inline-block')}>
-                {label}
-                <AnimatedUnderline />
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </aside>
-  );
-}
+export { HubPageTocSidebar };

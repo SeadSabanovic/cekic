@@ -271,7 +271,11 @@ export default async function PutokazDetailPage({ params }: PageProps) {
                       >
                         <ol className="divide-y divide-dashed">
                           {sections.map((section, index) => (
-                            <li key={section._key} className="py-6 first:pt-2">
+                            <li
+                              key={section._key}
+                              id={`poglavlje-${section.slug}`}
+                              className="scroll-mt-28 py-6 first:pt-2"
+                            >
                               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
                                 <span
                                   className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-dashed border-border text-sm font-medium text-muted-foreground tabular-nums sm:mt-0.5"
@@ -315,7 +319,12 @@ export default async function PutokazDetailPage({ params }: PageProps) {
               </section>
             </div>
 
-            <HubPageTocSidebar />
+            <HubPageTocSidebar
+              roadmapChapters={sections.map((s) => ({
+                id: `poglavlje-${s.slug}`,
+                title: s.title,
+              }))}
+            />
           </div>
         </Container>
       </>
