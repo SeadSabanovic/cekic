@@ -27,7 +27,11 @@ export default function Home() {
           short: false,
         }}
         actions={[
-          { label: 'Putokazi', href: '/putokazi', variant: 'default' },
+          {
+            label: 'Karijerni putokazi',
+            href: '/karijerni-putokazi',
+            variant: 'default',
+          },
           { label: 'Projekti', href: '/projekti', variant: 'secondary' },
         ]}
       />

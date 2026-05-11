@@ -13,7 +13,7 @@ import { fetchPutokaziList } from '@/sanity/lib/queries/putokaz-list';
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: 'Putokazi',
+  title: 'Karijerni putokazi',
   description:
     'Pregled svih mapa puta — strukturirani koraci za kućne popravke i zanate.',
 };
@@ -59,7 +59,7 @@ export default async function PutokaziPage({ searchParams }: PageProps) {
                 <li key={`${map.listSource ?? 'putokaz'}-${map.id}`}>
                   <RoadmapCard
                     map={map}
-                    detailHref={`/putokazi/${map.id}`}
+                    detailHref={`/karijerni-putokazi/${map.id}`}
                     enabled={!map.locked}
                     variant="putokazi"
                   />

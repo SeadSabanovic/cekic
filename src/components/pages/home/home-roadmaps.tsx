@@ -50,7 +50,7 @@ export default async function HomeRoadmapsSection() {
           </p>
           <div className="group mt-8 w-fit">
             <Link
-              href="/putokazi"
+              href="/karijerni-putokazi"
               className={cn(
                 buttonVariants({ variant: 'default', size: 'lg' }),
                 'inline-flex items-center gap-2'
@@ -140,7 +140,7 @@ export default async function HomeRoadmapsSection() {
                           </div>
                         ) : (
                           <Link
-                            href={`/putokazi/${map.id}`}
+                            href={`/karijerni-putokazi/${map.id}`}
                             className="group flex h-full min-h-0 flex-col rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                           >
                             {cardMedia}

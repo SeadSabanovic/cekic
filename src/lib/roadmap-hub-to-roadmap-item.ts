@@ -5,7 +5,7 @@ import { toRoadmapCardStats } from '@/lib/roadmap-card-stats';
 import { resolvePutokazCover } from '@/lib/putokaz-cover';
 import type { RoadmapHubSummary } from '@/sanity/lib/queries/roadmap';
 
-/** Kartica na /putokazi — link vodi na hub rutu `/putokazi/{slug}`. */
+/** Kartica na `/karijerni-putokazi` — link vodi na hub rutu `/karijerni-putokazi/{slug}`. */
 export function roadmapHubSummaryToRoadmapItem(
   hub: RoadmapHubSummary
 ): RoadmapItem {

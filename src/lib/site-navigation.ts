@@ -63,10 +63,10 @@ export const siteNavigation = {
       href: '/o-nama',
     },
     {
-      id: 'putokazi',
+      id: 'karijerni-putokazi',
       kind: 'single',
-      label: 'Putokazi',
-      href: '/putokazi',
+      label: 'Karijerni putokazi',
+      href: '/karijerni-putokazi',
     },
     {
       id: 'projekti',
@@ -104,7 +104,11 @@ export const siteNavigation = {
         title: 'Navigacija',
         links: [
           { id: 'f-home', label: 'Početna', href: '/' },
-          { id: 'f-putokazi', label: 'Putokazi', href: '/putokazi' },
+          {
+            id: 'f-karijerni-putokazi',
+            label: 'Karijerni putokazi',
+            href: '/karijerni-putokazi',
+          },
           { id: 'f-projekti', label: 'Projekti', href: '/projekti' },
           { id: 'f-about', label: 'O nama', href: '/o-nama' },
         ],

@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity';
 
-/** Jedno poglavlje unutar mape puta (hub) — vlastiti URL segment ispod /putokazi/[hub]/…. */
+/** Jedno poglavlje unutar mape puta (hub) — vlastiti URL segment ispod /karijerni-putokazi/[hub]/…. */
 export default defineType({
   name: 'roadmapSection',
   title: 'Poglavlje',

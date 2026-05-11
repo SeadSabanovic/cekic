@@ -312,7 +312,7 @@ export default async function PutokazDetailPage({ params }: PageProps) {
                                   </div>
                                   <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 self-stretch sm:pt-8">
                                     <Link
-                                      href={`/putokazi/${hub.slug}/${section.slug}`}
+                                      href={`/karijerni-putokazi/${hub.slug}/${section.slug}`}
                                       className={cn(
                                         buttonVariants({
                                           variant: 'default',

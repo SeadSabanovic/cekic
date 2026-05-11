@@ -71,8 +71,8 @@ export default async function RoadmapSectionPage({ params }: PageProps) {
         >
           <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
             <li>
-              <Link href="/putokazi" className="hover:text-foreground">
-                Putokazi
+              <Link href="/karijerni-putokazi" className="hover:text-foreground">
+                Karijerni putokazi
               </Link>
             </li>
             <li aria-hidden className="text-border">
@@ -80,7 +80,7 @@ export default async function RoadmapSectionPage({ params }: PageProps) {
             </li>
             <li>
               <Link
-                href={`/putokazi/${hub.slug}`}
+                href={`/karijerni-putokazi/${hub.slug}`}
                 className="hover:text-foreground"
               >
                 {hub.title}
@@ -117,7 +117,7 @@ export default async function RoadmapSectionPage({ params }: PageProps) {
           <div className="flex flex-wrap items-center gap-3">
             {prev ? (
               <Link
-                href={`/putokazi/${hub.slug}/${prev.slug}`}
+                href={`/karijerni-putokazi/${hub.slug}/${prev.slug}`}
                 className={cn(
                   buttonVariants({ variant: 'default', size: 'lg' }),
                   'group/prev inline-flex max-w-full items-center gap-2 whitespace-normal'
@@ -132,7 +132,7 @@ export default async function RoadmapSectionPage({ params }: PageProps) {
             ) : null}
             {next ? (
               <Link
-                href={`/putokazi/${hub.slug}/${next.slug}`}
+                href={`/karijerni-putokazi/${hub.slug}/${next.slug}`}
                 className={cn(
                   buttonVariants({ variant: 'default', size: 'lg' }),
                   'group/next inline-flex max-w-full items-center gap-2 whitespace-normal'
@@ -147,7 +147,7 @@ export default async function RoadmapSectionPage({ params }: PageProps) {
             ) : null}
           </div>
           <Link
-            href={`/putokazi/${hub.slug}`}
+            href={`/karijerni-putokazi/${hub.slug}`}
             className={cn(
               buttonVariants({ variant: 'outline', size: 'lg' }),
               'sm:ml-auto'

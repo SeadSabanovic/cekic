@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticEntries: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: now, changeFrequency: 'weekly', priority: 1 },
     {
-      url: new URL('/putokazi', baseUrl).toString(),
+      url: new URL('/karijerni-putokazi', baseUrl).toString(),
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.9,
@@ -43,7 +43,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const row of rows) {
       if (!row.hub) continue;
       roadmapEntries.push({
-        url: new URL(`/putokazi/${row.hub}`, baseUrl).toString(),
+        url: new URL(`/karijerni-putokazi/${row.hub}`, baseUrl).toString(),
         lastModified: now,
         changeFrequency: 'weekly',
         priority: 0.85,
@@ -51,7 +51,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       for (const sec of row.sections) {
         if (!sec) continue;
         roadmapEntries.push({
-          url: new URL(`/putokazi/${row.hub}/${sec}`, baseUrl).toString(),
+          url: new URL(`/karijerni-putokazi/${row.hub}/${sec}`, baseUrl).toString(),
           lastModified: now,
           changeFrequency: 'weekly',
           priority: 0.75,

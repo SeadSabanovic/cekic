@@ -11,7 +11,7 @@ export type PutokaziFilterChip = {
 
 type PutokaziFiltersToolbarProps = {
   items: PutokaziFilterChip[];
-  /** Bazna putanja liste, npr. `/putokazi` ili `/projekti`. */
+  /** Bazna putanja liste, npr. `/karijerni-putokazi` ili `/projekti`. */
   pathnameBase?: string;
   /** Aktivni filter iz URL-a (`?sekcija=`), određen na serveru. */
   activeTrade: PutokaziListTradeFilter;
@@ -31,7 +31,7 @@ function isFilterActive(id: string, activeTrade: PutokaziListTradeFilter) {
 /** Server komponenta — bez `useSearchParams`, nema potrebe za `Suspense`. */
 export default function PutokaziFiltersToolbar({
   items,
-  pathnameBase = '/putokazi',
+  pathnameBase = '/karijerni-putokazi',
   activeTrade,
 }: PutokaziFiltersToolbarProps) {
   return (

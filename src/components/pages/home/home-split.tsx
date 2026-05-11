@@ -11,7 +11,7 @@ const panels = [
     title: 'Karijerni putokazi',
     description:
       'Od šegrta do prve plate. Faze učenja, alat i posao — sve na jednoj stazi.',
-    href: '/putokazi',
+    href: '/karijerni-putokazi',
     cta: 'Kreni učiti',
     variant: 'default' as const,
   },

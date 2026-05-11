@@ -34,7 +34,7 @@ export default defineType({
       name: 'kategorija',
       title: 'Kategorija (filter na sajtu)',
       description:
-        'Odaberi jednu kategoriju da se putokaz pojavi pod odgovarajućim filterom na /putokazi. Ako ostane prazno, vidi se samo pod „Sve”.',
+        'Odaberi jednu kategoriju da se putokaz pojavi pod odgovarajućim filterom na /karijerni-putokazi. Ako ostane prazno, vidi se samo pod „Sve”.',
       type: 'string',
       options: {
         list: putokaziTradeCategoryOptions.map((o) => ({

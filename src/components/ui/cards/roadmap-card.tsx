@@ -10,7 +10,7 @@ import { RoadmapCoverStatBadges } from './roadmap-cover-stat-badges';
 
 export type RoadmapCardProps = {
   map: RoadmapItem;
-  /** Ako je zadano, link vodi ovdje (npr. `/putokazi/krecenje`). Inače `/mape/{id}`. */
+  /** Ako je zadano, link vodi ovdje (npr. `/karijerni-putokazi/krecenje`). Inače `/mape/{id}`. */
   detailHref?: string;
   /** Kada je false, karta nije klikabilna i izgleda onemogućeno (npr. izvan MVP opsega). */
   enabled?: boolean;

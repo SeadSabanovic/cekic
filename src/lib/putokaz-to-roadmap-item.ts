@@ -46,7 +46,7 @@ function tradeCardToRoadmapItem(
   };
 }
 
-/** Kartica za listu putokaza (`/putokazi`). */
+/** Kartica za listu putokaza (`/karijerni-putokazi`). */
 export function putokazListItemToRoadmapItem(
   doc: TradeCardListItem
 ): RoadmapItem {

@@ -1,7 +1,7 @@
 import { defineField, defineType } from 'sanity';
 
 /**
- * Hub mapa puta (npr. „Postani moler”) — URL: /putokazi/{slug}.
+ * Hub mapa puta (npr. „Postani moler”) — URL: /karijerni-putokazi/{slug}.
  * U Studiju: lista „Karijerni putokazi” (structure).
  */
 export default defineType({
@@ -18,7 +18,7 @@ export default defineType({
     defineField({
       name: 'slug',
       title: 'Slug hub stranice',
-      description: 'Npr. „moler” → /putokazi/moler',
+      description: 'Npr. „moler” → /karijerni-putokazi/moler',
       type: 'slug',
       options: { source: 'title', maxLength: 96 },
       validation: (Rule) => Rule.required(),
