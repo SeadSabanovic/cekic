@@ -12,9 +12,6 @@ import { cn } from '@/lib/utils';
 const tocLinkClassName =
   'group relative text-xs font-medium text-muted-foreground transition-colors hover:text-foreground md:text-sm';
 
-const tocSubLinkClassName =
-  'group/sub relative block py-0.5 text-[11px] font-medium leading-snug text-muted-foreground transition-colors hover:text-foreground md:text-xs';
-
 export type HubPageTocRoadmapChapter = {
   id: string;
   title: string;
@@ -132,8 +129,8 @@ export function HubPageTocSidebar({
                           <a
                             href={`#${ch.id}`}
                             className={cn(
-                              tocSubLinkClassName,
-                              'max-w-full wrap-break-word',
+                              tocLinkClassName,
+                              'inline-block w-fit max-w-full py-0.5 wrap-break-word',
                               subActive && 'text-foreground'
                             )}
                             aria-current={subActive ? 'location' : undefined}
