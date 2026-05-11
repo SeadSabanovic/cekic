@@ -38,7 +38,7 @@ export function HubPageTocMobile({ className }: { className?: string }) {
 export function HubPageTocSidebar({ className }: { className?: string }) {
   return (
     <aside className={cn('hidden lg:block', className)}>
-      <nav className="sticky top-32 self-start" aria-label="Na stranici">
+      <nav className="sticky top-28 self-start" aria-label="Na stranici">
         <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
           Na stranici
         </p>

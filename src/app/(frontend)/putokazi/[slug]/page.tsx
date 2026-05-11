@@ -165,12 +165,12 @@ export default async function PutokazDetailPage({ params }: PageProps) {
         />
 
         <Container
-          paddingTop="small"
+          paddingTop="medium"
           paddingBottom="default"
           className="border-x border-t border-dashed"
         >
           <HubPageTocMobile />
-          <div className="mt-6 grid gap-8 lg:mt-8 lg:grid-cols-[minmax(0,1fr)_min(13.5rem,28%)] xl:grid-cols-[minmax(0,1fr)_15.5rem] xl:gap-12">
+          <div className="mt-6 grid gap-8 lg:mt-0 lg:grid-cols-[minmax(0,1fr)_min(10rem,28%)] xl:grid-cols-[minmax(0,1fr)_10rem] xl:gap-12">
             <div className="min-w-0 space-y-0">
               <section
                 id="brzi-podaci"
@@ -216,7 +216,7 @@ export default async function PutokazDetailPage({ params }: PageProps) {
                 className="scroll-mt-28 border-t border-dashed border-border/80 pt-8 pb-10 md:pt-10 md:pb-14"
                 aria-labelledby="about-occupation-heading"
               >
-                <div className="grid grid-cols-12 gap-3 pt-2 md:gap-6 md:px-10 md:pt-0 xl:gap-14">
+                <div className="grid grid-cols-12 gap-3 pt-2 md:gap-6 md:pt-0 xl:gap-14">
                   <div className="col-span-12 lg:col-span-4">
                     <Heading
                       id="about-occupation-heading"
@@ -244,10 +244,10 @@ export default async function PutokazDetailPage({ params }: PageProps) {
 
               <section
                 id="karijerni-putokaz"
-                className="scroll-mt-28 border-t border-dashed border-border/80 pt-8 pb-6 md:pt-10 md:pb-10"
+                className="scroll-mt-28 border-t border-dashed border-border/80 pt-8 md:pt-10"
                 aria-labelledby="career-roadmap-heading"
               >
-                <div className="grid grid-cols-12 gap-3 pt-2 md:gap-6 md:px-10 md:pt-0 xl:gap-14">
+                <div className="grid grid-cols-12 gap-3 pt-2 md:gap-6 md:pt-0 xl:gap-14">
                   <div className="col-span-12 lg:col-span-4">
                     <Heading
                       id="career-roadmap-heading"
