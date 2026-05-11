@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import AnimatedUnderline from '@/components/shared/animated-underline';
 import {
@@ -57,9 +57,6 @@ export function HubPageTocSidebar({
   className,
   roadmapChapters = [],
 }: HubPageTocSidebarProps) {
-  const chaptersRef = useRef(roadmapChapters);
-  chaptersRef.current = roadmapChapters;
-
   const [activeMainId, setActiveMainId] = useState<HubPageTocEntryId>(
     HUB_PAGE_TOC_ENTRIES[0]!.id
   );
@@ -68,19 +65,21 @@ export function HubPageTocSidebar({
   const updateActive = useCallback(() => {
     const main = resolveActiveMainSectionId();
     setActiveMainId(main);
-    const chapters = chaptersRef.current;
-    if (main === 'karijerni-putokaz' && chapters.length > 0) {
-      setActiveChapterId(resolveActiveChapterId(chapters));
+    if (main === 'karijerni-putokaz' && roadmapChapters.length > 0) {
+      setActiveChapterId(resolveActiveChapterId(roadmapChapters));
     } else {
       setActiveChapterId(null);
     }
-  }, []);
+  }, [roadmapChapters]);
 
   useEffect(() => {
-    updateActive();
+    const frame = requestAnimationFrame(() => {
+      updateActive();
+    });
     window.addEventListener('scroll', updateActive, { passive: true });
     window.addEventListener('resize', updateActive);
     return () => {
+      cancelAnimationFrame(frame);
       window.removeEventListener('scroll', updateActive);
       window.removeEventListener('resize', updateActive);
     };

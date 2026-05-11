@@ -3,7 +3,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { unstable_noStore as noStore } from 'next/cache';
 import { notFound } from 'next/navigation';
-import { ArrowRight, Clock3, TrendingUp, type LucideIcon } from 'lucide-react';
+import {
+  ArrowRight,
+  ChevronDown,
+  Clock3,
+  TrendingUp,
+  type LucideIcon,
+} from 'lucide-react';
 import Container from '@/components/global/container';
 import HeroBlock from '@/components/blocks/hero-block';
 import Heading from '@/components/shared/heading';
@@ -269,48 +275,84 @@ export default async function PutokazDetailPage({ params }: PageProps) {
                         className="mt-3 border-border/80 md:mt-0"
                         aria-label="Sadržaj mape puta"
                       >
-                        <ol className="divide-y divide-dashed">
-                          {sections.map((section, index) => (
-                            <li
-                              key={section._key}
-                              id={`poglavlje-${section.slug}`}
-                              className="scroll-mt-28 py-6 first:pt-2"
-                            >
-                              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
-                                <span
-                                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-dashed border-border text-sm font-medium text-muted-foreground tabular-nums sm:mt-0.5"
-                                  aria-hidden
-                                >
-                                  {index + 1}
-                                </span>
-                                <div className="min-w-0 flex-1 space-y-3">
-                                  <Link
-                                    href={`/putokazi/${hub.slug}/${section.slug}`}
-                                    className={cn(
-                                      buttonVariants({
-                                        variant: 'default',
-                                        size: 'lg',
-                                      }),
-                                      'group/section inline-flex w-fit max-w-full items-center gap-2 text-left whitespace-normal'
-                                    )}
-                                  >
-                                    <span className="min-w-0 wrap-break-word">
-                                      {section.title}
-                                    </span>
-                                    <ArrowRight
-                                      className="size-4 shrink-0 transition-transform duration-200 group-hover/section:translate-x-0.5"
+                        <ol className="flex flex-col">
+                          {sections.map((section, index) => {
+                            const isLast = index === sections.length - 1;
+                            return (
+                              <li
+                                key={section._key}
+                                id={`poglavlje-${section.slug}`}
+                                className="scroll-mt-28 border-b border-dashed border-border/70 py-8 last:border-b-0 sm:py-10"
+                              >
+                                <div className="flex gap-4">
+                                  <div className="flex w-10 shrink-0 flex-col items-center">
+                                    <div
                                       aria-hidden
+                                      className="-mb-px h-8 w-0 shrink-0 self-center border-l-2 border-dotted border-primary/45"
                                     />
-                                  </Link>
-                                  {section.lead?.trim() ? (
-                                    <p className="max-w-2xl text-base leading-relaxed text-pretty text-muted-foreground md:text-lg">
-                                      {section.lead}
-                                    </p>
-                                  ) : null}
+                                    <span
+                                      className="relative z-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-dashed border-border bg-background text-sm font-medium text-muted-foreground tabular-nums"
+                                      aria-hidden
+                                    >
+                                      {index + 1}
+                                    </span>
+                                    {!isLast ? (
+                                      <>
+                                        <ChevronDown
+                                          className="my-1 size-4 shrink-0 text-primary/50"
+                                          aria-hidden
+                                          strokeWidth={2.25}
+                                        />
+                                        <div
+                                          aria-hidden
+                                          className="min-h-8 w-0 flex-1 shrink-0 self-center border-l-2 border-dotted border-primary/45"
+                                        />
+                                      </>
+                                    ) : null}
+                                  </div>
+                                  <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 self-stretch sm:pt-8">
+                                    <Link
+                                      href={`/putokazi/${hub.slug}/${section.slug}`}
+                                      className={cn(
+                                        buttonVariants({
+                                          variant: 'default',
+                                          size: 'lg',
+                                        }),
+                                        'group/section inline-flex w-fit max-w-full items-center gap-2 text-left whitespace-normal'
+                                      )}
+                                    >
+                                      <span className="min-w-0 wrap-break-word">
+                                        {section.title}
+                                      </span>
+                                      <ArrowRight
+                                        className="size-4 shrink-0 transition-transform duration-200 group-hover/section:translate-x-0.5"
+                                        aria-hidden
+                                      />
+                                    </Link>
+                                    {section.lead?.trim() ? (
+                                      <p className="max-w-2xl text-base leading-relaxed text-pretty text-muted-foreground md:text-lg">
+                                        {section.lead}
+                                      </p>
+                                    ) : null}
+                                    <div className="mt-auto flex justify-end pt-1">
+                                      <span
+                                        className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-muted/25 px-2.5 py-1 text-xs text-muted-foreground tabular-nums md:text-sm"
+                                        title="Procijenjeno vrijeme čitanja (ilustracija)"
+                                      >
+                                        <Clock3
+                                          className="size-3.5 shrink-0 opacity-80"
+                                          aria-hidden
+                                        />
+                                        <span className="font-medium">
+                                          ~{4 + (index % 4)} min čitanja
+                                        </span>
+                                      </span>
+                                    </div>
+                                  </div>
                                 </div>
-                              </div>
-                            </li>
-                          ))}
+                              </li>
+                            );
+                          })}
                         </ol>
                       </nav>
                     )}
