@@ -26,7 +26,7 @@ export default function HeaderBlock(props: HeaderBlockProps) {
             {heading}
           </Heading>
           {body && (
-            <div className="mt-6 text-balance text-gray-600 md:mt-8 md:text-xl">
+            <div className="mt-6 text-balance md:mt-8 md:text-xl">
               {body}
             </div>
           )}

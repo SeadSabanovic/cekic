@@ -8,7 +8,6 @@ export type SiteNavSingle = {
   label: string;
   /** Apsolutna putanja, npr. "/", "/o-nama" */
   href: string;
-  isButton?: boolean;
 };
 
 export type SiteNavGroup = {
@@ -79,7 +78,6 @@ export const siteNavigation = {
       kind: 'single',
       label: 'Kontakt',
       href: '/kontakt',
-      isButton: true,
     },
   ] satisfies SiteNavbarItem[],
 

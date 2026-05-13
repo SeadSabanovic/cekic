@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import Container from './container';
-import { buttonVariants } from '../ui/button';
 import useScroll from '@/hooks/use-scroll';
 import SiteLogo from '../shared/site-logo';
 import SlideOutMenu from './slide-out-menu';
@@ -38,7 +37,7 @@ export default function Navbar({ settings }: NavbarProps) {
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 z-40 w-full rounded-b-xl border-b border-b-gray-100 bg-white/80 py-6 backdrop-blur-lg transition-all duration-300 ease-in-out',
+        'fixed top-0 left-0 z-40 w-full rounded-b-xl border-b bg-background/80 py-6 backdrop-blur-lg transition-all duration-300 ease-in-out',
         {
           'py-4': hasScrolled,
         }
@@ -46,7 +45,7 @@ export default function Navbar({ settings }: NavbarProps) {
     >
       <Container className="flex items-center justify-between">
         <SiteLogo />
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-6">
           <NavigationMenu className="hidden md:block">
             <NavigationMenuList className="group/nav space-x-8">
               {navbarMenuItems.map((item) => (
@@ -54,24 +53,26 @@ export default function Navbar({ settings }: NavbarProps) {
               ))}
             </NavigationMenuList>
           </NavigationMenu>
-          <button
-            type="button"
-            aria-label="Otvori pretragu"
-            className="cursor-pointer rounded-full border border-gray-200/60 p-2.5 transition-colors duration-300 ease-in-out hover:bg-gray-50"
-          >
-            <Search size={18} aria-hidden />
-          </button>
-          {showSlideOutMenu && (
-            <SlideOutMenu settings={settings}>
-              <button
-                type="button"
-                aria-label="Otvori meni"
-                className="cursor-pointer rounded-full border border-gray-200/60 p-2.5 transition-colors duration-300 ease-in-out hover:bg-gray-50"
-              >
-                <Menu size={18} aria-hidden />
-              </button>
-            </SlideOutMenu>
-          )}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              aria-label="Otvori pretragu"
+              className="cursor-pointer rounded-full border p-2.5 transition-colors duration-300 ease-in-out hover:bg-foreground/10"
+            >
+              <Search size={18} aria-hidden />
+            </button>
+            {showSlideOutMenu && (
+              <SlideOutMenu settings={settings}>
+                <button
+                  type="button"
+                  aria-label="Otvori meni"
+                  className="cursor-pointer rounded-full border p-2.5 transition-colors duration-300 ease-in-out hover:bg-foreground/10"
+                >
+                  <Menu size={18} aria-hidden />
+                </button>
+              </SlideOutMenu>
+            )}
+          </div>
         </div>
       </Container>
     </header>
@@ -91,7 +92,7 @@ function NavbarMenuItem({
         <NavigationMenuTrigger className="group-hover/nav:opacity-40 hover:opacity-100!">
           {item.label}
         </NavigationMenuTrigger>
-        <NavigationMenuContent className="flex min-w-[180px] flex-col gap-2 bg-white px-3 py-3 text-nowrap">
+        <NavigationMenuContent className="flex min-w-[180px] flex-col gap-2 bg-background px-3 py-3 text-nowrap">
           {item.items.map((page) => (
             <Link
               key={page.href}
@@ -110,19 +111,6 @@ function NavbarMenuItem({
     );
   }
 
-  if (item.isButton) {
-    return (
-      <NavigationMenuItem>
-        <Link
-          href={item.href}
-          className={cn('group', buttonVariants({ variant: 'default' }))}
-        >
-          {item.label}
-        </Link>
-      </NavigationMenuItem>
-    );
-  }
-
   return (
     <NavigationMenuItem>
       <Link
@@ -131,7 +119,7 @@ function NavbarMenuItem({
           'relative inline-flex overflow-hidden transition-opacity duration-200 group-hover/nav:opacity-40 hover:opacity-100!',
           {
             'underline-offset-38 hover:underline': true,
-            'text-primary': navItemActive(pathname, item.href),
+            'text-accent': navItemActive(pathname, item.href),
           }
         )}
       >

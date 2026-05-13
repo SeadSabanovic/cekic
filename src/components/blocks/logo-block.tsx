@@ -25,7 +25,7 @@ export default function LogoBlock(props: LogoBlockProps) {
   return (
     <section
       {...(anchorId ? { id: anchorId } : {})}
-      className="rounded-b-4xl border-b border-b-gray-200/60 bg-gray-50 px-4 md:px-10"
+      className="rounded-b-4xl border-b px-4 md:px-10"
     >
       <Container className="border-x border-dashed border-x-gray-200 px-0">
         <div className="py-6 md:py-10">

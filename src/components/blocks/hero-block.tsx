@@ -41,7 +41,7 @@ export default function HeroBlock(props: HeroBlockProps) {
   return (
     <section
       {...(anchorId ? { id: anchorId } : {})}
-      className={cn('pattern-bg border-b border-b-gray-200/60 px-4 md:px-10', {
+      className={cn('pattern-bg border-b px-4 md:px-10', {
         'rounded-3xl md:rounded-4xl': bottomCornerRadius === 'rounded',
       })}
     >
@@ -67,7 +67,7 @@ export default function HeroBlock(props: HeroBlockProps) {
           </div>
           <div className="col-span-12 xl:col-span-5">
             {body && (
-              <div className="mt-3 text-balance text-gray-600 md:text-lg">
+              <div className="mt-3 text-balance text-foreground md:text-lg">
                 {body}
               </div>
             )}

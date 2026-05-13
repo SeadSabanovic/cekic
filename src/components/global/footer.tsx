@@ -14,7 +14,7 @@ export default function Footer() {
   const { columns, legal: legalMenuItems } = siteNavigation.footer;
 
   return (
-    <footer className="border-t border-t-gray-200/60 px-4 xl:px-10">
+    <footer className="border-t px-4 xl:px-10">
       <Container className="border-x border-dashed pt-14 md:pt-16">
         <div className="w-full space-y-14 md:space-y-16">
           <div className="flex-none border-y border-dashed py-4 md:border-none md:py-0">
@@ -50,7 +50,7 @@ function FooterColumns({ columns }: { columns: SiteFooterColumn[] }) {
         <li
           key={column.id}
           className={cn(
-            'w-full space-y-7 border-x border-dashed bg-white px-10 md:py-10',
+            'w-full space-y-7 border-x border-dashed bg-background px-10 md:py-10',
             {
               'pb-8': index === columns.length - 1,
             }
@@ -130,8 +130,8 @@ function LegalMenuItems({
 function EdgeBlur() {
   return (
     <div className="absolute inset-0 flex items-center justify-between">
-      <div className="relative h-full w-[100px] bg-linear-to-r from-white to-transparent"></div>
-      <div className="h-full w-[100px] bg-linear-to-l from-white to-transparent"></div>
+      <div className="relative h-full w-[100px] bg-linear-to-r from-background to-transparent"></div>
+      <div className="h-full w-[100px] bg-linear-to-l from-background to-transparent"></div>
     </div>
   );
 }

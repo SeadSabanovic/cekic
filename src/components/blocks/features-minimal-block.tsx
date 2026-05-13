@@ -50,7 +50,7 @@ export default function FeaturesMinimalBlock(props: FeaturesMinimalBlockProps) {
               <Heading
                 tag="h2"
                 size="xl"
-                className="pattern-bg--2 relative max-w-[420px] border-y border-dashed border-t-gray-200 border-b-gray-200 bg-gray-50 py-3 pr-2.5 leading-normal text-balance"
+                className="pattern-bg--2 relative max-w-[420px] border-y border-t border-b border-dashed py-3 pr-2.5 leading-normal text-balance"
               >
                 <span className="relative z-20">{heading}</span>
                 <EdgeBlur />

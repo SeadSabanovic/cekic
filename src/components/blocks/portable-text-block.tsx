@@ -22,7 +22,7 @@ export default function PortableTextBlock(props: PortableTextBlockProps) {
         })}
       >
         <div
-          className={cn('max-w-3xl text-balance text-gray-600', {
+          className={cn('max-w-3xl text-balance', {
             'border-l border-dashed pl-10': alignment === 'left',
             'border-r border-dashed': alignment === 'right',
           })}

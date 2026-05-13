@@ -32,17 +32,15 @@ export function RoadmapCoverStatBadges({
         aria-label="Zarada i vrijeme do samostalne zarade"
       >
         <Badge
-          variant="outline"
+          variant="accent"
           title={`Zarada: ${zarada}`}
-          className="h-auto min-h-6 min-w-0 border-green-300/30 bg-green-300/10 text-green-300 shadow-sm backdrop-blur-sm"
         >
           <Wallet className="shrink-0" aria-hidden />
           <span className="min-w-0 truncate">{zarada}</span>
         </Badge>
         <Badge
-          variant="outline"
+          variant="secondary"
           title={`Vrijeme: ${vrijeme}`}
-          className="h-auto min-h-6 min-w-0 border-yellow-300/30 bg-yellow-300/10 text-yellow-300 shadow-sm backdrop-blur-sm"
         >
           <Clock3 className="shrink-0" aria-hidden />
           <span className="min-w-0 truncate">{vrijeme}</span>

@@ -165,8 +165,8 @@ function CallToAction({
 function EdgeBlur() {
   return (
     <div className="absolute inset-0 flex items-center justify-between">
-      <div className="relative h-full w-[100px] bg-linear-to-r from-white to-transparent" />
-      <div className="h-full w-[100px] bg-linear-to-l from-white to-transparent" />
+      <div className="relative h-full w-[100px] bg-linear-to-r from-background to-transparent" />
+      <div className="h-full w-[100px] bg-linear-to-l from-background to-transparent" />
     </div>
   );
 }

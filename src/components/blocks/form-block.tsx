@@ -30,7 +30,7 @@ export default function FormBlock(props: FormBlockProps) {
             </Heading>
           )}
           {intro && (
-            <div className="mb-4 max-w-[320px] text-center text-balance text-gray-600 md:text-xl">
+            <div className="mb-4 max-w-[320px] text-center text-balance text-muted md:text-xl">
               {intro}
             </div>
           )}

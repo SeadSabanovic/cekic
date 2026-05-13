@@ -46,8 +46,7 @@ export default function ServicesBlock(props: ServicesBlockProps) {
       {...(anchorId ? { id: anchorId } : {})}
       className={cn('px-4 xl:px-10', {
         'pattern-bg': background === 'pattern',
-        'rounded-t-4xl border-t border-t-gray-200/60':
-          topCornerRadius === 'rounded',
+        'rounded-t-4xl border-t': topCornerRadius === 'rounded',
       })}
     >
       <Container

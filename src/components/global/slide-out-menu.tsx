@@ -51,13 +51,13 @@ export default function SlideOutMenu({
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent className="overflow-y-scroll pb-44">
-        <SheetHeader className="fixed top-0 right-7 z-20 h-20 w-[338px] border-b border-dashed border-b-gray-200 bg-white/95 pt-[26px] md:w-[330px]">
+        <SheetHeader className="fixed top-0 right-7 z-20 h-20 w-[338px] border-b border-dashed bg-background/95 pt-[26px] md:w-[330px]">
           <SiteLogo />
           <SheetDescription className="sr-only">
             Cekic{settings.copyright}
           </SheetDescription>
         </SheetHeader>
-        <SheetTitle className="mt-16 px-0 py-6 font-normal text-gray-400 antialiased">
+        <SheetTitle className="mt-16 px-0 py-6 font-normal antialiased">
           {menuTitle}
         </SheetTitle>
         <ul className="flex flex-col gap-4 px-0 text-black">
@@ -132,7 +132,7 @@ export default function SlideOutMenu({
           </>
         )}
         {ctaButtons.length > 0 && (
-          <div className="fixed right-0 bottom-1 w-full bg-linear-to-t from-white via-white to-transparent px-4 pt-10 pb-4 md:w-[380px]">
+          <div className="fixed right-0 bottom-1 w-full bg-linear-to-t from-background via-background to-transparent px-4 pt-10 pb-4 md:w-[380px]">
             <div className="flex flex-col gap-3 md:flex-row">
               {ctaButtons.map((btn) => (
                 <SheetClose key={btn.id} asChild>
