@@ -218,22 +218,22 @@ export default async function PutokazDetailPage({ params }: PageProps) {
               </section>
 
               <section
-                id="o-zanimanju"
+                id="zanimanje"
                 className="scroll-mt-28 border-t border-dashed border-border/80 pt-8 pb-10 md:pt-10 md:pb-14"
                 aria-labelledby="about-occupation-heading"
               >
                 <div className="grid grid-cols-12 gap-3 pt-2 md:gap-6 md:pt-0 xl:gap-14">
-                  <div className="col-span-12 lg:col-span-4">
+                  <div className="col-span-12 lg:col-span-3">
                     <Heading
                       id="about-occupation-heading"
                       tag="h2"
-                      size="xl"
+                      size="lg"
                       className="leading-tight text-balance md:max-w-160 lg:sticky lg:top-28 lg:z-10 lg:bg-background lg:py-1"
                     >
-                      O zanimanju
+                      Zanimanje
                     </Heading>
                   </div>
-                  <div className="col-span-12 min-w-0 lg:col-span-8">
+                  <div className="col-span-12 min-w-0 lg:col-span-9">
                     {Array.isArray(hub.aboutOccupation) &&
                     hub.aboutOccupation.length > 0 ? (
                       <div>
@@ -254,17 +254,17 @@ export default async function PutokazDetailPage({ params }: PageProps) {
                 aria-labelledby="career-roadmap-heading"
               >
                 <div className="grid grid-cols-12 gap-3 pt-2 md:gap-6 md:pt-0 xl:gap-14">
-                  <div className="col-span-12 lg:col-span-4">
+                  <div className="col-span-12 lg:col-span-3">
                     <Heading
                       id="career-roadmap-heading"
                       tag="h2"
-                      size="xl"
+                      size="lg"
                       className="leading-tight text-balance md:max-w-160 lg:sticky lg:top-28 lg:z-10 lg:bg-background lg:py-1"
                     >
                       Karijerni putokaz
                     </Heading>
                   </div>
-                  <div className="col-span-12 min-w-0 lg:col-span-8">
+                  <div className="col-span-12 min-w-0 lg:col-span-9">
                     {sections.length === 0 ? (
                       <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:mt-0 md:text-base">
                         Nema poglavlja — u dokumentu dodaj barem jedno poglavlje
@@ -288,10 +288,10 @@ export default async function PutokazDetailPage({ params }: PageProps) {
                                   <div className="flex w-10 shrink-0 flex-col items-center">
                                     <div
                                       aria-hidden
-                                      className="-mb-px h-8 w-0 shrink-0 self-center border-l-2 border-dotted border-primary/45"
+                                      className="-mb-px h-8 w-0 shrink-0 self-center border-l-2 border-dotted"
                                     />
                                     <span
-                                      className="relative z-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-dashed border-border bg-background text-sm font-medium text-muted-foreground tabular-nums"
+                                      className="relative z-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-dashed border-2 bg-background text-sm font-medium text-muted-foreground tabular-nums"
                                       aria-hidden
                                     >
                                       {index + 1}
@@ -299,13 +299,13 @@ export default async function PutokazDetailPage({ params }: PageProps) {
                                     {!isLast ? (
                                       <>
                                         <ChevronDown
-                                          className="my-1 size-4 shrink-0 text-primary/50"
+                                          className="my-1 size-4 shrink-0 text-border"
                                           aria-hidden
                                           strokeWidth={2.25}
                                         />
                                         <div
                                           aria-hidden
-                                          className="min-h-8 w-0 flex-1 shrink-0 self-center border-l-2 border-dotted border-primary/45"
+                                          className="min-h-8 w-0 flex-1 shrink-0 self-center border-l-2 border-dotted"
                                         />
                                       </>
                                     ) : null}
@@ -330,7 +330,7 @@ export default async function PutokazDetailPage({ params }: PageProps) {
                                       />
                                     </Link>
                                     {section.lead?.trim() ? (
-                                      <p className="max-w-2xl text-base leading-relaxed text-pretty text-muted-foreground md:text-lg">
+                                      <p className="text-base leading-relaxed text-pretty text-muted-foreground md:text-lg">
                                         {section.lead}
                                       </p>
                                     ) : null}

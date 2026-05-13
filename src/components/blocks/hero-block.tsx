@@ -42,7 +42,7 @@ export default function HeroBlock(props: HeroBlockProps) {
     <section
       {...(anchorId ? { id: anchorId } : {})}
       className={cn('pattern-bg border-b px-4 md:px-10', {
-        'rounded-3xl md:rounded-4xl': bottomCornerRadius === 'rounded',
+        '': bottomCornerRadius === 'rounded',
       })}
     >
       <Container

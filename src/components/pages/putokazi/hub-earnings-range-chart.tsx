@@ -34,12 +34,12 @@ function RangeRow({
         </span>
       </div>
       <div
-        className="relative h-2.5 w-full overflow-hidden rounded-full bg-primary/10"
+        className="relative h-2.5 w-full overflow-hidden rounded-full bg-accent/10"
         role="presentation"
         aria-hidden
       >
         <div
-          className="absolute top-0 h-full rounded-full bg-primary"
+          className="absolute top-0 h-full rounded-full bg-accent"
           style={{
             left: `${leftPct}%`,
             width: `${widthPct}%`,

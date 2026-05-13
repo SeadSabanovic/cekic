@@ -1,6 +1,6 @@
 export const HUB_PAGE_TOC_ENTRIES = [
   { id: 'brzi-podaci', href: '#brzi-podaci', label: 'Brzi podaci' },
-  { id: 'o-zanimanju', href: '#o-zanimanju', label: 'O zanimanju' },
+  { id: 'zanimanje', href: '#zanimanje', label: 'Zanimanje' },
   {
     id: 'karijerni-putokaz',
     href: '#karijerni-putokaz',

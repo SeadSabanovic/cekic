@@ -55,7 +55,7 @@ export default defineType({
     }),
     defineField({
       name: 'aboutOccupation',
-      title: 'O zanimanju',
+      title: 'Zanimanje',
       description: 'Kratko objašnjenje: šta je ovo zanimanje i čime se bavi.',
       type: 'array',
       of: [{ type: 'block' }, { type: 'horizontalRule' }],
