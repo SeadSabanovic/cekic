@@ -27,11 +27,11 @@ export default defineType({
       rows: 3,
     }),
     defineField({
-      name: 'body',
-      title: 'Sadržaj',
-      description: 'Glavni tekst poglavlja (opciono).',
+      name: 'content',
+      title: 'Sadržaj stranice',
+      description: 'Niz blokova: Tekst (Portable Text), Slika (hero okvir), …',
       type: 'array',
-      of: [{ type: 'block' }, { type: 'horizontalRule' }],
+      of: [{ type: 'roadmapSectionPortableText' }, { type: 'contentImage' }],
     }),
   ],
   preview: {

@@ -13,6 +13,8 @@ import {
 
 export type HeroBlockProps = {
   anchorId?: string;
+  /** Iznad naslova, npr. breadcrumb na podstranicama. */
+  breadcrumb?: ReactNode;
   heading?: string;
   body?: ReactNode;
   mediaType?: 'none' | 'image';
@@ -26,6 +28,7 @@ export type HeroBlockProps = {
 
 export default function HeroBlock(props: HeroBlockProps) {
   const {
+    breadcrumb,
     heading,
     body,
     mediaType,
@@ -56,6 +59,7 @@ export default function HeroBlock(props: HeroBlockProps) {
             { 'pb-6': mediaType === 'image' }
           )}
         >
+          {breadcrumb ? <div className="col-span-12">{breadcrumb}</div> : null}
           <div className="col-span-12 xl:col-span-7">
             <Heading
               size="xxxl"

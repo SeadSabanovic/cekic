@@ -2,6 +2,7 @@ import type { PortableTextBlock } from '@portabletext/types';
 import { groq } from 'next-sanity';
 
 import { client } from '@/sanity/lib/client';
+import type { RoadmapSectionContentBlock } from '@/lib/roadmap-section-content';
 
 const publishedRoadmap = groq`
   _type == "roadmap"
@@ -9,7 +10,6 @@ const publishedRoadmap = groq`
   && !(_id in path("drafts.**"))
 `;
 
-export type RoadmapSectionPortable = PortableTextBlock[];
 export type EarningsByRegion = {
   balkanMin?: number | null;
   balkanMax?: number | null;
@@ -41,7 +41,7 @@ export type RoadmapSectionQuery = {
   title: string;
   slug: string;
   lead: string | null;
-  body: RoadmapSectionPortable | null;
+  content: RoadmapSectionContentBlock[] | null;
 };
 
 export type RoadmapHubQuery = {
@@ -79,7 +79,18 @@ const roadmapBySlugQuery = groq`
       title,
       "slug": slug.current,
       lead,
-      body
+      content[]{
+        _key,
+        _type,
+        content,
+        compact,
+        image {
+          asset,
+          alt,
+          hotspot,
+          crop
+        }
+      }
     }
   }
 `;

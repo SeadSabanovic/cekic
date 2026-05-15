@@ -291,7 +291,7 @@ export default async function PutokazDetailPage({ params }: PageProps) {
                                       className="-mb-px h-8 w-0 shrink-0 self-center border-l-2 border-dotted"
                                     />
                                     <span
-                                      className="relative z-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-dashed border-2 bg-background text-sm font-medium text-muted-foreground tabular-nums"
+                                      className="relative z-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-dashed bg-background text-sm font-medium text-muted-foreground tabular-nums"
                                       aria-hidden
                                     >
                                       {index + 1}
